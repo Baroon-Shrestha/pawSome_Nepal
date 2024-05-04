@@ -1,0 +1,111 @@
+.nav {
+  width: 100%;
+  display: flex;
+  padding: 2rem 2rem;
+  background-color: #ffffff;
+}
+
+.logo_container {
+  display: flex !important;
+  width: 20%;
+}
+
+.logo,
+.logoOrange {
+  font-size: 3.5rem;
+}
+
+.logoOrange {
+  color: #f0736f;
+}
+
+.navContainer {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  align-items: center;
+  margin: auto;
+}
+
+.navigationLinks {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ul {
+  text-decoration: none;
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+  align-items: center;
+}
+
+.ul li {
+  position: relative;
+  cursor: pointer;
+}
+
+.ul li::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #f06868;
+  transition: width 0.5s ease;
+}
+
+.ul li:hover::before {
+  width: 100%;
+}
+
+.text {
+  font-size: 1.3rem;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+
+.userSection {
+  width: 20%;
+}
+
+.dropDown_container {
+  position: relative;
+}
+
+.dropDown {
+  position: absolute;
+  top: 150%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(212, 211, 211);
+  z-index: 1000;
+}
+
+.drop {
+  padding: 1rem;
+}
+
+.drop:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.prof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+  object-fit: cover;
+}

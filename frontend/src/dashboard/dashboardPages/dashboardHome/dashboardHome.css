@@ -1,0 +1,47 @@
+.dashboard_home {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 3rem;
+}
+.dashboard_home .container {
+  max-width: 1200px;
+  width: 100%;
+  padding-top: 3rem;
+  padding-left: 200px;
+}
+.dashboard_home .container .cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.dashboard_home .container .cards .card {
+  background-color: #485d84;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 150px;
+  padding: 5px 45px;
+  color: white;
+  border-radius: 12px;
+}
+.dashboard_home .container .cards .card img {
+  color: black;
+  width: 60px;
+  height: 60px;
+}
+.dashboard_home .container .chart_container {
+  margin-top: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dashboard_home .container .chart_container .pie_chart {
+  margin-top: 3rem;
+  width: 40%;
+}
+.dashboard_home .container .chart_container .bar_chart {
+  margin-top: 3rem;
+  width: 55%;
+}/*# sourceMappingURL=dashboardHome.css.map */
