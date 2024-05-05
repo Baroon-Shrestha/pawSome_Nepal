@@ -1,6 +1,8 @@
 import { asyncErrorHandling } from "../middlewares/asyncErrorHandler.js";
 import { createError, errorHanlder } from "../middlewares/errorHandling.js";
 import { adopt } from "../models/adoptModel.js";
+import { user } from "../models/userModel.js";
+
 
 export const adoptPet = asyncErrorHandling(async (req, res) => {
     const { id: userId, email } = req.user;
@@ -32,9 +34,9 @@ export const adoptPet = asyncErrorHandling(async (req, res) => {
 });
 
 export const viewAdoptReq = asyncErrorHandling(async (req, res) => {
-    // const { email } = req.user;
+    const { email } = req.user;
 
-    // if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
+    if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
 
     const viewReq = await adopt.find().populate('user').populate('pet');
 
@@ -61,4 +63,20 @@ export const deleteReq = asyncErrorHandling(async (req, res) => {
         success: true,
         message: "Deleted successfully"
     })
+})
+
+export const viewYourAdoptionRequest = asyncErrorHandling(async (req, res) => {
+    const { id: userId, email } = req.user
+
+    if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you are not authorized"), req, res)
+
+    if (!userId) return errorHanlder(createError("no user found"), req, res)
+
+    const users = await user.findById(userId);
+    if (!users) {
+        return errorHanlder(createError("User not found"), req, res);
+    }
+    const adoptionRequest = await adopt.find({ user: userId }).populate('user');
+
+    return res.status(200).json({ success: true, adoptionRequest });
 })
