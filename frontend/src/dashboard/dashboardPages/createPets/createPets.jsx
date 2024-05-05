@@ -112,6 +112,7 @@ export default function CreatePets() {
                 type="text"
                 placeholder="About pet"
                 value={description}
+                className={styles.textArea}
                 onChange={(e) => setDescription(e.target.value)}
                 autoComplete="off"
                 required

@@ -12,6 +12,7 @@ import DashboardHome from "./dashboard/dashboardPages/dashboardHome/dashboardHom
 import EditPets from "./dashboard/dashboardPages/editPets/editPets";
 import DashboardPets from "./dashboard/dashboardPages/dashboardPets/dashboardPets";
 import NewPetDescription from "./pages/newPetDescriptionPage/newPetDescription";
+import AdoptPage from "./pages/adoptPet/adoptPage";
 
 const router = createBrowserRouter([
   {
@@ -60,7 +61,12 @@ const router = createBrowserRouter([
     path: "newPetDescription",
     element: <NewPetDescription/>,
   },
+  {
+    path: "adoptPet/:id",
+    element: <AdoptPage/>,
+  },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />

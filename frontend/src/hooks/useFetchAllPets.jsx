@@ -60,6 +60,6 @@ export default function useFetchAllPets() {
         uniqueCategories,
         handleCategoryClick,
         handleSearchChange,
-        loading // Include loading state in the returned object
+        loading 
     };
 }
