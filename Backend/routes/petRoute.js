@@ -1,6 +1,6 @@
 import express from 'express';
 import { isAuthorized } from "../middlewares/auth.js"
-import { getCat, getDogs, getOther, getpets, postPets, deletePet, updatePet, showPets, addFav, getFav } from "../controllers/petController.js"
+import { getCat, getDogs, getOther, getpets, postPets, deletePet, updatePet, showPets, addFav, getFav, sendPostRequest, viewPetRequest } from "../controllers/petController.js"
 
 const router = express.Router();
 
@@ -14,6 +14,8 @@ router.put("/update/:id", isAuthorized, updatePet);
 router.get("/selected/:id", showPets);
 router.post("/addfav/:id", isAuthorized, addFav);
 router.get("/getfav", isAuthorized, getFav)
+router.post("/sendrequest", isAuthorized, sendPostRequest)
+router.get("/viewrequest", isAuthorized, viewPetRequest)
 
 
 export default router;
