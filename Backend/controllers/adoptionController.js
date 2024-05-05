@@ -8,6 +8,7 @@ export const adoptPet = asyncErrorHandling(async (req, res) => {
     if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
 
     const { reason } = req.body;
+ 
     const { id: petId } = req.params;
 
     if (!petId) {

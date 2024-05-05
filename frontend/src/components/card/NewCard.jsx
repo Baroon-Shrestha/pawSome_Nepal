@@ -1,4 +1,5 @@
 
+
 import { useEffect, useState } from "react";
 import styles from "./new.module.css";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -61,7 +62,10 @@ export default function NewCard({ pet }) {
           </p>
           <p className={styles.gender}>{pet?.gender}</p>
         </div>
+        <Link to = {`/adoptPet/${pet._id}`}>
         <div className={styles.btn}>Adopt</div>
+        </Link>
+       
       </div>
     </div>
   );
