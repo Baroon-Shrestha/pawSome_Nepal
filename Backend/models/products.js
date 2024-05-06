@@ -17,6 +17,7 @@ const productSchema = new mongoose.Schema({
     }],
     description: {
         type: String
+
     },
     // forPetCategory: {
     //     type: String,
@@ -24,6 +25,7 @@ const productSchema = new mongoose.Schema({
     // },
     price: {
         type: Number,
+        required: true
     },
     stockQuantity: {
         type: Number,
