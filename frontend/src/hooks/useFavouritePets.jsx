@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 
 function useFavoritePet(petId) {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(["token"]);
   const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
     async function fetchFavourites() {
-     
       try {
         const response = await axios.get(
           `http://localhost:3000/petFinder/getfav`,
@@ -23,19 +22,19 @@ function useFavoritePet(petId) {
 
         setFavourites(response?.data?.favorites);
 
-       
-        const isPetFavorite = response?.data?.favorites.some(fav => fav.pet._id === petId);
+        const isPetFavorite = response?.data?.favorites.some(
+          (fav) => fav.pet._id === petId
+        );
         setIsFavorite(isPetFavorite);
 
         return response.data;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
 
     fetchFavourites();
-  }, [petId, cookies.token]); 
-
+  }, [petId, cookies.token]);
 
   const handleAddToFavorites = async (id) => {
     try {
@@ -50,15 +49,15 @@ function useFavoritePet(petId) {
       );
 
       toast(response?.data?.message, {
-        type: 'success',
+        type: "success",
       });
 
-      setIsFavorite(true); 
+      setIsFavorite(true);
       return response.data;
     } catch (error) {
       setIsFavorite(false);
       toast(error?.response?.data?.message, {
-        type: 'error',
+        type: "error",
       });
     }
   };

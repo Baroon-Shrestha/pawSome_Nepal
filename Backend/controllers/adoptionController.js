@@ -1,6 +1,7 @@
 import { asyncErrorHandling } from "../middlewares/asyncErrorHandler.js";
 import { createError, errorHanlder } from "../middlewares/errorHandling.js";
 import { adopt } from "../models/adoptModel.js";
+import { Pet } from "../models/petModel.js";
 import { user } from "../models/userModel.js";
 
 
@@ -9,8 +10,8 @@ export const adoptPet = asyncErrorHandling(async (req, res) => {
 
     if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
 
-    const { reason } = req.body;
- 
+    const { reason, status } = req.body;
+
     const { id: petId } = req.params;
 
     if (!petId) {
@@ -25,7 +26,7 @@ export const adoptPet = asyncErrorHandling(async (req, res) => {
         return errorHanlder(createError("You have already requested to adopt this pet"), req, res);
     }
 
-    const adoption = await adopt.create({ user: userId, pet: petId, reason, requestedBy });
+    const adoption = await adopt.create({ user: userId, pet: petId, reason, requestedBy, status });
 
     res.send({
         success: true,
@@ -80,4 +81,29 @@ export const viewYourAdoptionRequest = asyncErrorHandling(async (req, res) => {
     const adoptionRequest = await adopt.find({ user: userId }).populate('user');
 
     return res.status(200).json({ success: true, adoptionRequest });
+})
+
+export const updateStatus = asyncErrorHandling(async (req, res) => {
+    const { email } = req.user
+
+    if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
+
+    const { id } = req.params
+
+    let updateSat = await adopt.findById(id)
+    if (!updateSat) return errorHanlder(createError("Request not found"), req, res)
+
+    updateSat = await adopt.findByIdAndUpdate(id, req.body, {
+        new: true,
+    })
+
+    if (req.body.status == "Accepted") {
+        const updatedPet = await Pet.findByIdAndUpdate(updateSat.pet, { available: false }, { new: true });
+        console.log("Pet availability updated successfully:", updatedPet);
+    }
+
+    res.send({
+        success: true,
+        message: "updated succesfully"
+    })
 })

@@ -8,6 +8,11 @@ const adoptSchema = new mongoose.Schema({
         required: true
     },
     requestedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    status: {
+        type: String,
+        enum: ["Pending", "Accepted", "Rejected"],
+        default: "Pending"
+    }
 
 })
 

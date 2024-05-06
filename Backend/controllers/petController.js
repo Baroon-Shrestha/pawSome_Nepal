@@ -342,7 +342,6 @@ export const sendPostRequest = asyncErrorHandling(async (req, res) => {
             });
         }
 
-
         const post = await Pet.create({
             name, age, category, description, breed, gender, createdBy, image: uploadedImages, vaccination, specialCare, disease, available: false
         });
@@ -367,3 +366,4 @@ export const viewPetRequest = asyncErrorHandling(async (req, res) => {
         seeAll
     })
 })
+

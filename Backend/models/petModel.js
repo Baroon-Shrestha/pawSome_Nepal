@@ -70,7 +70,8 @@ const petSchema = new mongoose.Schema({
     available: {
         type: Boolean,
         default: "true"
-    }
+    },
+
 });
 
 
