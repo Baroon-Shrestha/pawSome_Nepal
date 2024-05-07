@@ -45,7 +45,7 @@ export default function DashboardPets() {
 
   return (
     <>
-      {/* <DashboardNav /> */}
+     
       <Sidebar />/
       <div className="dashboard_pets">
         <div className="container">

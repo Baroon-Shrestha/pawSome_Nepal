@@ -5,7 +5,7 @@ import { IoAddCircleSharp, IoPersonCircle } from "react-icons/io5";
 import { MdOutlinePets, MdExpandMore } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import gsap from "gsap";
+
 
 export const Sidebar = () => {
   const [activeItem, setActiveItem] = useState("");
@@ -13,9 +13,6 @@ export const Sidebar = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const side = useRef(null);
 
-  useEffect(() => {
-    gsap.from(side.current, { duration: 3, x: "-100%", ease: "elastic" });
-  }, []);
 
   const handleClick = (item) => {
     setActiveItem((prev) => (prev !== item ? item : ""));
@@ -82,6 +79,14 @@ export const Sidebar = () => {
           isActive={activeItem === "Settings"}
         />
       </div>
+      <Link to="/manageAdoptionRequest">
+        <NavButton
+          onClick={handleClick}
+          name="Adoption Request"
+          icon={<IoMdSettings />}
+          isActive={activeItem === "Settings"}
+        />
+      </Link>
       <Link to="/">
         <NavButton
           onClick={handleClick}

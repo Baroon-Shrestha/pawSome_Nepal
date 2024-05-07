@@ -13,7 +13,8 @@ import EditPets from "./dashboard/dashboardPages/editPets/editPets";
 import DashboardPets from "./dashboard/dashboardPages/dashboardPets/dashboardPets";
 import NewPetDescription from "./pages/newPetDescriptionPage/newPetDescription";
 import AdoptPage from "./pages/adoptPet/adoptPage";
-
+import ManageAdoptionRequest from "./dashboard/dashboardPages/manageAdoptionRequest/manageAdoptionRequest";
+import AdoptionRequest from "./pages/adoptionRequest/adoptionRequest";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +65,14 @@ const router = createBrowserRouter([
   {
     path: "adoptPet/:id",
     element: <AdoptPage/>,
+  },
+  {
+    path: "manageAdoptionRequest",
+    element: <ManageAdoptionRequest/>,
+  },
+  {
+    path: "viewAdoptionRequest",
+    element: < AdoptionRequest/>,
   },
 ]);
 
