@@ -99,7 +99,7 @@ export const updateStatus = asyncErrorHandling(async (req, res) => {
 
     if (req.body.status == "Accepted") {
         const updatedPet = await Pet.findByIdAndUpdate(updateSat.pet, { available: false }, { new: true });
-        console.log("Pet availability updated successfully:", updatedPet);
+        console.log("Pet adoption request sent successfully:", updatedPet);
     }
 
     res.send({

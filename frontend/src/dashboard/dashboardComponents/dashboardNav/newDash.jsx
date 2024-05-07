@@ -6,13 +6,11 @@ import { MdOutlinePets, MdExpandMore } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-
 export const Sidebar = () => {
   const [activeItem, setActiveItem] = useState("");
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const side = useRef(null);
-
 
   const handleClick = (item) => {
     setActiveItem((prev) => (prev !== item ? item : ""));
@@ -84,7 +82,7 @@ export const Sidebar = () => {
           onClick={handleClick}
           name="Adoption Request"
           icon={<IoMdSettings />}
-          isActive={activeItem === "Settings"}
+          isActive={activeItem === "Adoption Request"}
         />
       </Link>
       <Link to="/">
@@ -92,7 +90,7 @@ export const Sidebar = () => {
           onClick={handleClick}
           name="User Dashboard"
           icon={<IoMdSettings />}
-          isActive={activeItem === "Settings"}
+          isActive={activeItem === "User Dashboard"}
         />
       </Link>
       <Link to="/">
