@@ -4,22 +4,28 @@ import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import Nav from "../../components/nav/nav";
+import { useCookies } from "react-cookie";
 
 
 export default function AdoptionRequest() {
 
     const [petRequests, setPetRequests] = useState([])
+    const [cookies] = useCookies(["token"]);
 
-   
+
 
 
 
     useEffect(() => {
         axios
-            .get("http://localhost:3000/petfinder/adopt/viewyourrequest")
+            .get("http://localhost:3000/petfinder/adopt/viewyourrequest", {
+                headers: {
+                    authorization: cookies.token,
+                },
+            })
             .then(function (response) {
-
-                setPetRequests(response?.data?.viewReq);
+                console.log(response)
+                setPetRequests(response?.data?.adoptionRequest);
 
 
             })
@@ -35,18 +41,18 @@ export default function AdoptionRequest() {
     console.log(petRequests)
 
 
-    
+
 
 
 
     return (
         <>
-       
-       <Nav/>
+
+            <Nav />
             <div className="adoptionRequest_section">
-           
+
                 <div className="container">
-                <h1>Your Adoption Requests!</h1>
+                    <h1>Your Adoption Requests!</h1>
                     <div className="posts">
                         {
                             petRequests?.map((data) => {
@@ -54,49 +60,33 @@ export default function AdoptionRequest() {
                                     <>
                                         <div className="post">
                                             <div className="top">
-                                                <img src={data?.user?.profile[0]?.url} className="user_profile" />
+                                                <div className="left">
+                                                    <img src={data?.user?.profile[0]?.url} className="user_profile" />
 
 
-                                                <div className="user_info">
-                                                    <h1>{data?.user?.firstname}</h1>
-                                                   <p>{data?.user?.number}</p>
+                                                    <div className="user_info">
+                                                        <h1>{data?.user?.firstname}</h1>
+                                                        <p>{data?.user?.number}</p>
 
+                                                    </div>
                                                 </div>
+
+
+                                                <p className="status status_pending">Pending</p>
                                             </div>
-                                            <Carousel  showThumbs = {false} >
-
-
-                                                
-                                                    {
-                                                        data?.pet?.image?.map((imgs)=>{
-                                                           return <img src={imgs?.url} className="post_img" />
-                                                        })
-                                                    }
+                                            <Carousel showThumbs={false} >
 
 
 
-                                                   
+                                                {
+                                                    data?.pet?.image?.map((imgs) => {
+                                                        return <img src={imgs?.url} className="post_img" />
+                                                    })
+                                                }
 
-                                                
+
 
                                             </Carousel>
-
-
-
-
-                                            <div className="options">
-                                                <div className="option">
-                                                    <p>Approve</p>
-                                                </div>
-                                                <div className="option">
-                                                    <p>Disaprove</p>
-                                                </div>
-
-                                                <div className="option">
-                                                    <p>Message</p>
-                                                </div>
-
-                                            </div>
 
                                             <div className="caption">
                                                 <p><span className="bold">Reason : </span>{data?.reason}</p>

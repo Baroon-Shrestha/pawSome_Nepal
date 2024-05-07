@@ -28,7 +28,30 @@
             display: flex;
             margin-bottom: 1rem;
             align-items: center;
-            gap: 3rem;
+            justify-content: space-between;
+
+            .left{
+              display: flex;
+              gap:2rem;
+              align-items: center;
+            }
+
+            .status{
+              font-size: 1.6rem;
+            
+              padding:1rem;
+              border-radius: 12px;
+            }
+
+            .status_success{
+              background-color: rgb(124, 238, 124);
+            }
+
+            .status_pending{
+              background-color: rgb(233, 116, 116);
+            }
+
+
   
             .user_info{
               
@@ -44,8 +67,6 @@
               }
   
             }
-  
-           
   
             .user_profile {
               width: 50px;
