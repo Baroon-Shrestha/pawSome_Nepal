@@ -5,8 +5,7 @@ import styles from "./createPets.module.css";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Nav from "../../../components/nav/nav";
-import DashboardNav from "../../dashboardComponents/dashboardNav/dashboardNav";
+import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 
 export default function CreatePets() {
   const [name, setName] = useState("");
@@ -67,7 +66,7 @@ export default function CreatePets() {
 
   return (
     <>
-      <DashboardNav />
+      <Sidebar />
       <ToastContainer bodyclassName="toastBody" />
       <div className={styles.formSection}>
         <form id="myForm" className={styles.myForm} onSubmit={handleSubmit}>

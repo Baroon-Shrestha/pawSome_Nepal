@@ -5,7 +5,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './editPets.module.css';
-import DashboardNav from '../../dashboardComponents/dashboardNav/dashboardNav';
+import { Sidebar } from '../../dashboardComponents/dashboardNav/newDash';
 
 function EditPets() {
   const [cookies] = useCookies(['token']);
@@ -88,7 +88,7 @@ function EditPets() {
 
   return (
     <>
-      <DashboardNav />
+      <Sidebar />
       <div className={styles.formSection}>
         <form id="myForm" className={styles.myForm} onSubmit={formSubmit}>
           <ToastContainer bodyclassName="toastBody" />
