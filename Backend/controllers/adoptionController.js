@@ -78,7 +78,7 @@ export const viewYourAdoptionRequest = asyncErrorHandling(async (req, res) => {
     if (!users) {
         return errorHanlder(createError("User not found"), req, res);
     }
-    const adoptionRequest = await adopt.find({ user: userId }).populate('user');
+    const adoptionRequest = await adopt.find({ user: userId }).populate('user').populate("pet");
 
     return res.status(200).json({ success: true, adoptionRequest });
 })

@@ -15,6 +15,10 @@ export default function AdoptionRequest() {
 
 
 
+   
+
+
+
 
     useEffect(() => {
         axios
@@ -72,7 +76,8 @@ export default function AdoptionRequest() {
                                                 </div>
 
 
-                                                <p className="status status_pending">Pending</p>
+                                                <p className={data?.status === 'Accepted' ? 'status status_accepted' : 'status status_pending'}>{data?.status}</p>
+
                                             </div>
                                             <Carousel showThumbs={false} >
 
