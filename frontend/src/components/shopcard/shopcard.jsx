@@ -1,6 +1,9 @@
 import React from 'react';
-import '.petshop.css';
-const shopcard = () => {
+import './shopcard.css';
+import food1 from './food1.png';
+import food2 from './food2.jpg';
+
+const Shopcard = () => {
   const products = [
     {
       id: 1,
@@ -56,7 +59,7 @@ const shopcard = () => {
     <div className="product-grid">
       {products.map(product => (
         <div key={product.id} className="product">
-          <img src={product.image} alt={product.name} />
+          <img src={product.image === 'food1.png' ? food1 : food2} alt={product.name} />
           <div className="product-info">
             <h2>{product.name}</h2>
             <p>Price: Rs. {product.price}</p>
@@ -68,4 +71,4 @@ const shopcard = () => {
   );
 };
 
-export default shopcard;
+export default Shopcard;
