@@ -32,9 +32,8 @@ export default function AdoptionProcess(){
                
                 <div className="card_description">
                     <h1>02</h1>
-                    <h2>Choose Pet</h2>
-                    <p>Choose the pet you want to adopt and check the details such as age, health,status and ask all
-                        those questions you have so that this experiece is sucessful and wonderful.</p>
+                    <h2>Adoption Form</h2>
+                    <p>Fill the information for the adoption process. </p>
                 </div>
             </div>
 
@@ -46,9 +45,8 @@ export default function AdoptionProcess(){
               
                 <div className="card_description">
                     <h1>03</h1>
-                    <h2>Choose Pet</h2>
-                    <p>Choose the pet you want to adopt and check the details such as age, health,status and ask all
-                        those questions you have so that this experiece is sucessful and wonderful.</p>
+                    <h2>Take your Pet Home</h2>
+                    <p>After filling the information take your friendly companion to your home who will always acompany you in your journey.</p>
                 </div>
             </div>
         </div>
