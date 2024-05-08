@@ -60,6 +60,12 @@ export default function Nav() {
                   Available Pets
                 </Link>
               </li>
+
+              <li className={styles.list}>
+                <Link to="/viewAdoptionRequest" className={styles.text}>
+                  Adoption Requests
+                </Link>
+              </li>
               {!isAdmin && loggedInUser && (
                 <li className={styles.list}>
                   <Link to="/favourites" className={styles.text}>

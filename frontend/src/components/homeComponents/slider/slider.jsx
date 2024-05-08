@@ -126,7 +126,7 @@ function Slider() {
 
 
                         <div className="person-info">
-                            <img className="image-small-device" src="./images/toy-small.jpg" />
+                            <img className="image-small-device" src="https://lh4.googleusercontent.com/proxy/SYiZj04ZhL7Itm1TcbL3RiRuP1FNPPb2RN3lQqF2hAGmkKNMZN8M19sv1D6DJvYSOIykrXrHXYoj53rCWMkzSVRv9tOt6Mmz2D5TgO1APx2x0oCGRXKV039N6ejXm78AIw" />
                             <div>
                                 <h1>Barun Pahari</h1>
                                 <p className="slider-card-label">LABEL</p>
@@ -176,9 +176,9 @@ function Slider() {
 
                     <div className="image-buttons">
 
-                        <img className="image-button" src="./images/toy-small.jpg" />
-                        <img className="image-button active" src="./images//mecha-small.jpg" />
-                        <img className="image-button" src="./images/yoda-small.jpg" />
+                        <img className="image-button" src="https://lh4.googleusercontent.com/proxy/SYiZj04ZhL7Itm1TcbL3RiRuP1FNPPb2RN3lQqF2hAGmkKNMZN8M19sv1D6DJvYSOIykrXrHXYoj53rCWMkzSVRv9tOt6Mmz2D5TgO1APx2x0oCGRXKV039N6ejXm78AIw" />
+                        <img className="image-button active" src="https://static.vecteezy.com/system/resources/thumbnails/033/662/051/small_2x/cartoon-lofi-young-manga-style-girl-while-listening-to-music-in-the-rain-ai-generative-photo.jpg" />
+                        <img className="image-button" src="https://img.freepik.com/premium-vector/young-girl-anime-style-character-vector-illustration-design-manga-anime-girl-hair-faces-cartoon_147933-1139.jpg?w=360" />
 
 
                     </div>
