@@ -12,4 +12,6 @@ router.get("/user/logout", isAuthorized, logout)
 router.get("/user/deleteuser", isAuthorized, deleteUser)
 router.put("/user/update/:id", isAuthorized, updateUser)
 
+
+
 export default router;

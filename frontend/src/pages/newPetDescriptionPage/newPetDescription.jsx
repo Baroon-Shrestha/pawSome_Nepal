@@ -4,6 +4,7 @@ import NewCard from "../../components/card/NewCard";
 import useFetchAllPets from "../../hooks/useFetchAllPets";
 import useFetchPetById from "../../hooks/useFetchPetById";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function NewPetDescription() {
   const {pets} = useFetchAllPets()
@@ -72,8 +73,17 @@ export default function NewPetDescription() {
 
                         <div className="bottom_container">
                             <h2>About {petInfo?.name}</h2>
-                            <p>{petInfo.description}</p>
+                            <p>{petInfo?.description}</p>
+
+                            <Link to = {`/adoptPet/${petInfo._id}`}>
+                            <button className="btn">Adopt {petInfo?.name}</button>
+                            </Link>
+
+                          
+
                         </div>
+
+                       
 
                         <div className="img_container">
                             {

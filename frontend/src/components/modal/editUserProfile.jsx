@@ -7,42 +7,51 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from './editUserProfile.module.css';
 import { MdCancel } from "react-icons/md";
 
-function EditUserProfile({setShowEditModal}) {
+function EditUserProfile({ setShowEditModal }) {
   const [cookies] = useCookies(['token']);
-  const { id } = useParams();
-  const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    category: '',
-    description: '',
-    breed: '',
-    gender: '',
-  });
-  const [images, setImages] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [images, setImages] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [firstName, setFirstName] = useState()
+  const [lastName, setLastName] = useState("")
+  const [number, setNumber] = useState(0)
+  const [password, setPassword] = useState("")
+  const [userId, setUserId] = useState(null)
+
+
+
+  console.log(userId)
+
+  //getting the user information
+  useEffect(() => {
+    const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
+    const tokenFromCookies = cookies.token;
+
+    if (userFromLocalStorage && tokenFromCookies) {
+      setLoggedInUser(userFromLocalStorage);
+    }
+  }, [cookies.token]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/petFinder/selected/${id}`)
-      .then((response) => {
-        setFormData(response?.data?.getPetData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
+    if (loggedInUser) {
+      setFirstName(loggedInUser.firstname);
+      setLastName(loggedInUser.lastname);
+      setNumber(loggedInUser.number);
+      setUserId(loggedInUser._id)
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    }
+  }, [loggedInUser]);
+
+
+  console.log(cookies.token)
+
+
+
+
 
   const handleImageUpload = (event) => {
-    const files = Array.from(event.target.files);
-    setImages(files);
+    const file = event.target.files[0]; 
+    setImages([file]); 
   };
 
   const formSubmit = async (event) => {
@@ -50,47 +59,50 @@ function EditUserProfile({setShowEditModal}) {
 
     const formDataToUpdate = new FormData();
 
-    formDataToUpdate.append("name", formData.name);
-    formDataToUpdate.append("category", formData.category);
-    formDataToUpdate.append("age", formData.age);
-    formDataToUpdate.append("description", formData.description);
-    formDataToUpdate.append("breed", formData.breed);
-    formDataToUpdate.append("gender", formData.gender);
+    formDataToUpdate.append("firstname", firstName);
+    formDataToUpdate.append("lastname", lastName);
+    formDataToUpdate.append("number", number);
+    formDataToUpdate.append("password", password);
 
-    images.forEach((image, index) => {
-      formDataToUpdate.append(`images`, image);
-    });
+
+
+    formDataToUpdate.append(`profile`, images);
+
 
     try {
       setIsLoading(true);
-      const response = await axios.put(
-        `http://localhost:3000/petFinder/update/${id}`,
-        formDataToUpdate,
-        {
-          headers: {
-            authorization: cookies.token,
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+      if (userId) {
+        const response = await axios.put(
+          `http://localhost:3000/petfinder/user/update/${userId}`,
+          formDataToUpdate,
+          {
+            headers: {
+              authorization: cookies.token,
 
-      if (response.data.success === true) {
-        toast.success('Pet details updated successfully');
-        setIsLoading(false);
+            },
+          }
+        );
+        if (response.data.success === true) {
+          toast.success('Profile Updated Sucessfully');
+          setIsLoading(false);
+        }
       }
+
+
+
     } catch (error) {
       console.error('Error:', error);
-      toast.error('Failed to update pet details. Please try again.');
+      toast.error('Failed to update your profile');
       setIsLoading(false);
     }
   };
 
   return (
     <>
-    
+
       <div className={styles.formSection}>
-        <form id="myForm" className={styles.myForm} onSubmit={formSubmit}>
-        <MdCancel  className={styles.icon} onClick={()=>setShowEditModal(false)}/>
+        <form id="myForm" className={styles.myForm} onSubmit={formSubmit} >
+          <MdCancel className={styles.icon} onClick={() => setShowEditModal(false)} />
           <ToastContainer bodyclassName="toastBody" />
           <img src="/dribbblepets_v01.gif" className={styles.gif} />
           <p className={styles.message}>Update Profile</p>
@@ -100,10 +112,10 @@ function EditUserProfile({setShowEditModal}) {
                 type="text"
                 placeholder="First Name"
                 name="name"
-                value={formData.name}
+                defaultValue={firstName}
                 autoComplete="off"
                 required
-                onChange={handleInputChange}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
 
@@ -111,11 +123,11 @@ function EditUserProfile({setShowEditModal}) {
               <input
                 type="text"
                 placeholder="Last Name"
-                name="name"
-                value={formData.name}
+                name="lastname"
+                defaultValue={lastName}
                 autoComplete="off"
                 required
-                onChange={handleInputChange}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
 
@@ -123,60 +135,37 @@ function EditUserProfile({setShowEditModal}) {
               <input
                 type="number"
                 placeholder="Number"
-                name="age"
-                value={formData.age}
+                name="number"
+                value={number}
                 autoComplete="off"
                 required
-                onChange={handleInputChange}
+                onChange={(e) => setNumber(e.target.value)}
               />
             </div>
 
-            <div className={styles.inputDiv}>
-              <input
-                type="email"
-                placeholder="Email"
-                name="category"
-                value={formData.category}
-                autoComplete="off"
-                required
-                onChange={handleInputChange}
-              />
-            </div>
 
             <div className={styles.inputDiv}>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="New Password"
                 name="breed"
-                value={formData.breed}
+                value={password}
                 autoComplete="off"
                 required
-                onChange={handleInputChange}
-              />
-            </div>
-           
-
-            <div className={styles.inputDiv}>
-              <input
-                type="text"
-                placeholder="Confirm Password"
-                name="breed"
-                value={formData.breed}
-                autoComplete="off"
-                required
-                onChange={handleInputChange}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
-          
+
 
             <div className={styles.inputDiv}>
+              <h1 className={styles.inputTitle}>Your New Profile</h1>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
-                multiple
               />
+
             </div>
           </div>
           <div className={styles.btnDiv}>
