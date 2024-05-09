@@ -15,10 +15,15 @@ import NewPetDescription from "./pages/newPetDescriptionPage/newPetDescription";
 import AdoptPage from "./pages/adoptPet/adoptPage";
 import ManageAdoptionRequest from "./dashboard/dashboardPages/manageAdoptionRequest/manageAdoptionRequest";
 import AdoptionRequest from "./pages/adoptionRequest/adoptionRequest";
+import UserProfile from "./pages/userProfile/userProfile";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/userProfile",
+    element: <UserProfile/>,
   },
   {
     path: "/favourites",

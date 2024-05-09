@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import gsap from "gsap";
 
 export default function Nav() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -11,7 +10,6 @@ export default function Nav() {
   const [isAdmin, setIsAdmin] = useState(false);
   const navRef = useRef(null);
   const logo = useRef();
-
 
   useEffect(() => {
     const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
@@ -60,19 +58,7 @@ export default function Nav() {
                   Available Pets
                 </Link>
               </li>
-
-              <li className={styles.list}>
-                <Link to="/viewAdoptionRequest" className={styles.text}>
-                  Adoption Requests
-                </Link>
-              </li>
-              {!isAdmin && loggedInUser && (
-                <li className={styles.list}>
-                  <Link to="/favourites" className={styles.text}>
-                    Favourite
-                  </Link>
-                </li>
-              )}
+         
               {isAdmin && (
                 <li className={styles.list}>
                   <Link to="/dashboard" className={styles.text}>
@@ -117,12 +103,14 @@ export default function Nav() {
 
                 {showDropDown && (
                   <div className={styles.dropDown}>
+                     <Link to = "/userProfile">
                     <p
                       className={`${styles.text} ${styles.drop}`}
                       onClick={handleSettingClick}
                     >
-                      Settings
+                     Profile
                     </p>
+                    </Link>
                     <p
                       className={`${styles.text} ${styles.drop}`}
                       onClick={handleLogOutClick}
