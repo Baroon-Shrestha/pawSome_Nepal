@@ -12,6 +12,8 @@ import EditUserProfile from "../../components/modal/editUserProfile";
 export default function UserProfile() {
     const [selectedTab, setSelectedTab] = useState('favourites');
     const [showEditModal, setShowEditModal] = useState(false)
+   
+
     return (
         <>
             < Nav />
@@ -62,6 +64,7 @@ export default function UserProfile() {
                     </div>
 
                     {
+
                     showEditModal &&
                     <div className="edit_profile_container">
                         < EditUserProfile setShowEditModal = {setShowEditModal}/>

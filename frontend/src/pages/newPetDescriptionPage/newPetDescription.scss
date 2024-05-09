@@ -47,6 +47,58 @@
             gap: 1rem;
             background-color: rgb(255, 255, 255);
 
+            .btn {
+                font-size: 17px;
+                background: transparent;
+                border: none;
+                padding: 1.3rem 1.5em;
+                color: #000000;
+                text-transform: uppercase;
+                position: relative;
+                transition: color 0.5s ease;
+                cursor: pointer;
+                z-index: 1;
+                width: 30%;
+                text-align: center;
+                background-color: #e28080;
+                margin-top: 1rem;
+                color: white;
+              }
+              
+              .btn::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 2px;
+                width: 0;
+                background-color: #f06868;
+                transition: width 0.5s ease;
+              }
+              
+              .btn:hover::before {
+                width: 100%;
+                transition-delay: 0.1s;
+              }
+              
+              .btn::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 0;
+                width: 100%;
+                background-color: #f06868;
+                transition: height 0.4s ease;
+                z-index: -1;
+              }
+              
+              .btn:hover::after {
+                height: 100%;
+                transition-delay: 0.4s;
+                color: white;
+              }
+
             .top_container {
                 padding: 2rem 0rem;
                 border-top: 1px solid rgb(235, 235, 235);
