@@ -107,6 +107,7 @@ export const deleteUser = asyncErrorHandling(async (req, res) => {
     const { id } = req.params
     const { email } = req.user
 
+
     if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
 
     const UserToDelete = await user.findById(id)
@@ -122,9 +123,11 @@ export const deleteUser = asyncErrorHandling(async (req, res) => {
 
 export const updateUser = asyncErrorHandling(async (req, res) => {
     const { id } = req.params
-    const { email } = req.user
+    const loggedInUserId = req.user.id;
 
-    if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you are not authorized"), req, res)
+    if (id !== loggedInUserId) {
+        return errorHanlder(createError("You are not authorized to update this user's data"), req, res);
+    }
 
     let userToUpdate = await user.findById(id)
     if (!userToUpdate) return errorHanlder(createError("User not found"), req, res)
