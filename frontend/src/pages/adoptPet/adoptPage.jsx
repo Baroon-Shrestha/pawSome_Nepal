@@ -52,28 +52,28 @@ export default function AdoptPage() {
             <Nav />
             <ToastContainer />
             <div className="adopt_page_section">
-                <div className="adopt_page_section_container">  
+                <div className="adopt_page_section_container">
                     <h1>Adopt Pet</h1>
 
                     <div className="wrapper_container">
-                    <Carousel  showThumbs = {false} >
-                        {
-                            petInfo?.image?.map((imgs) => {
-                                return <img src={imgs.url} className="img"></img>
-                            })
-                        }
+                        <Carousel showThumbs={false} >
+                            {
+                                petInfo?.image?.map((imgs) => {
+                                    return <img src={imgs.url} className="img"></img>
+                                })
+                            }
                         </Carousel>
 
                         <h2>{petInfo?.name}</h2>
-                    <p className="description">{petInfo?.description}</p>
-                    <textarea placeholder="Why do u want to adopt this pet?" onChange={(e) => setReason(e.target.value)} value={reason}></textarea>
-                    <button className="btn" onClick={adoptPet}>Adopt</button>
+                        <p className="description">{petInfo?.description}</p>
+                        <textarea placeholder="Why do u want to adopt this pet?" onChange={(e) => setReason(e.target.value)} value={reason}></textarea>
+                        <button className="btn" onClick={adoptPet}>Adopt</button>
                     </div>
 
-                    
-                  
-                  
-                    
+
+
+
+
                 </div>
             </div>
         </>

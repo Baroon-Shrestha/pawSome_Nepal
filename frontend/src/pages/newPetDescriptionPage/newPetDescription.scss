@@ -93,14 +93,16 @@
 
             .img_container {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 3rem;
                 margin-top: 3rem;
+             
     
                 .img {
                     width: 100%;
                     object-position: top;
-                    height: 350px;
+                    height: 100%;
+                    
                     object-fit: cover;
                 }
             }

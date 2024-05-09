@@ -52,10 +52,10 @@ export default function AdoptionRequest() {
     return (
         <>
 
-            <Nav />
+       
             <div className="adoptionRequest_section">
 
-                <div className="container">
+             
                     <h1>Your Adoption Requests!</h1>
                     <div className="posts">
                         {
@@ -121,7 +121,7 @@ export default function AdoptionRequest() {
                     </div>
 
                 </div>
-            </div>
+           
         </>
     )
 }

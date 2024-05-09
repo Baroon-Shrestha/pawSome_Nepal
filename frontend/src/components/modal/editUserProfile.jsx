@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styles from './editPets.module.css';
-import { Sidebar } from '../../dashboardComponents/dashboardNav/newDash';
+import styles from './editUserProfile.module.css';
+import { MdCancel } from "react-icons/md";
 
-function EditPets() {
+function EditUserProfile({setShowEditModal}) {
   const [cookies] = useCookies(['token']);
   const { id } = useParams();
   const [formData, setFormData] = useState({
@@ -87,17 +87,30 @@ function EditPets() {
 
   return (
     <>
-      <Sidebar />
+    
       <div className={styles.formSection}>
         <form id="myForm" className={styles.myForm} onSubmit={formSubmit}>
+        <MdCancel  className={styles.icon} onClick={()=>setShowEditModal(false)}/>
           <ToastContainer bodyclassName="toastBody" />
           <img src="/dribbblepets_v01.gif" className={styles.gif} />
-          <p className={styles.message}>Edit Pets?</p>
+          <p className={styles.message}>Update Profile</p>
           <div className={styles.formPadding}>
             <div className={styles.inputDiv}>
               <input
                 type="text"
-                placeholder="Pet Name"
+                placeholder="First Name"
+                name="name"
+                value={formData.name}
+                autoComplete="off"
+                required
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className={styles.inputDiv}>
+              <input
+                type="text"
+                placeholder="Last Name"
                 name="name"
                 value={formData.name}
                 autoComplete="off"
@@ -109,7 +122,7 @@ function EditPets() {
             <div className={styles.inputDiv}>
               <input
                 type="number"
-                placeholder="Age"
+                placeholder="Number"
                 name="age"
                 value={formData.age}
                 autoComplete="off"
@@ -120,8 +133,8 @@ function EditPets() {
 
             <div className={styles.inputDiv}>
               <input
-                type="text"
-                placeholder="Category"
+                type="email"
+                placeholder="Email"
                 name="category"
                 value={formData.category}
                 autoComplete="off"
@@ -131,20 +144,22 @@ function EditPets() {
             </div>
 
             <div className={styles.inputDiv}>
-              <textarea
-                placeholder="Description"
-                name="description"
-                value={formData.description}
+              <input
+                type="password"
+                placeholder="Password"
+                name="breed"
+                value={formData.breed}
                 autoComplete="off"
                 required
                 onChange={handleInputChange}
-              ></textarea>
+              />
             </div>
+           
 
             <div className={styles.inputDiv}>
               <input
                 type="text"
-                placeholder="Breed"
+                placeholder="Confirm Password"
                 name="breed"
                 value={formData.breed}
                 autoComplete="off"
@@ -153,17 +168,7 @@ function EditPets() {
               />
             </div>
 
-            <div className={styles.inputDiv}>
-              <input
-                type="text"
-                placeholder="Gender"
-                name="gender"
-                value={formData.gender}
-                autoComplete="off"
-                required
-                onChange={handleInputChange}
-              />
-            </div>
+          
 
             <div className={styles.inputDiv}>
               <input
@@ -189,4 +194,4 @@ function EditPets() {
   );
 }
 
-export default EditPets;
+export default EditUserProfile;
