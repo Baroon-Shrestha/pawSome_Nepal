@@ -19,10 +19,6 @@ const productSchema = new mongoose.Schema({
         type: String
 
     },
-    // forPetCategory: {
-    //     type: String,
-    //     enum: ["Dog", "Cat", "Other"]
-    // },
     price: {
         type: Number,
         required: true

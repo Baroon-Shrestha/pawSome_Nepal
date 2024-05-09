@@ -3,6 +3,7 @@ import { createError, errorHanlder } from "../middlewares/errorHandling.js";
 import { user } from "../models/userModel.js";
 import { getToken } from "../utils/token.js";
 import cloudinary from 'cloudinary'
+import bcrypt from 'bcrypt';
 
 export const userData = asyncErrorHandling(async (req, res) => {
     const users = await user.find()
@@ -149,6 +150,12 @@ export const updateUser = asyncErrorHandling(async (req, res) => {
         };
     } else {
         profileUpdate = userToUpdate.profile;
+    }
+
+    delete req.body.email;
+
+    if (req.body.password) {
+        req.body.password = await bcrypt.hash(req.body.password, 10);
     }
 
     userToUpdate = await user.findByIdAndUpdate(id, { ...req.body, profile: profileUpdate }, {

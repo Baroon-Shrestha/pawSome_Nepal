@@ -83,7 +83,7 @@ export const viewYourAdoptionRequest = asyncErrorHandling(async (req, res) => {
     return res.status(200).json({ success: true, adoptionRequest });
 })
 
-export const    updateStatus = asyncErrorHandling(async (req, res) => {
+export const updateStatus = asyncErrorHandling(async (req, res) => {
     const { email } = req.user
 
     if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
