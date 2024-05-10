@@ -45,7 +45,7 @@ export const postPets = asyncErrorHandling(async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            message: "Posted about pets",
+            message: "Posted successfully",
             post
         });
     } else {
@@ -76,7 +76,7 @@ export const postPets = asyncErrorHandling(async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            message: "Posted about pets",
+            message: "Posted successfully",
             post
         });
     }

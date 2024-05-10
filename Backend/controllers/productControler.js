@@ -149,7 +149,7 @@ export const viewCart = asyncErrorHandling(async (req, res) => {
 
     if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
 
-    const seeCart = await cart.find({ user: id }).populate({ path: 'product', select: 'name price' })
+    const seeCart = await cart.find({ user: id }).populate({ path: 'product', select: 'name price prodImage' })
 
     res.send({
         success: true,
@@ -189,24 +189,21 @@ export const updateFromCart = asyncErrorHandling(async (req, res) => {
     const numQuantity = parseInt(quantity);
     if (isNaN(numQuantity) || numQuantity <= 0) return errorHanlder(createError("Invalid quantity"), req, res);
 
-    const updateQuantity = await cart.findByIdAndUpdate(id, { quantity: numQuantity }, { new: true })
+    const updatedCartItem = await cart.findByIdAndUpdate(id, { quantity: numQuantity }, { new: true }).populate({ path: 'product', select: 'name price stockQuantity' });
 
-    const product = updateQuantity.product;
-    if (!product) return errorHanlder(createError("Product associated with the cart item not found"), req, res);
+    if (!updatedCartItem) return errorHanlder(createError(404, "Item not found in cart"), req, res);
 
-    const oldQuantity = updateQuantity.quantity;
-    const difference = numQuantity - oldQuantity;
+    const quantityDifference = numQuantity - updatedCartItem.quantity;
 
-    if (product.stockQuantity < difference) {
-        return errorHanlder(createError("Insufficient stock quantity"), req, res);
-    }
+    const product = updatedCartItem.product;
 
-    product.stockQuantity -= difference;
+    product.stockQuantity -= quantityDifference;
+
     await product.save();
 
     res.send({
         success: true,
-        message: "quantity updated successfully",
-        updateQuantity
-    })
+        message: "Quantity updated successfully",
+        updateQuantity: updatedCartItem
+    });
 })
