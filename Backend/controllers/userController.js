@@ -151,12 +151,10 @@ export const updateUser = asyncErrorHandling(async (req, res) => {
         req.body.password = await bcrypt.hash(req.body.password, 10);
     }
 
-    // Create update object for user data excluding profile if no new image provided
     const updateObject = Object.keys(profileUpdate).length !== 0 ?
         { ...req.body, profile: profileUpdate } :
         req.body;
 
-    // Use findByIdAndUpdate to update user data
     const userToUpdate = await user.findByIdAndUpdate(id, updateObject, {
         new: true,
         runValidators: true,

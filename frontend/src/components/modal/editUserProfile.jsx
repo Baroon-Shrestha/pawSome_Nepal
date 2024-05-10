@@ -17,8 +17,6 @@ function EditUserProfile({ setShowEditModal }) {
   const [password, setPassword] = useState("");
   const [userId, setUserId] = useState(null);
 
-
-  //getting the user information
   useEffect(() => {
     const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
     const tokenFromCookies = cookies.token;
@@ -37,34 +35,25 @@ function EditUserProfile({ setShowEditModal }) {
     }
   }, [loggedInUser]);
 
-
-
-
   const handleImageUpload = (event) => {
-    const file = event.target.files[0]; 
-    setImage(file); 
-  }
- 
+    const file = event.target.files[0];
+    setImage(file);
+  };
 
   const formSubmit = async (event) => {
     event.preventDefault();
-  
-    // Check if image is selected
-    if (!image) {
-      toast.error('Please select an image');
-      return;
-    }
-  
+
     const formDataToUpdate = new FormData();
-  
+
     formDataToUpdate.append("firstname", firstName);
     formDataToUpdate.append("lastname", lastName);
     formDataToUpdate.append("number", number);
     formDataToUpdate.append("password", password);
 
-    formDataToUpdate.append(`profile`, image);
-  
-    
+    // Check if an image is provided
+    if (image) {
+      formDataToUpdate.append(`profile`, image);
+    }
 
     try {
       setIsLoading(true);
@@ -74,19 +63,21 @@ function EditUserProfile({ setShowEditModal }) {
           formDataToUpdate,
           {
             headers: {
-              'content-type': 'multipart/form-data',
+              "content-type": "multipart/form-data",
               authorization: cookies.token,
             },
           }
         );
         if (response.data.success === true) {
-          console.log(response.data)
-          localStorage.setItem("user", JSON.stringify(response?.data?.userToUpdate));
+          console.log(response.data);
+          localStorage.setItem(
+            "user",
+            JSON.stringify(response?.data?.userToUpdate)
+          );
 
-          toast.success('Profile Updated Successfully');
+          toast.success("Profile Updated Successfully");
           setIsLoading(false);
           setImage(null);
-         
         }
       }
     } catch (error) {
@@ -98,7 +89,6 @@ function EditUserProfile({ setShowEditModal }) {
 
   useEffect(() => {
     if (!isLoading) {
-      // Reset file input field after form submission
       document.getElementById("imageUpload").value = null;
     }
   }, [isLoading]);
@@ -134,7 +124,6 @@ function EditUserProfile({ setShowEditModal }) {
                 name="lastname"
                 defaultValue={lastName}
                 autoComplete="off"
-             
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
@@ -158,7 +147,6 @@ function EditUserProfile({ setShowEditModal }) {
                 name="breed"
                 value={password}
                 autoComplete="off"
-             
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
