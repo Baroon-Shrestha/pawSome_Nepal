@@ -9,9 +9,7 @@ router.get("/user/allUsers", userData)
 router.post("/user/login", login)
 router.get("/user/loggedinuser", isAuthorized, getLoggedInUser)
 router.get("/user/logout", isAuthorized, logout)
-router.get("/user/deleteuser", isAuthorized, deleteUser)
+router.delete("/user/deleteuser/:id", isAuthorized, deleteUser)
 router.put("/user/update/:id", isAuthorized, updateUser)
-
-
 
 export default router;
