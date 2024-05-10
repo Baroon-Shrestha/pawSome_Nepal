@@ -80,11 +80,13 @@ function EditUserProfile({ setShowEditModal }) {
           }
         );
         if (response.data.success === true) {
+          console.log(response.data)
+          localStorage.setItem("user", JSON.stringify(response?.data?.userToUpdate));
 
           toast.success('Profile Updated Successfully');
           setIsLoading(false);
-          // Reset image input field
           setImage(null);
+         
         }
       }
     } catch (error) {
