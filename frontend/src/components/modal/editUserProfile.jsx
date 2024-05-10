@@ -10,7 +10,7 @@ import { MdCancel } from "react-icons/md";
 function EditUserProfile({ setShowEditModal }) {
   const [cookies] = useCookies(['token']);
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [images, setImages] = useState(null);
+  const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [firstName, setFirstName] = useState()
   const [lastName, setLastName] = useState("")
@@ -43,32 +43,31 @@ function EditUserProfile({ setShowEditModal }) {
   }, [loggedInUser]);
 
 
-  console.log(cookies.token)
-
-
-
-
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; 
-    setImages([file]); 
+    setImage(file); 
   };
+
+  console.log(image)
 
   const formSubmit = async (event) => {
     event.preventDefault();
-
+  
+    // Check if image is selected
+    if (!image) {
+      toast.error('Please select an image');
+      return;
+    }
+  
     const formDataToUpdate = new FormData();
-
+  
     formDataToUpdate.append("firstname", firstName);
     formDataToUpdate.append("lastname", lastName);
     formDataToUpdate.append("number", number);
     formDataToUpdate.append("password", password);
-
-
-
-    formDataToUpdate.append(`profile`, images);
-
-
+    formDataToUpdate.append(`profile`, image);
+  
     try {
       setIsLoading(true);
       if (userId) {
@@ -77,25 +76,31 @@ function EditUserProfile({ setShowEditModal }) {
           formDataToUpdate,
           {
             headers: {
+              'content-type': 'multipart/form-data',
               authorization: cookies.token,
-
             },
           }
         );
         if (response.data.success === true) {
-          toast.success('Profile Updated Sucessfully');
+          toast.success('Profile Updated Successfully');
           setIsLoading(false);
+          // Reset image input field
+          setImage(null);
         }
       }
-
-
-
     } catch (error) {
       console.error('Error:', error);
       toast.error('Failed to update your profile');
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!isLoading) {
+      // Reset file input field after form submission
+      document.getElementById("imageUpload").value = null;
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -126,7 +131,7 @@ function EditUserProfile({ setShowEditModal }) {
                 name="lastname"
                 defaultValue={lastName}
                 autoComplete="off"
-                required
+             
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
@@ -151,7 +156,7 @@ function EditUserProfile({ setShowEditModal }) {
                 name="breed"
                 value={password}
                 autoComplete="off"
-                required
+             
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -164,6 +169,7 @@ function EditUserProfile({ setShowEditModal }) {
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
+                id="imageUpload"
               />
 
             </div>
