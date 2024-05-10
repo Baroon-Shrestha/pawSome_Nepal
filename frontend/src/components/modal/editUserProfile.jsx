@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,7 +17,6 @@ function EditUserProfile({ setShowEditModal }) {
   const [password, setPassword] = useState("");
   const [userId, setUserId] = useState(null);
 
-  console.log(userId);
 
   //getting the user information
   useEffect(() => {
@@ -45,15 +43,8 @@ function EditUserProfile({ setShowEditModal }) {
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; 
     setImage(file); 
-  console.log(loggedInUser);
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setImages([file]);
-
-  };
-
-  console.log(image)
+  }
+ 
 
   const formSubmit = async (event) => {
     event.preventDefault();
@@ -73,7 +64,7 @@ function EditUserProfile({ setShowEditModal }) {
 
     formDataToUpdate.append(`profile`, image);
   
-    formDataToUpdate.append(`profile`, images);
+    
 
     try {
       setIsLoading(true);
@@ -91,7 +82,6 @@ function EditUserProfile({ setShowEditModal }) {
         if (response.data.success === true) {
 
           toast.success('Profile Updated Successfully');
-          toast.success("Profile Updated Sucessfully");
           setIsLoading(false);
           // Reset image input field
           setImage(null);
