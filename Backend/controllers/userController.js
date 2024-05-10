@@ -121,70 +121,7 @@ export const deleteUser = asyncErrorHandling(async (req, res) => {
     })
 })
 
-// export const updateUser = asyncErrorHandling(async (req, res) => {
-//     console.log("Api route mah hit bhayo")
-//     console.log("Request body:", req.body);
-//     console.log("Request files:", req.files);
-
-//     const { id } = req.params
-//     const loggedInUserId = req.user.id;
-
-//     if (id !== loggedInUserId) {
-//         return errorHanlder(createError("You are not authorized to update this user's data"), req, res);
-//     }
-
-//     let userToUpdate = await user.findById(id)
-//     if (!userToUpdate) return errorHanlder(createError("User not found"), req, res)
-
-//     let profileUpdate = {};
-    
-//         if (req.files && req.files.profile && req.files.profile.length > 0) {
-//             const profile = req.files.profile; 
-//             console.log("This is not consoling", profile);
-//         const imgExt = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
-
-//         if (!imgExt.includes(profile.mimetype)) {
-//             return next(createError(400, "Please upload the image in PNG, JPEG, JPG, or WEBP format"));
-//         }
-
-//         const cloudinaryResponse = await cloudinary.uploader.upload(profile.tempFilePath);
-//         if (!cloudinaryResponse || cloudinaryResponse.error) {
-//             console.log("Cloudinary error:", cloudinaryResponse.error || "Unknown Cloudinary error");
-//             return next(createError(500, "Failed to upload"));
-//         }
-
-//         profileUpdate = {
-//             public_id: cloudinaryResponse.public_id,
-//             url: cloudinaryResponse.secure_url
-//         };
-//     } else {
-//         profileUpdate = userToUpdate.profile;
-//     }
-
-//     delete req.body.email;
-
-//     if (req.body.password) {
-//         req.body.password = await bcrypt.hash(req.body.password, 10);
-//     }
-
-//     userToUpdate = await user.findByIdAndUpdate(id, { ...req.body, profile: profileUpdate }, {
-//         new: true,
-//         runValidators: true,
-//         useFindAndModify: false
-//     });
-
-//     res.send({
-//         success: true,
-//         messgae: "user updated succesfully",
-//         userToUpdate
-//     })
-// })
-
 export const updateUser = asyncErrorHandling(async (req, res) => {
-    console.log("Api route mah hit bhayo");
-    console.log("Request body:", req.body);
-    console.log("Request files:", req.files);
-
     const { id } = req.params;
     const loggedInUserId = req.user.id;
 
@@ -192,55 +129,48 @@ export const updateUser = asyncErrorHandling(async (req, res) => {
         return errorHanlder(createError("You are not authorized to update this user's data"), req, res);
     }
 
-    let userToUpdate = await user.findById(id);
-    if (!userToUpdate) return errorHanlder(createError("User not found"), req, res);
-
     let profileUpdate = {};
 
-    try {
-        // Check if profile file exists in the request
-        if (!req.files || !req.files.profile) {
-            return errorHanlder(createError(400, "Please upload a profile image"), req, res);
-        }
-
+    if (req.files && req.files.profile) {
         const profileFile = req.files.profile;
 
-        // Process the profile file (upload to Cloudinary, etc.)
         const cloudinaryResponse = await cloudinary.uploader.upload(profileFile.tempFilePath);
         if (!cloudinaryResponse || cloudinaryResponse.error) {
             console.log("Cloudinary error:", cloudinaryResponse.error || "Unknown Cloudinary error");
             return errorHanlder(createError(500, "Failed to upload profile image"), req, res);
         }
 
-        // Update user profile with Cloudinary URL
         profileUpdate = {
             public_id: cloudinaryResponse.public_id,
             url: cloudinaryResponse.secure_url
         };
-
-        // Delete email from req.body if present
-        delete req.body.email;
-
-        // Hash password if present in req.body
-        if (req.body.password) {
-            req.body.password = await bcrypt.hash(req.body.password, 10);
-        }
-
-        // Update user document in the database
-        userToUpdate = await user.findByIdAndUpdate(id, { ...req.body, profile: profileUpdate }, {
-            new: true,
-            runValidators: true,
-            useFindAndModify: false
-        });
-
-        // Respond with success message and updated user document
-        res.send({
-            success: true,
-            message: "User updated successfully",
-            userToUpdate
-        });
-    } catch (error) {
-        console.error('Error:', error);
-        return errorHanlder(createError(500, "Internal server error"), req, res);
     }
+
+    delete req.body.email;
+
+    if (req.body.password) {
+        req.body.password = await bcrypt.hash(req.body.password, 10);
+    }
+
+    // Create update object for user data excluding profile if no new image provided
+    const updateObject = Object.keys(profileUpdate).length !== 0 ?
+        { ...req.body, profile: profileUpdate } :
+        req.body;
+
+    // Use findByIdAndUpdate to update user data
+    const userToUpdate = await user.findByIdAndUpdate(id, updateObject, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    });
+
+    if (!userToUpdate) {
+        return errorHanlder(createError("User not found"), req, res);
+    }
+
+    res.send({
+        success: true,
+        message: "User updated successfully",
+        userToUpdate
+    });
 });
