@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "you cannot leave this empty"],
         select: false
     },
     confirmPassword: {
