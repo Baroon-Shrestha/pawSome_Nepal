@@ -13,7 +13,7 @@ export const isAuthorized = asyncErrorHandling(async (req, res, next) => {
         token = req.cookies.token;
     }
 
-    console.log("this is token", token)
+   
 
     if (!token) {
         return errorHanlder(createError("You are not authorized", 400), req, res);
@@ -22,7 +22,6 @@ export const isAuthorized = asyncErrorHandling(async (req, res, next) => {
     try {
         const decodedId = jwt.verify(token, process.env.JWT_KEY);
         req.user = await user.findById(decodedId.id);
-        console.log("Retrieved user data:", req.user);
         next();
     } catch (error) {
         console.error("Authorization error:", error);
