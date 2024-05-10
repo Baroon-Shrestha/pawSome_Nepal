@@ -22,7 +22,7 @@ export default function Nav() {
         setIsAdmin(true);
       }
     }
-  }, [cookies.token]);
+  }, [cookies.token,localStorage.getItem("user")]);
 
   function handleLogOutClick() {
     localStorage.clear();
