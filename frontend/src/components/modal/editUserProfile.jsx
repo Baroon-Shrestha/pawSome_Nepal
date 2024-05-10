@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import styles from './editUserProfile.module.css';
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./editUserProfile.module.css";
 import { MdCancel } from "react-icons/md";
 
 function EditUserProfile({ setShowEditModal }) {
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(["token"]);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [firstName, setFirstName] = useState()
-  const [lastName, setLastName] = useState("")
-  const [number, setNumber] = useState(0)
-  const [password, setPassword] = useState("")
-  const [userId, setUserId] = useState(null)
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState("");
+  const [number, setNumber] = useState(0);
+  const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState(null);
 
-
-
-  console.log(userId)
+  console.log(userId);
 
   //getting the user information
   useEffect(() => {
@@ -37,16 +35,22 @@ function EditUserProfile({ setShowEditModal }) {
       setFirstName(loggedInUser.firstname);
       setLastName(loggedInUser.lastname);
       setNumber(loggedInUser.number);
-      setUserId(loggedInUser._id)
-
+      setUserId(loggedInUser._id);
     }
   }, [loggedInUser]);
+
 
 
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; 
     setImage(file); 
+  console.log(loggedInUser);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImages([file]);
+
   };
 
   console.log(image)
@@ -66,8 +70,11 @@ function EditUserProfile({ setShowEditModal }) {
     formDataToUpdate.append("lastname", lastName);
     formDataToUpdate.append("number", number);
     formDataToUpdate.append("password", password);
+
     formDataToUpdate.append(`profile`, image);
   
+    formDataToUpdate.append(`profile`, images);
+
     try {
       setIsLoading(true);
       if (userId) {
@@ -82,15 +89,17 @@ function EditUserProfile({ setShowEditModal }) {
           }
         );
         if (response.data.success === true) {
+
           toast.success('Profile Updated Successfully');
+          toast.success("Profile Updated Sucessfully");
           setIsLoading(false);
           // Reset image input field
           setImage(null);
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      toast.error('Failed to update your profile');
+      console.error("Error:", error);
+      toast.error("Failed to update your profile");
       setIsLoading(false);
     }
   };
@@ -104,10 +113,12 @@ function EditUserProfile({ setShowEditModal }) {
 
   return (
     <>
-
       <div className={styles.formSection}>
-        <form id="myForm" className={styles.myForm} onSubmit={formSubmit} >
-          <MdCancel className={styles.icon} onClick={() => setShowEditModal(false)} />
+        <form id="myForm" className={styles.myForm} onSubmit={formSubmit}>
+          <MdCancel
+            className={styles.icon}
+            onClick={() => setShowEditModal(false)}
+          />
           <ToastContainer bodyclassName="toastBody" />
           <img src="/dribbblepets_v01.gif" className={styles.gif} />
           <p className={styles.message}>Update Profile</p>
@@ -148,7 +159,6 @@ function EditUserProfile({ setShowEditModal }) {
               />
             </div>
 
-
             <div className={styles.inputDiv}>
               <input
                 type="password"
@@ -161,8 +171,6 @@ function EditUserProfile({ setShowEditModal }) {
               />
             </div>
 
-
-
             <div className={styles.inputDiv}>
               <h1 className={styles.inputTitle}>Your New Profile</h1>
               <input
@@ -171,7 +179,6 @@ function EditUserProfile({ setShowEditModal }) {
                 onChange={handleImageUpload}
                 id="imageUpload"
               />
-
             </div>
           </div>
           <div className={styles.btnDiv}>
@@ -180,7 +187,7 @@ function EditUserProfile({ setShowEditModal }) {
               type="submit"
               id="submit_btn"
             >
-              {isLoading ? 'Updating...' : 'Update'}
+              {isLoading ? "Updating..." : "Update"}
             </button>
           </div>
         </form>

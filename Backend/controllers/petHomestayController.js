@@ -2,19 +2,77 @@ import { asyncErrorHandling } from "../middlewares/asyncErrorHandler.js";
 import { createError, errorHanlder } from "../middlewares/errorHandling.js";
 import { homestay } from "../models/petHomestay.js";
 import { user } from "../models/userModel.js";
+import cloudinary from 'cloudinary'
 
 export const addRequest = asyncErrorHandling(async (req, res) => {
-
     const { id: userId, email } = req.user;
 
     if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
 
-    const newRequest = await homestay.create({ user: userId });
-    res.send({
-        success: true,
-        message: 'Request sent successfully',
-        newRequest
-    });
+    const { petName, category, age, gender, breed, specialCare, disease } = req.body
+
+    const { image } = req.files;
+
+    if (!image) {
+        return errorHanlder(createError("Please provide at least one image"), req, res);
+    }
+
+    const allowedExtensions = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+
+    if (!Array.isArray(image)) {
+        if (!allowedExtensions.includes(image.mimetype)) {
+            return errorHanlder(createError("Please upload images in PNG, JPEG, JPG, or WEBP format"), req, res);
+        }
+
+        const cloudinaryResponse = await cloudinary.uploader.upload(image.tempFilePath);
+        if (!cloudinaryResponse || cloudinaryResponse.error) {
+            console.log("Cloudinary error:", cloudinaryResponse.error || "Unknown Cloudinary error");
+            return errorHanlder(createError("Failed to upload image"), req, res);
+        }
+
+        const post = await homestay.create({
+            user: userId, petName, age, category, breed, gender, image: [{
+                public_id: cloudinaryResponse.public_id,
+                url: cloudinaryResponse.secure_url
+            }], specialCare, disease
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Posted successfully",
+            post
+        });
+    } else {
+        for (const img of image) {
+            if (!allowedExtensions.includes(img.mimetype)) {
+                return errorHanlder(createError("Please upload images in PNG, JPEG, JPG, or WEBP format"), req, res);
+            }
+        }
+
+        const uploadedImages = [];
+
+        for (const img of image) {
+            const cloudinaryResponse = await cloudinary.uploader.upload(img.tempFilePath);
+            if (!cloudinaryResponse || cloudinaryResponse.error) {
+                console.log("Cloudinary error:", cloudinaryResponse.error || "Unknown Cloudinary error");
+                return errorHanlder(createError("Failed to upload image"), req, res);
+            }
+            uploadedImages.push({
+                public_id: cloudinaryResponse.public_id,
+                url: cloudinaryResponse.secure_url
+            });
+        }
+
+        const post = await homestay.create({
+            user: userId, petName, age, category, breed, gender, image: uploadedImages, specialCare, disease
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Posted successfully",
+            post
+        });
+    }
 });
 
 export const yourHomestayRequest = asyncErrorHandling(async (req, res) => {
