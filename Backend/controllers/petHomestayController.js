@@ -103,3 +103,19 @@ export const viewAllRequest = asyncErrorHandling(async (req, res) => {
         requests
     })
 })
+
+export const deleteRequest = asyncErrorHandling(async (req, res) => {
+    const { email } = req.user
+
+    if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
+
+    const { id } = req.params
+
+    const deleteReq = await homestay.findByIdAndDelete(id)
+
+    res.send({
+        success: true,
+        message: "request deleted successfully"
+    })
+
+})

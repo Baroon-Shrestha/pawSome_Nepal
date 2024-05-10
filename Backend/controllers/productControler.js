@@ -193,17 +193,9 @@ export const updateFromCart = asyncErrorHandling(async (req, res) => {
 
     if (!updatedCartItem) return errorHanlder(createError(404, "Item not found in cart"), req, res);
 
-    const quantityDifference = numQuantity - updatedCartItem.quantity;
-
-    const product = updatedCartItem.product;
-
-    product.stockQuantity -= quantityDifference;
-
-    await product.save();
-
     res.send({
         success: true,
         message: "Quantity updated successfully",
-        updateQuantity: updatedCartItem
+        updatedCartItem
     });
 })

@@ -107,7 +107,6 @@ export const deleteUser = asyncErrorHandling(async (req, res) => {
     const { id } = req.params
     const { email } = req.user
 
-
     if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
 
     const UserToDelete = await user.findById(id)
