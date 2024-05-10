@@ -9,7 +9,7 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
 
     if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
 
-    const { name, category, age, gender, breed, specialCare, disease, dateFrom, dateTo } = req.body;
+    const { name, category, age, gender, breed, specialCare, disease, dateFrom, dateTo, status } = req.body;
 
     // Check if dates are in the future and DateTo is after DateFrom
     const currentDate = new Date();
@@ -79,7 +79,7 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
         }
 
         const post = await homestay.create({
-            user: userId, name, age, category, breed, gender, image: uploadedImages, specialCare, disease, dateFrom, dateTo
+            user: userId, name, age, category, breed, gender, image: uploadedImages, specialCare, disease, dateFrom, dateTo, status
         });
 
         return res.status(200).json({
@@ -89,8 +89,6 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
         });
     }
 });
-
-
 
 export const yourHomestayRequest = asyncErrorHandling(async (req, res) => {
     const { id: userId, email } = req.user
@@ -135,4 +133,25 @@ export const deleteRequest = asyncErrorHandling(async (req, res) => {
         message: "request deleted successfully"
     })
 
+})
+
+export const updateStatus = asyncErrorHandling(async (req, res) => {
+    const { email } = req.user
+
+    if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
+
+    const { id } = req.params
+    const { status } = req.body
+
+    let updateSat = await homestay.findById(id)
+    if (!updateSat) return errorHanlder(createError("Request not found"), req, res)
+
+    updateSat = await homestay.findByIdAndUpdate(id, { status: status }, {
+        new: true,
+    })
+
+    res.send({
+        success: true,
+        message: "updated succesfully"
+    })
 })

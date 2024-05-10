@@ -55,6 +55,11 @@ const homestaySchema = new mongoose.Schema({
     dateTo: {
         type: Date,
         required: true,
+    },
+    status: {
+        type: String,
+        enum: ["Pending", "Accepted", "Rejected"],
+        default: "Pending"
     }
 })
 
