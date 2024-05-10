@@ -9,17 +9,31 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
 
     if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
 
-    const { petName, category, age, gender, breed, specialCare, disease } = req.body
+    const { name, category, age, gender, breed, specialCare, disease, dateFrom, dateTo } = req.body;
+
+    // Check if dates are in the future and DateTo is after DateFrom
+    const currentDate = new Date();
+
+    if (new Date(dateFrom) <= currentDate) {
+        return errorHanlder(createError("DateFrom should be in the future"), req, res);
+    }
+
+    if (new Date(dateTo) <= new Date(dateFrom)) {
+        return errorHanlder(createError("DateTo should be after DateFrom"), req, res);
+    }
 
     const { image } = req.files;
 
+    // Check if image is provided
     if (!image) {
         return errorHanlder(createError("Please provide at least one image"), req, res);
     }
 
     const allowedExtensions = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
+    // Process single or multiple images
     if (!Array.isArray(image)) {
+        // Handle single image upload
         if (!allowedExtensions.includes(image.mimetype)) {
             return errorHanlder(createError("Please upload images in PNG, JPEG, JPG, or WEBP format"), req, res);
         }
@@ -31,10 +45,10 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
         }
 
         const post = await homestay.create({
-            user: userId, petName, age, category, breed, gender, image: [{
+            user: userId, name, age, category, breed, gender, image: [{
                 public_id: cloudinaryResponse.public_id,
                 url: cloudinaryResponse.secure_url
-            }], specialCare, disease
+            }], specialCare, disease, dateFrom, dateTo
         });
 
         return res.status(200).json({
@@ -43,6 +57,7 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
             post
         });
     } else {
+        // Handle multiple image uploads
         for (const img of image) {
             if (!allowedExtensions.includes(img.mimetype)) {
                 return errorHanlder(createError("Please upload images in PNG, JPEG, JPG, or WEBP format"), req, res);
@@ -64,7 +79,7 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
         }
 
         const post = await homestay.create({
-            user: userId, petName, age, category, breed, gender, image: uploadedImages, specialCare, disease
+            user: userId, name, age, category, breed, gender, image: uploadedImages, specialCare, disease, dateFrom, dateTo
         });
 
         return res.status(200).json({
@@ -74,6 +89,8 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
         });
     }
 });
+
+
 
 export const yourHomestayRequest = asyncErrorHandling(async (req, res) => {
     const { id: userId, email } = req.user

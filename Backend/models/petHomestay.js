@@ -4,7 +4,7 @@ const homestaySchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
-    petName: {
+    name: {
         type: String,
         required: true,
         minLength: [3, "name should not be this short"],
@@ -48,11 +48,11 @@ const homestaySchema = new mongoose.Schema({
     disease: {
         type: String
     },
-    DateFrom: {
+    dateFrom: {
         type: Date,
         required: true,
     },
-    DateTo: {
+    dateTo: {
         type: Date,
         required: true,
     }
