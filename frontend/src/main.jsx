@@ -16,8 +16,6 @@ import AdoptPage from "./pages/adoptPet/adoptPage";
 import ManageAdoptionRequest from "./dashboard/dashboardPages/manageAdoptionRequest/manageAdoptionRequest";
 import AdoptionRequest from "./pages/adoptionRequest/adoptionRequest";
 import UserProfile from "./pages/userProfile/userProfile";
-import Shopcard from "./components/shopcard/shopcard";
-import Products from "./pages/products/products";
 
 const router = createBrowserRouter([
   {
@@ -81,10 +79,6 @@ const router = createBrowserRouter([
   {
     path: "viewAdoptionRequest",
     element: <AdoptionRequest />,
-  },
-  {
-    path: "products",
-    element: <Products />,
   },
 ]);
 

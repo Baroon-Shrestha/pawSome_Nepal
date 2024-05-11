@@ -6,7 +6,7 @@ import AdoptionProcess from "../../components/homeComponents/adoptionProcess/ado
 import Petshop from "../../components/homeComponents/petshop/petshop";
 import Slider from "../../components/homeComponents/slider/slider";
 import Video from "../../components/homeComponents/video/video";
-
+import Shopcard from "../../components/shopcard/shopcard";
 import "../../index.css";
 
 export default function Home() {
@@ -17,6 +17,7 @@ export default function Home() {
       <AdoptionProcess />
       <Petshop />
       <Slider />
+      <Shopcard />
       <Video />
       <Footer />
     </>
