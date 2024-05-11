@@ -5,6 +5,9 @@ import useFetchAllPets from "../../hooks/useFetchAllPets";
 import useFetchPetById from "../../hooks/useFetchPetById";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { IoMdFemale, IoIosMale } from "react-icons/io";
+import { MdOutlinePets, MdNumbers } from "react-icons/md";
+import { BiCategory } from "react-icons/bi";
 
 export default function NewPetDescription() {
   const { pets } = useFetchAllPets();
@@ -24,45 +27,57 @@ export default function NewPetDescription() {
               <div className="cards">
                 <div className="card">
                   <div className="left">
-                    <h2>Icon</h2>
+                    <h2>
+                      <MdOutlinePets size={32} />
+                    </h2>
                   </div>
 
                   <div className="right">
-                    <h1>Breed</h1>
-                    <p>{petInfo?.breed}</p>
+                    <h2>Breed</h2>
+                    <h1>{petInfo?.breed}</h1>
                   </div>
                 </div>
 
                 <div className="card">
                   <div className="left">
-                    <h2>Icon</h2>
+                    <h2>
+                      <BiCategory size={32} />
+                    </h2>
                   </div>
 
                   <div className="right">
-                    <h1>Category</h1>
-                    <p>{petInfo?.category}</p>
+                    <h2>Category</h2>
+                    <h1>{petInfo?.category}</h1>
                   </div>
                 </div>
 
                 <div className="card">
                   <div className="left">
-                    <h2>Icon</h2>
+                    <h2>
+                      {petInfo?.gender == "Male" ? (
+                        <IoIosMale size={32} />
+                      ) : (
+                        <IoMdFemale size={32} />
+                      )}
+                    </h2>
                   </div>
 
                   <div className="right">
-                    <h1>Gender</h1>
-                    <p>{petInfo?.gender}</p>
+                    <h2>Gender</h2>
+                    <h1>{petInfo?.gender}</h1>
                   </div>
                 </div>
 
                 <div className="card">
                   <div className="left">
-                    <h2>Icon</h2>
+                    <h2>
+                      <MdNumbers size={32} />
+                    </h2>
                   </div>
 
                   <div className="right">
-                    <h1>Age</h1>
-                    <p>{petInfo?.age}</p>
+                    <h2>Age</h2>
+                    <h1>{petInfo?.age}</h1>
                   </div>
                 </div>
               </div>

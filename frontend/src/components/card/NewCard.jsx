@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import styles from "./new.module.css";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -20,7 +18,6 @@ export default function NewCard({ pet }) {
     };
   }, [pet]);
 
-  
   return (
     <div className={styles.card} key={pet?._id}>
       {img === null ? (
@@ -38,13 +35,7 @@ export default function NewCard({ pet }) {
             to={`/newPetDescription/${pet?._id}`}
             onClick={() => window.scrollTo(0, 0)}
           >
-            {
-              <img
-                src={img.src}
-                className={styles.card_img}
-                alt={pet?.name}
-              />
-            }
+            {<img src={img.src} className={styles.card_img} alt={pet?.name} />}
           </Link>
         </>
       )}
@@ -62,10 +53,9 @@ export default function NewCard({ pet }) {
           </p>
           <p className={styles.gender}>{pet?.gender}</p>
         </div>
-        <Link to = {`/adoptPet/${pet._id}`}>
-        <div className={styles.btn}>Adopt</div>
+        <Link to={`/adoptPet/${pet._id}`}>
+          <div className={styles.btn}>Adopt</div>
         </Link>
-       
       </div>
     </div>
   );
