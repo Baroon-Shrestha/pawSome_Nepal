@@ -7,6 +7,7 @@ import Petshop from "../../components/homeComponents/petshop/petshop";
 import Slider from "../../components/homeComponents/slider/slider"
 import Video from "../../components/homeComponents/video/video"
 import Shopcard from "../../components/shopcard/shopcard";
+import ProductDesc from "../productDescription/productDesc";
 import "../../index.css"
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Petshop/>
       < Slider />
       <Shopcard />
+      <ProductDesc />
       <Video />
       <Footer />
     </>

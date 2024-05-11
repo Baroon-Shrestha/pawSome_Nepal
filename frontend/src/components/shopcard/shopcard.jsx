@@ -41,18 +41,7 @@ const Shopcard = () => {
       image: "food1.png",
       price: 1000
     },
-    {
-      id: 7,
-      name: "Pet food",
-      image: "food1.png",
-      price: 1000
-    },
-    {
-      id: 8,
-      name: "Pet food",
-      image: "food1.png",
-      price: 1000
-    }
+
   ];
 
   return (
