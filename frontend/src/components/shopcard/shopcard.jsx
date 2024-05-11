@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./shopcard.css";
+import axios from "axios";
 
 export default function shopcard() {
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/petfinder/product/viewproduct")
+      .then(function (response) {
+        // setProduct(response.data.viewProduct);
+        console.log(response.data.viewProduct);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   const handleIncreaseQuantity = () => {
     setQuantity(quantity + 1);

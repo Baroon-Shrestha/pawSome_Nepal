@@ -100,10 +100,14 @@ export const updateStatus = asyncErrorHandling(async (req, res) => {
     if (req.body.status == "Accepted") {
         const updatedPet = await Pet.findByIdAndUpdate(updateSat.pet, { available: false }, { new: true });
         console.log("Pet availability updated successfully:", updatedPet);
+        setTimeout(async () => {
+            await adopt.findByIdAndDelete(id);
+            console.log("Adoption request deleted after acceptance:", id);
+        }, 12 * 60 * 60 * 1000);
     }
 
     res.send({
         success: true,
-        message: "updated succesfully"
+        message: "Respond sent successfully"
     })
 })
