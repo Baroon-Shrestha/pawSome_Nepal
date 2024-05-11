@@ -1,74 +1,47 @@
-import React from 'react';
-import './shopcard.css';
-import food1 from './food1.png';
-import food2 from './food2.jpg';
+import React, { useState } from "react";
+import "./shopcard.css";
 
-const Shopcard = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Pedigree",
-      image: "food1.png",
-      price: 1000
-    },
-    {
-      id: 2,
-      name: "Pedigree",
-      image: "food1.png",
-      price: 2000
-    },
-    {
-      id: 3,
-      name: "Pet Pedigre",
-      image: "food2.jpg",
-      price: 1000
-    },
-    {
-      id: 4,
-      name: "Pet Grooming Pedigree",
-      image: "food1.png",
-      price: 1000
-    },
-    {
-      id: 5,
-      name: "Pet food",
-      image: "food2.jpg",
-      price: 1000
-    },
-    {
-      id: 6,
-      name: "Pet fodd",
-      image: "food1.png",
-      price: 1000
-    },
-    {
-      id: 7,
-      name: "Pet food",
-      image: "food1.png",
-      price: 1000
-    },
-    {
-      id: 8,
-      name: "Pet food",
-      image: "food1.png",
-      price: 1000
+export default function shopcard() {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleIncreaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     }
-  ];
+  };
+
+  const handleAddToCart = () => {
+    console.log(`Added ${quantity} items to cart`);
+  };
 
   return (
-    <div className="product-grid">
-      {products.map(product => (
-        <div key={product.id} className="product">
-          <img src={product.image === 'food1.png' ? food1 : food2} alt={product.name} />
-          <div className="product-info">
-            <h2>{product.name}</h2>
-            <p>Price: Rs. {product.price}</p>
-            <button className="buy-btn">Buy Now</button>
+    <>
+      <div className="container">
+        <div className="prod-img">
+          <img src="./food1.png" alt="" />
+        </div>
+        <div className="prod-body">
+          <div className="prod-title">Pedigree</div>
+          <div className="prod-desc">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione
+            quos quibusdam enim eligendi culpa maxime laborum vitae voluptatem
+            corporis eius.
+          </div>
+          <div className="prod-price">$100</div>
+          <div className="quantity">
+            <button onClick={handleDecreaseQuantity}>-</button>
+            <input type="number" value={quantity} readOnly />
+            <button onClick={handleIncreaseQuantity}>+</button>
+          </div>
+          <div className="btn" onClick={handleAddToCart}>
+            Add to cart
           </div>
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   );
-};
-
-export default Shopcard;
+}

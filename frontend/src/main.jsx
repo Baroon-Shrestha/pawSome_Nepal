@@ -16,6 +16,9 @@ import AdoptPage from "./pages/adoptPet/adoptPage";
 import ManageAdoptionRequest from "./dashboard/dashboardPages/manageAdoptionRequest/manageAdoptionRequest";
 import AdoptionRequest from "./pages/adoptionRequest/adoptionRequest";
 import UserProfile from "./pages/userProfile/userProfile";
+import Shopcard from "./components/shopcard/shopcard";
+import Products from "./pages/products/products";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/userProfile",
-    element: <UserProfile/>,
+    element: <UserProfile />,
   },
   {
     path: "/favourites",
@@ -65,22 +68,25 @@ const router = createBrowserRouter([
   },
   {
     path: "newPetDescription",
-    element: <NewPetDescription/>,
+    element: <NewPetDescription />,
   },
   {
     path: "adoptPet/:id",
-    element: <AdoptPage/>,
+    element: <AdoptPage />,
   },
   {
     path: "manageAdoptionRequest",
-    element: <ManageAdoptionRequest/>,
+    element: <ManageAdoptionRequest />,
   },
   {
     path: "viewAdoptionRequest",
-    element: < AdoptionRequest/>,
+    element: <AdoptionRequest />,
+  },
+  {
+    path: "products",
+    element: <Products />,
   },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />

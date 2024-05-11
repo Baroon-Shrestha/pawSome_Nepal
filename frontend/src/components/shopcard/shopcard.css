@@ -1,52 +1,83 @@
-.product-grid {
+.container {
+    margin: 8px;
+    width: 20%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.product {
-    background-color: #f7f7f7;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    width: calc(25% - 10px);
-    box-sizing: border-box;
-}
-
-.product img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    min-width: 300px;
-    max-width: 100%;
-}
-
-.product-info {
+    align-items: center;
+    flex-direction: column;
     padding: 10px;
+    border-radius: 8px;
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.product-info h2 {
+.prod-img img {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+}
+
+.prod-body {
+    padding: 0 20px;
+}
+
+.prod-title {
     font-size: 18px;
-    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
 }
 
+.prod-desc {
+    text-align: justify;
+    font-size: 12px;
 
-.product-info h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
 }
 
-.buy-btn {
-    background-color:  rgb(240, 115, 111);
+.prod-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(0, 196, 0);
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.quantity button {
+    background-color: #007bff;
     color: #fff;
-    margin-top: 10px;
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    padding: 6px 10px;
     cursor: pointer;
+    margin: 0 5px;
 }
 
-.buy-btn:hover {
-    background-color:  rgb(240, 115, 111);
+.quantity input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+.btn:hover {
+    background-color: #0056b3;
 }

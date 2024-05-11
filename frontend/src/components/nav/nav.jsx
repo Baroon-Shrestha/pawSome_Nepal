@@ -22,7 +22,7 @@ export default function Nav() {
         setIsAdmin(true);
       }
     }
-  }, [cookies.token,localStorage.getItem("user")]);
+  }, [cookies.token, localStorage.getItem("user")]);
 
   function handleLogOutClick() {
     localStorage.clear();
@@ -52,13 +52,18 @@ export default function Nav() {
                   Home
                 </Link>
               </li>
-            
+
               <li className={styles.list}>
                 <Link to="/allPets" className={styles.text}>
                   Available Pets
                 </Link>
               </li>
-         
+              <li className={styles.list}>
+                <Link to="/products" className={styles.text}>
+                  Products
+                </Link>
+              </li>
+
               {isAdmin && (
                 <li className={styles.list}>
                   <Link to="/dashboard" className={styles.text}>
@@ -103,13 +108,13 @@ export default function Nav() {
 
                 {showDropDown && (
                   <div className={styles.dropDown}>
-                     <Link to = "/userProfile">
-                    <p
-                      className={`${styles.text} ${styles.drop}`}
-                      onClick={handleSettingClick}
-                    >
-                     Profile
-                    </p>
+                    <Link to="/userProfile">
+                      <p
+                        className={`${styles.text} ${styles.drop}`}
+                        onClick={handleSettingClick}
+                      >
+                        Profile
+                      </p>
                     </Link>
                     <p
                       className={`${styles.text} ${styles.drop}`}

@@ -16,14 +16,10 @@ export default function AllPets() {
     uniqueCategories,
     handleCategoryClick,
     handleSearchChange,
-    loading: fetchLoading
+    loading: fetchLoading,
   } = useFetchAllPets();
 
-  
-
-
-
-  const loading = fetchLoading
+  const loading = fetchLoading;
 
   return (
     <>
@@ -40,8 +36,9 @@ export default function AllPets() {
               <div className={styles.box_container}>
                 {uniqueCategories.map((category) => (
                   <div
-                    className={`${styles.box} ${selectedCategory === category ? styles.selected : ""
-                      }`}
+                    className={`${styles.box} ${
+                      selectedCategory === category ? styles.selected : ""
+                    }`}
                     key={category}
                     onClick={() => handleCategoryClick(category)}
                   >
@@ -57,10 +54,7 @@ export default function AllPets() {
                   onChange={handleSearchChange}
                   className={styles.searchInput}
                 />
-                <AiOutlineSearch
-                  size={20}
-                  className={styles.searchIcon}
-                />
+                <AiOutlineSearch size={20} className={styles.searchIcon} />
               </div>
             </div>
           </div>
@@ -69,25 +63,27 @@ export default function AllPets() {
             <div className={styles.loaderContainer}>
               <div className={styles.loader}></div>
             </div>
-
-
           ) : filteredPets.length === 0 ? (
             <div className={styles.noImgFoundContainer}>
-              <img src="../no_result_found.png" className={styles.noImg} alt="No result found" />
-              <p className={styles.noImgP}>No pets found matching your search criteria.</p>
+              <img
+                src="../no_result_found.png"
+                className={styles.noImg}
+                alt="No result found"
+              />
+              <p className={styles.noImgP}>
+                No pets found matching your search criteria.
+              </p>
             </div>
           ) : (
             <div className={styles.cards}>
               {filteredPets.map((pet) => (
-                <NewCard
-                  pet={pet}
-                  key={pet._id}
-                />
+                <NewCard pet={pet} key={pet._id} />
               ))}
             </div>
           )}
         </div>
       </div>
+
       <Footer />
     </>
   );
