@@ -11,9 +11,12 @@ const product = {
 
 const ProductDesc = () => {
   const [quantity, setQuantity] = React.useState(1);
+  const [totalPrice, setTotalPrice] = React.useState(product.price);
 
   const handleQuantityChange = (event) => {
-    setQuantity(parseInt(event.target.value));
+    const newQuantity = parseInt(event.target.value);
+    setQuantity(newQuantity);
+    setTotalPrice(newQuantity * product.price);
   };
 
   return (
@@ -24,7 +27,7 @@ const ProductDesc = () => {
       <div className="product-info1">
         <h2 className="product-name">{product.name}</h2>
         <p className="product-description-text">{product.description}</p>
-        <p className="product-price">Price: Rs. {product.price}</p>
+        <p className="product-price">Price: Rs. {totalPrice}</p>
         <input
           type="number"
           className="quantity-input"
