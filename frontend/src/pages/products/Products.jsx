@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
+import ProductDesc from "../productDescription/productDesc";
 import "./products.css";
 
 export default function Products() {
@@ -62,6 +63,7 @@ export default function Products() {
           ))}
         </div>
       </div>
+      <ProductDesc />
       <Footer />
     </>
   );
