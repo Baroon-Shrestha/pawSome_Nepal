@@ -1,5 +1,5 @@
 .offer {
-    background-image: url('offer.png');
+    background-image: url('offer.jpg');
     background-size: cover;
     background-position: center;
     padding: 70px 20px;
@@ -27,7 +27,7 @@
 }
 
 .offer a {
-    background-color: rgb(240, 115, 111);;
+    background-color: rgb(240, 115, 111);
     color: #fff;
     margin-top: 10px;
     padding: 15px 30px;
@@ -38,5 +38,5 @@
 }
 
 .offer a:hover {
-    background-color: rgb(240, 115, 111);;
+    background-color: rgb(240, 115, 111);
 }

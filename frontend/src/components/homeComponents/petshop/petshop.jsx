@@ -6,7 +6,7 @@ export default function Petshop() {
             <div className="offer">
                 <h1>Special Offer</h1>
                 <h2>Get special vounchers and items on your first order</h2>
-                <p>Eirmod sed tempor lorem ut dolores sit kasd ipsum. Dolor ea et dolore et at sea ea at dolor justo ipsum duo rebum sea. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo lorem. Elitr ut dolores magna sit. Sea dolore sed et.</p>
+                <p>Fuel your pet's adventures with nutrition they'll love! Our pet food selection offers a delicious array of flavors and wholesome ingredients to keep tails wagging and whiskers twitching. From kibble to wet food and treats, we have all the flavors and goodness they crave. Shop now and keep your furry friend happy and healthy</p>
                 <a href="">Shop Now</a>
             </div>
         </>
