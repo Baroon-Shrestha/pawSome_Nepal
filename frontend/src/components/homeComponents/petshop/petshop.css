@@ -1,42 +1,45 @@
 .offer {
-    background-image: url('offer.png');
+    /* background-image: url('offer.png');
     background-size: cover;
-    background-position: center;
-    padding: 70px 20px;
+    background-position: center; */
     text-align: center;
-    color: black;
-    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: center;
+    padding: 50px;
+    border: 1px solid black;
 }
 
-.offer h1 {
+.off-title {
     font-size: 48px;
-    margin-bottom: 30px;
-    color:  rgb(240, 115, 111);
-}
-.offer h2{
-    font-size: 48px;
-    margin-bottom: 30px;
+    color: rgb(240, 115, 111);
+    font-weight: 700;
 }
 
-.offer p {
+.off-sec-title {
+    font-size: 30px;
+}
+
+.off-desc {
     color: black;
     font-size: 18px;
-    margin-bottom: 40px;
-    max-width: 500px;
+    max-width: 75%;
     margin: 0 auto;
 }
 
-.offer a {
-    background-color: rgb(240, 115, 111);;
+.off-btn {
+    background-color: rgb(240, 115, 111);
     color: #fff;
-    margin-top: 10px;
     padding: 15px 30px;
     border-radius: 5px;
     text-decoration: none;
     display: inline-block;
     transition: background-color 0.3s ease;
+    margin: 0 auto;
 }
 
-.offer a:hover {
-    background-color: rgb(240, 115, 111);;
+.off-btn:hover {
+    cursor: pointer;
+    background-color: rgb(240, 115, 111);
 }

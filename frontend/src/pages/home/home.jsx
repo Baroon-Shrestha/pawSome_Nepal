@@ -17,7 +17,6 @@ export default function Home() {
       <AdoptionProcess />
       <Petshop />
       <Slider />
-      <Shopcard />
       <Video />
       <Footer />
     </>

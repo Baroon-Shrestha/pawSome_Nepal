@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./shopcard.css";
 import axios from "axios";
 
-export default function shopcard() {
+export default function ShopCard() {
   const [quantity, setQuantity] = useState(1);
-  const [product, setProduct] = useState();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/petfinder/product/viewproduct")
       .then(function (response) {
-        // setProduct(response.data.viewProduct);
+        setProducts(response.data.viewProduct);
         console.log(response.data.viewProduct);
       })
       .catch(function (error) {
@@ -34,28 +34,26 @@ export default function shopcard() {
 
   return (
     <>
-      <div className="container">
-        <div className="prod-img">
-          <img src="./food1.png" alt="" />
-        </div>
-        <div className="prod-body">
-          <div className="prod-title">Pedigree</div>
-          <div className="prod-desc">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione
-            quos quibusdam enim eligendi culpa maxime laborum vitae voluptatem
-            corporis eius.
+      {products.map((product) => (
+        <div key={product._id} className="container">
+          <div className="prod-img">
+            <img src={product.prodImage[0].url} alt="" />
           </div>
-          <div className="prod-price">$100</div>
-          <div className="quantity">
-            <button onClick={handleDecreaseQuantity}>-</button>
-            <input type="number" value={quantity} readOnly />
-            <button onClick={handleIncreaseQuantity}>+</button>
-          </div>
-          <div className="btn" onClick={handleAddToCart}>
-            Add to cart
+          <div className="prod-body">
+            <div className="prod-title">{product.name}</div>
+            <div className="prod-desc">{product.description}</div>
+            <div className="prod-price">${product.price}</div>
+            <div className="quantity">
+              <button onClick={handleDecreaseQuantity}>-</button>
+              <input type="number" value={quantity} readOnly />
+              <button onClick={handleIncreaseQuantity}>+</button>
+            </div>
+            <div className="btn" onClick={handleAddToCart}>
+              Add to cart
+            </div>
           </div>
         </div>
-      </div>
+      ))}
     </>
   );
 }
