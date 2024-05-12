@@ -4,19 +4,22 @@ export default function Video() {
     <>
       <section className="section-7">
         <div className="section-7-container">
-          <div className="video-container">
-            <video controls className="video video-one">
-              <source src="../happy.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+          <h1>
+            <span className="black">Don't Shop ❌, &nbsp;</span>
+            <span className="orange">Adopt</span>
+          </h1>
 
-            <video controls className="video video-two">
-              <source src="../happy.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+          <div className="video-container">
+            <video
+              src="vid.mp4"
+              autoPlay
+              loop
+              muted
+              style={{ width: "90vw", height: "auto" }}
+            ></video>
           </div>
 
-          <div className="cards_container">
+          {/* <div className="cards_container">
             <div className="cards">
               <div className="card">
                 <img src="../cat1.jpg"></img>
@@ -34,7 +37,7 @@ export default function Video() {
                 <img src="../cat1.jpg"></img>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </>

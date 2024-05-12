@@ -1,22 +1,31 @@
 .section-7 {
-padding: 5rem 10rem;
+padding: 5rem 0rem;
 
   .section-7-container {
     width: 100%;
     max-width: 1290px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
    
+  }
+  h1{
+    text-align: center;
+  }
+  .black{
+    color: #000000;
+    font-size: 4rem;
   }
   .video {
     width: 100%;
     height: 100%;
   }
 
-  .video-container {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap:2rem;
-  }
+  .orange{
+    color: #F0736F;
+    font-size: 4rem;
+   }
 
   .cards_container {
     margin-top: 5rem;
