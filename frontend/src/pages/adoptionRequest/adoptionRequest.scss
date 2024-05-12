@@ -1,0 +1,115 @@
+.adoptionRequest_section {
+
+  margin-top: 0rem;
+ 
+    
+      h1{
+        margin: 2rem 0rem;
+      }
+  
+      .posts {
+          padding-top: 1rem;
+          display: grid;
+          grid-template-columns: repeat(3,1fr);
+          gap:3rem;
+
+        .post {
+          margin-bottom: 3rem;
+          width: 400px;
+          border: 1px solid rgb(240, 240, 240);
+          padding:1rem;
+  
+          .top {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: space-between;
+
+            .left{
+              display: flex;
+              gap:2rem;
+              align-items: center;
+            }
+
+            .status{
+              font-size: 1.6rem;
+            
+              padding:1rem;
+              border-radius: 12px;
+            }
+
+            .status_accepted{
+              background-color: rgb(124, 238, 124);
+            }
+
+            .status_pending{
+              background-color: rgb(233, 116, 116);
+            }
+
+
+  
+            .user_info{
+              
+  
+              h1{
+                margin-bottom: 0rem;
+              }
+              
+              p {
+            
+                font-size: 1.4rem;
+                color: grey;
+              }
+  
+            }
+  
+            .user_profile {
+              width: 50px;
+              height: 50px;
+              border-radius: 100%;
+              object-fit: cover;
+            }
+          }
+  
+          .caption {
+            padding: 1rem;
+          
+            p {
+              font-size: 1.4rem;
+              width: 100%;
+              font-weight: 300;
+            }
+  
+            .bold{
+              // font-weight: bold;
+              font-weight: 500;
+            
+            }
+          }
+  
+          .post_img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+          }
+  
+          .options {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid rgb(233, 233, 233);
+           
+  
+            .option {
+              cursor: pointer;
+              p {
+                font-size: 1.4rem;
+                
+              }
+            }
+          }
+        }
+      }
+    }
+  
+  

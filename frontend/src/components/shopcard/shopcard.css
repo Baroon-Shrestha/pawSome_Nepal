@@ -1,0 +1,83 @@
+.container {
+    margin: 8px;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prod-img img {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+}
+
+.prod-body {
+    padding: 0 20px;
+}
+
+.prod-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.prod-desc {
+    text-align: justify;
+    font-size: 12px;
+
+}
+
+.prod-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(0, 196, 0);
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.quantity button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.quantity input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+.btn:hover {
+    background-color: #0056b3;
+}

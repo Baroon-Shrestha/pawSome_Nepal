@@ -1,0 +1,48 @@
+.offer {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: center;
+    padding: 50px;
+}
+
+.off-img {
+    position: absolute;
+    right: 0;
+}
+
+
+.off-title {
+    font-size: 48px;
+    color: rgb(240, 115, 111);
+    font-weight: 700;
+}
+
+.off-sec-title {
+    font-size: 30px;
+}
+
+.off-desc {
+    color: black;
+    font-size: 18px;
+    max-width: 75%;
+    margin: 0 auto;
+    z-index: 99;
+}
+
+.off-btn {
+    background-color: rgb(240, 115, 111);
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+
+.off-btn:hover {
+    cursor: pointer;
+    background-color: rgb(240, 115, 111);
+}

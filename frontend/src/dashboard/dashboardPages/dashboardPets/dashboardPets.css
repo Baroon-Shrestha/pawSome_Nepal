@@ -1,0 +1,68 @@
+.dashboard_pets {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 3rem;
+}
+.dashboard_pets .container {
+  width: 100%;
+  max-width: 1200px;
+  padding-left: 200px;
+}
+.dashboard_pets .container .heading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+.dashboard_pets .container .heading h1 {
+  font-size: 4rem;
+}
+.dashboard_pets .container .add_btn {
+  font-size: 6rem;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 12px;
+  color: black;
+}
+.dashboard_pets .container .grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.dashboard_pets .container .card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.dashboard_pets .container .card img {
+  width: 100%;
+  height: 250px;
+}
+.dashboard_pets .container .card .description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 3rem;
+}
+.dashboard_pets .container .card .buttons {
+  display: flex;
+  gap: 1rem;
+}
+.dashboard_pets .container .card .buttons .delete_btn {
+  font-size: 30px;
+  cursor: pointer;
+  color: red;
+}
+.dashboard_pets .container .card .buttons .edit_btn {
+  font-size: 30px;
+  cursor: pointer;
+  color: rgb(114, 114, 9);
+}/*# sourceMappingURL=dashboardPets.css.map */

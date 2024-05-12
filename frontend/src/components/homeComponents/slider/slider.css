@@ -1,0 +1,104 @@
+.section-6 {
+  width: 100%;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  background-color: #ebedf3;
+  min-height: 100vh;
+}
+
+.section-6 .section-6-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section-6 .section-6-container .section-6-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-6 .section-6-container .card-slider-container {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  min-height: 40rem;
+  position: relative;
+}
+
+.section-6 .section-6-container .slider-card {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding: 5rem 2rem;
+  text-align: center;
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
+  transition: 0.5s ease;
+}
+
+.section-6 .section-6-container .slider-card .person-info h1 {
+  font-size: 2rem;
+}
+
+.section-6 .section-6-container .slider-card p {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section-6 .section-6-container .label {
+  font-size: 1.4rem !important;
+}
+
+.section-6 .section-6-container .slider-card.active {
+  transform: scale(1.3) translateX(0);
+  z-index: 100;
+}
+
+.section-6 .section-6-container .slider-card.right {
+  transform: scale(1) translate(300px);
+  filter: blur(1.5px);
+}
+
+.section-6 .section-6-container .slider-card.left {
+  transform: scale(1) translateX(-300px);
+  filter: blur(1.5px);
+}
+
+.section-6 .section-6-container .image-button {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 100%;
+  background-color: rgb(212, 206, 206);
+  cursor: pointer;
+  object-fit: cover;
+  transition: 0.5s ease;
+  filter: grayscale(100);
+}
+
+.section-6 .section-6-container .image-buttons {
+  display: flex;
+  position: absolute;
+  bottom: 4rem;
+  z-index: 999;
+  gap: 3rem;
+  font-size: 1.6rem;
+}
+
+.section-6 .section-6-container .image-button.active {
+  transform: scale(1.5);
+  filter: grayscale(0);
+}
+
+.section-6 .section-6-container .slider-card-label {
+  font-size: 1rem;
+  color: grey;
+}
+
+.section-6 .section-6-container .image-small-device {
+  display: none;
+}
+
+/*# sourceMappingURL=slider.css.map */

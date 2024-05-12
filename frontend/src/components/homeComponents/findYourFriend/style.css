@@ -1,0 +1,95 @@
+.find_your_friend_section {
+  width: 100%;
+  padding-top: 20rem;
+  padding-bottom: 10rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 500px) {
+  .find_your_friend_section {
+    padding: 10rem 1rem;
+  }
+}
+.find_your_friend_section .section_container {
+  max-width: 1290px;
+  width: 100%;
+}
+.find_your_friend_section .section_container .heading {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 5rem;
+}
+.find_your_friend_section .section_container .heading h1 {
+  font-size: 4rem;
+}
+.find_your_friend_section .section_container .heading p {
+  color: grey;
+  font-size: 1.6rem;
+}
+.find_your_friend_section .section_container .cards {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.find_your_friend_section .section_container .cards .card {
+  width: 350px;
+  text-align: center;
+  z-index: 999;
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+}
+.find_your_friend_section .section_container .cards .card .card_description h2 {
+  font-size: 2.5rem;
+}
+.find_your_friend_section .section_container .cards .card .card_description p {
+  font-size: 1.6rem;
+  color: grey;
+}
+@media (max-width: 420px) {
+  .find_your_friend_section .section_container .cards .card {
+    width: 100%;
+  }
+}
+.find_your_friend_section .section_container .cards .card:hover {
+  box-shadow: 2px 2px 5px rgb(218, 187, 187);
+}
+.find_your_friend_section .section_container .cards .card .img_container {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  position: relative;
+  border-radius: 100%;
+}
+.find_your_friend_section .section_container .cards .card .img_container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  bottom: -20px;
+}
+.find_your_friend_section .section_container .cards .card .light_pink {
+  background-color: #efd4c5;
+}
+.find_your_friend_section .section_container .cards .card .orange {
+  background-color: orange;
+}
+.find_your_friend_section .section_container .cards .card .pink {
+  background-color: #ffac9c;
+}/*# sourceMappingURL=style.css.map */
