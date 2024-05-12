@@ -8,6 +8,7 @@ export default function Video() {
             <span className="black">Don't Shop ❌, &nbsp;</span>
             <span className="orange">Adopt</span>
           </h1>
+
           <div className="video-container">
             <video
               src="vid.mp4"
