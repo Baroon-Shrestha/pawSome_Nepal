@@ -83,6 +83,17 @@ export const viewAllProduct = asyncErrorHandling(async (req, res) => {
     })
 })
 
+export const viewOneProduct = asyncErrorHandling(async (req, res) => {
+    const { id } = req.params
+
+    const view = await Product.findById(id)
+
+    res.send({
+        success: true,
+        view
+    })
+})
+
 export const deleteProduct = asyncErrorHandling(async (req, res) => {
     const { id } = req.params
 

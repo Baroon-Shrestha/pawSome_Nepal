@@ -1,14 +1,10 @@
 .offer {
-    /* background-image: url('offer.png');
-    background-size: cover;
-    background-position: center; */
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
     align-items: center;
     padding: 50px;
-    border: 1px solid black;
 }
 
 .off-img {

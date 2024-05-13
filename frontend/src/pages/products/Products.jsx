@@ -13,7 +13,6 @@ export default function products() {
     axios
       .get("http://localhost:3000/petfinder/product/viewproduct")
       .then(function (response) {
-        // Initialize quantity for each product to 1
         const productsWithQuantity = response.data.viewProduct.map(
           (product) => ({
             ...product,
