@@ -5,6 +5,9 @@ export default function Petshop() {
   return (
     <>
       <div className="offer">
+        <div className="off-img">
+          <img src="product.gif" alt="" />
+        </div>
         <div className="off-title">Special Offer</div>
         <div className="off-sec-title">
           Get special discount on our opening ceremony

@@ -11,6 +11,11 @@
     border: 1px solid black;
 }
 
+.off-img {
+    position: absolute;
+    right: 0;
+}
+
 .off-title {
     font-size: 48px;
     color: rgb(240, 115, 111);
@@ -26,6 +31,7 @@
     font-size: 18px;
     max-width: 75%;
     margin: 0 auto;
+    z-index: 99;
 }
 
 .off-btn {

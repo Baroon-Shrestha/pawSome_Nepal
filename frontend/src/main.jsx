@@ -17,6 +17,7 @@ import ManageAdoptionRequest from "./dashboard/dashboardPages/manageAdoptionRequ
 import AdoptionRequest from "./pages/adoptionRequest/adoptionRequest";
 import UserProfile from "./pages/userProfile/userProfile";
 import Products from "./pages/products/Products";
+import ProductDesc from "./pages/productDescription/productDesc";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
   {
     path: "products",
     element: <Products />,
+  },
+  {
+    path: "productdescription",
+    element: <ProductDesc />,
   },
 ]);
 
