@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-
+import { FaBarsStaggered } from "react-icons/fa6";
 export default function Nav() {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -45,7 +45,8 @@ export default function Nav() {
             <h1 className={styles.logoOrange}>Nepal</h1>
           </div>
 
-          <div className={styles.navigationLinks}>
+          <div className={styles.linksWrapper}>
+          <div className={styles.navigationLinks}>  
             <ul className={styles.ul}>
               <li className={styles.list}>
                 <Link to="/" className={styles.text}>
@@ -126,7 +127,14 @@ export default function Nav() {
                 )}
               </div>
             )}
+       
           </div>
+         
+          </div>
+
+          <FaBarsStaggered className={styles.bars} />
+
+        
         </div>
       </nav>
     </>
