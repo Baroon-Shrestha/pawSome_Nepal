@@ -21,6 +21,27 @@
   animation: pulse 1.5s infinite alternate;
 }
 
+.vaccinated {
+  color: green;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.notVaccinated {
+  color: red;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.breed {
+  font-size: 1.5rem;
+  color: red;
+}
+
+.category {
+  font-size: 1.5rem;
+}
+
 @keyframes pulse {
   0% {
     opacity: 0.6;
@@ -31,16 +52,18 @@
   }
 }
 
+.age {
+  font-size: 2rem;
+}
+
 .name {
   font-size: 2rem;
 }
 
 .gender {
   border-radius: 20px;
-
   color: green;
-
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .description_one {
@@ -53,11 +76,13 @@ span {
   font-size: 1.4rem;
 }
 
+
 .description_two {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: grey;
+  /* color: grey; */
+  font-size: 1.3rem;
 }
 
 .description_container {
@@ -96,8 +121,9 @@ span {
   color: #000000;
   text-transform: uppercase;
   position: relative;
-  transition: color 0.5s ease;
+  transition: color 1s ease-in-out;
   cursor: pointer;
+  border-radius: 13px;
   z-index: 1;
   width: 100%;
   text-align: center;
@@ -106,6 +132,11 @@ span {
   color: white;
 }
 
+.btn:hover {
+  background-color: #f06868;
+}
+
+/*
 .btn::before {
   content: "";
   position: absolute;
@@ -115,9 +146,9 @@ span {
   width: 0;
   background-color: #f06868;
   transition: width 0.5s ease;
-}
+} */
 
-.btn:hover::before {
+/* .btn:hover::before {
   width: 100%;
   transition-delay: 0.1s;
 }
@@ -129,8 +160,7 @@ span {
   bottom: 0;
   height: 0;
   width: 100%;
-  background-color: #f06868;
-  transition: height 0.4s ease;
+  
   z-index: -1;
 }
 
@@ -138,7 +168,7 @@ span {
   height: 100%;
   transition-delay: 0.4s;
   color: white;
-}
+} */
 
 .fav {
   position: absolute;

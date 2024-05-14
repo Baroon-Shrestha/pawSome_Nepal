@@ -48,7 +48,9 @@ export default function AdoptPage() {
       <ToastContainer />
       <div className="adopt_page_section">
         <div className="adopt_page_section_container">
-          <h1>Adopt Pet</h1>
+          <div className="title">
+            Adopt <span className="petName">{petInfo?.name}</span>
+          </div>
 
           <div className="wrapper_container">
             <Carousel showThumbs={false}>
@@ -57,7 +59,7 @@ export default function AdoptPage() {
               })}
             </Carousel>
 
-            <h2>{petInfo?.name}</h2>
+            <div className="name">{petInfo?.name}</div>
             <p className="description">{petInfo?.description}</p>
             <textarea
               placeholder="Why do u want to adopt this pet?"

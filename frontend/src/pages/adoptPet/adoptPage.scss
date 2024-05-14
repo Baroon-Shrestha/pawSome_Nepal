@@ -22,19 +22,32 @@
     }
 
     .description {
-      font-size: 1.5rem;
-      color: grey;
-      margin-bottom: 3rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: justify;
+      padding: 0 10px;
+      font-size: 1.3rem;
     }
 
-    h1 {
+    .title {
       text-align: center;
-      font-size: 3rem;
+      font-size: 4rem;
+      font-weight: 600;
       margin-bottom: 2rem;
     }
+    .petName{
+      color: #e28080;
+      font-size: 4rem;
+      font-weight: 600;
+    }
 
-    h2 {
-      margin: 2rem 0rem;
+    .name{
+      font-size: 2rem;
+      text-align: center;
+      padding: 8px 0;
     }
 
     img {

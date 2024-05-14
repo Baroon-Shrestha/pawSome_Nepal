@@ -42,16 +42,34 @@ export default function NewCard({ pet }) {
 
       <div className={styles.description_container}>
         <div className={styles.description_one}>
-          <h2 className={styles.name}>{pet?.name}</h2>
+          <div className={styles.name}>
+            {pet?.name}&nbsp;:&nbsp;
+            <span className={styles.breed}>{pet?.breed}</span>
+          </div>
 
-          <h2 className={styles.name}>{pet?.breed}</h2>
+          <div className={styles.category}>{pet?.category}</div>
         </div>
 
         <div className={styles.description_two}>
           <p>
-            <span>{pet?.age}</span> Months
+            <span className={styles.age}>{pet?.age}</span> Months
           </p>
           <p className={styles.gender}>{pet?.gender}</p>
+        </div>
+        <div
+          className={
+            pet?.vaccination ? styles.vaccinated : styles.notVaccinated
+          }
+        >
+          <div
+            className={
+              pet?.vaccination === "Vaccinated"
+                ? styles.vaccinated
+                : styles.notVaccinated
+            }
+          >
+            {pet?.vaccination}
+          </div>
         </div>
         <Link to={`/adoptPet/${pet._id}`}>
           <div className={styles.btn}>Adopt</div>

@@ -15,6 +15,7 @@ export default function useFetchAllPets() {
       .then(function (response) {
         setPets(response.data.getallpets); //storing all the pets
         setFilteredPets(response.data.getallpets); // storing all the pets here for filtering
+        console.log(response.data.getallpets);
         setLoading(false);
       })
       .catch(function (error) {
