@@ -5,9 +5,11 @@ import Footer from "../../components/footer/footer";
 import ProductDesc from "../productDescription/productDesc";
 import "./products.css";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
-export default function products() {
+export default function Products() {
   const [products, setProducts] = useState([]);
+  const [cookies, __] = useCookies("token");
 
   useEffect(() => {
     axios
@@ -17,33 +19,41 @@ export default function products() {
           (product) => ({
             ...product,
             quantity: 1,
+            addedToCart: false,
           })
         );
         setProducts(productsWithQuantity);
-        console.log(productsWithQuantity);
       })
       .catch(function (error) {
         console.log(error);
       });
   }, []);
 
-  const handleIncreaseQuantity = (index) => {
-    const updatedProducts = [...products];
-    updatedProducts[index].quantity++;
-    setProducts(updatedProducts);
-  };
-
-  const handleDecreaseQuantity = (index) => {
-    const updatedProducts = [...products];
-    if (updatedProducts[index].quantity > 1) {
-      updatedProducts[index].quantity--;
-      setProducts(updatedProducts);
+  const handleAddToCart = async (productId, quantity, index) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/petfinder/product/addtocart/${productId}`,
+        { quantity },
+        {
+          headers: {
+            authorization: cookies.token,
+          },
+        }
+      )
+      if (response.data.success) {
+        console.log('Item added to cart successfully');
+       
+        const updatedProducts = [...products];
+        updatedProducts[index].addedToCart = true;
+        setProducts(updatedProducts);
+      } else {
+        console.error('Failed to add item to cart:', response.data.message);
+  
+      }
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+      
     }
-  };
-
-  const handleAddToCart = (index) => {
-    const product = products[index];
-    console.log(`Added ${product.quantity} items of ${product.name} to cart`);
   };
 
   return (
@@ -63,25 +73,20 @@ export default function products() {
                 <div className="prod-title">{product.name}</div>
                 <div className="prod-desc">{product.description}</div>
                 <div className="prod-price">${product.price}</div>
-
-                <div className="quantity">
-                  <button onClick={() => handleDecreaseQuantity(index)}>
-                    -
-                  </button>
-                  <input type="number" value={product.quantity} readOnly />
-                  <button onClick={() => handleIncreaseQuantity(index)}>
-                    +
-                  </button>
-                </div>
-                <div className="btn" onClick={() => handleAddToCart(index)}>
-                  Add to cart
-                </div>
+                {product.addedToCart ? (
+                  <Link to="/cart">
+                    <div className="btn">Checkout</div>
+                  </Link>
+                ) : (
+                  <div className="btn" onClick={() => handleAddToCart(product._id, product.quantity, index)}>
+                    Add to cart
+                  </div>
+                )}
               </div>
             </div>
           ))}
         </div>
       </div>
-      <ProductDesc />
       <Footer />
     </>
   );

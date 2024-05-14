@@ -1,0 +1,95 @@
+.userProfile_section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0rem 10rem;
+  background-color: white;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.userProfile_section .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Adjust opacity value as needed */
+  z-index: 10; /* Ensure it appears above other content */
+}
+.userProfile_section .edit_profile_container {
+  position: absolute;
+  width: 500px;
+  z-index: 99;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.userProfile_section .cover_img {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.userProfile_section .container {
+  width: 100%;
+  max-width: 1290px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  margin-top: 12rem;
+}
+.userProfile_section .container .profile_container {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+.userProfile_section .container .profile_container .btn {
+  border: 1px solid rgb(136, 136, 136);
+  padding: 0.5rem 2rem;
+  margin-top: 8rem;
+  font-weight: 500;
+  border-radius: 5px;
+  font-size: 2rem;
+}
+.userProfile_section .container .profile_container .user_info {
+  margin-top: 10rem;
+}
+.userProfile_section .container .profile_container .user_info h1 {
+  font-size: 3rem;
+}
+.userProfile_section .container .profile_container .user_info p {
+  font-size: 1.6rem;
+  color: grey;
+}
+.userProfile_section .container .user_profile_img {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  cursor: pointer;
+  object-fit: cover;
+}
+.userProfile_section .links_container {
+  margin-top: 4rem;
+  display: flex;
+  gap: 2rem;
+  border-bottom: 1px solid grey;
+  padding-bottom: 1rem;
+}
+.userProfile_section .links_container .active {
+  background-color: rgb(228, 228, 228);
+  border-radius: 4px;
+}
+.userProfile_section .links_container p {
+  font-size: 1.6rem;
+  color: rgb(97, 96, 96);
+  font-weight: 500;
+  padding: 1rem;
+  cursor: pointer;
+}
+.userProfile_section .links_container p:hover {
+  background-color: rgb(228, 228, 228);
+  border-radius: 4px;
+}/*# sourceMappingURL=userProfile.css.map */

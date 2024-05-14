@@ -1,0 +1,81 @@
+.adoptionRequest_section {
+  margin-top: 0rem;
+}
+.adoptionRequest_section h1 {
+  margin: 2rem 0rem;
+}
+.adoptionRequest_section .posts {
+  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+.adoptionRequest_section .posts .post {
+  margin-bottom: 3rem;
+  width: 400px;
+  border: 1px solid rgb(240, 240, 240);
+  padding: 1rem;
+}
+.adoptionRequest_section .posts .post .top {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.adoptionRequest_section .posts .post .top .left {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.adoptionRequest_section .posts .post .top .status {
+  font-size: 1.6rem;
+  padding: 1rem;
+  border-radius: 12px;
+}
+.adoptionRequest_section .posts .post .top .status_accepted {
+  background-color: rgb(124, 238, 124);
+}
+.adoptionRequest_section .posts .post .top .status_pending {
+  background-color: rgb(233, 116, 116);
+}
+.adoptionRequest_section .posts .post .top .user_info h1 {
+  margin-bottom: 0rem;
+}
+.adoptionRequest_section .posts .post .top .user_info p {
+  font-size: 1.4rem;
+  color: grey;
+}
+.adoptionRequest_section .posts .post .top .user_profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+.adoptionRequest_section .posts .post .caption {
+  padding: 1rem;
+}
+.adoptionRequest_section .posts .post .caption p {
+  font-size: 1.4rem;
+  width: 100%;
+  font-weight: 300;
+}
+.adoptionRequest_section .posts .post .caption .bold {
+  font-weight: 500;
+}
+.adoptionRequest_section .posts .post .post_img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.adoptionRequest_section .posts .post .options {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+.adoptionRequest_section .posts .post .options .option {
+  cursor: pointer;
+}
+.adoptionRequest_section .posts .post .options .option p {
+  font-size: 1.4rem;
+}/*# sourceMappingURL=adoptionRequest.css.map */

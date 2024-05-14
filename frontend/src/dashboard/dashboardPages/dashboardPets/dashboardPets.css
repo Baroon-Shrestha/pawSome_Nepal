@@ -44,6 +44,8 @@
 .dashboard_pets .container .card img {
   width: 100%;
   height: 250px;
+  object-fit: cover;
+  object-position: top;
 }
 .dashboard_pets .container .card .description {
   display: flex;

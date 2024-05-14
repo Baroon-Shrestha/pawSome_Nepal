@@ -18,6 +18,7 @@ import AdoptionRequest from "./pages/adoptionRequest/adoptionRequest";
 import UserProfile from "./pages/userProfile/userProfile";
 import Products from "./pages/products/Products";
 import ProductDesc from "./pages/productDescription/productDesc";
+import Cart from "./pages/cart/cart";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
   {
     path: "productdescription",
     element: <ProductDesc />,
+  },
+  {
+    path: "cart",
+    element: <Cart />,
   },
 ]);
 

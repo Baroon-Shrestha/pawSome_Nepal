@@ -21,7 +21,7 @@ const ProductDesc = () => {
 
   return (
     <>
-      <Nav />
+      
       <div className="product-description">
         <div className="product-image-container">
           {product.prodImage && product.prodImage.length > 0 && (

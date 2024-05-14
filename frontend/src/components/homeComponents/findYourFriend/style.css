@@ -38,6 +38,17 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
+@media (max-width: 1200px) {
+  .find_your_friend_section .section_container .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .find_your_friend_section .section_container .cards {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
 .find_your_friend_section .section_container .cards .card {
   width: 350px;
   text-align: center;
@@ -49,7 +60,6 @@
   align-items: center;
   flex-direction: column;
   cursor: pointer;
-  transition: 0.2s ease-in;
 }
 .find_your_friend_section .section_container .cards .card .card_description h2 {
   font-size: 2.5rem;
