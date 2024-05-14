@@ -3,6 +3,8 @@ import { createError, errorHanlder } from "../middlewares/errorHandling.js";
 import { cart } from "../models/cartModel.js";
 import { Product } from "../models/products.js"
 import cloudinary from 'cloudinary'
+import Stripe from "stripe";
+const stripe = new Stripe("sk_test_51PGROLDWsS23bDgUzBeul1ttLHD8TIqdZYwQlGtCiDDcCwrixtds5zhIhpFpcwdniOklAIGgS4VkrdnTQ4myrkgx00BOjSPTHb")
 
 export const addProduct = asyncErrorHandling(async (req, res) => {
     const { email } = req.user
@@ -108,21 +110,42 @@ export const deleteProduct = asyncErrorHandling(async (req, res) => {
 })
 
 export const buyProduct = asyncErrorHandling(async (req, res) => {
-    const { id } = req.user
+    const { id } = req.user;
 
-    const amount = await cart.find({ user: id }).populate('product')
+    const cartItems = await cart.find({ user: id }).populate('product');
 
     let totalPrice = 0;
 
-    for (const item of amount) {
+    for (const item of cartItems) {
         totalPrice += item.product.price * item.quantity;
     }
 
-    res.status(200).json({
-        success: true,
-        totalPrice
-    });
-})
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: cartItems.map(item => ({
+                price_data: {
+                    currency: "usd",
+                    product_data: {
+                        name: item.product.name
+                    },
+                    unit_amount: item.product.price * 100, // Stripe expects amount in cents
+                },
+                quantity: item.quantity,
+            })),
+            mode: "payment",
+            success_url: "http://localhost:5173/", // Update the success URL to match your frontend route
+            cancel_url: "http://localhost:5173/products", // Update the cancel URL to match your frontend route
+        });
+
+        res.status(200).json({ sessionId: session.id });
+    } catch (error) {
+        console.error("Error creating checkout session:", error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
+
 
 
 export const addToCart = asyncErrorHandling(async (req, res) => {
@@ -200,52 +223,52 @@ export const removeFromCart = asyncErrorHandling(async (req, res) => {
     })
 })
 
-    export const updateFromCart = asyncErrorHandling(async (req, res) => {
-        const { email } = req.user;
+export const updateFromCart = asyncErrorHandling(async (req, res) => {
+    const { email } = req.user;
 
-        if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
+    if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
 
-        const { id } = req.params;
-        const { quantity } = req.body;
+    const { id } = req.params;
+    const { quantity } = req.body;
 
-        if (!quantity) {
-            return errorHanlder(createError("Quantity not provided"), req, res);
-        }
+    if (!quantity) {
+        return errorHanlder(createError("Quantity not provided"), req, res);
+    }
 
-        const numQuantity = parseInt(quantity);
+    const numQuantity = parseInt(quantity);
 
-        if (isNaN(numQuantity) || numQuantity <= 0) {
-            return errorHanlder(createError("Invalid quantity"), req, res);
-        }
+    if (isNaN(numQuantity) || numQuantity <= 0) {
+        return errorHanlder(createError("Invalid quantity"), req, res);
+    }
 
-        const cartItem = await cart.findById(id).populate({ path: 'product', select: 'name price stockQuantity' });
+    const cartItem = await cart.findById(id).populate({ path: 'product', select: 'name price stockQuantity' });
 
-        if (!cartItem) {
-            return errorHanlder(createError(404, "Item not found in cart"), req, res);
-        }
+    if (!cartItem) {
+        return errorHanlder(createError(404, "Item not found in cart"), req, res);
+    }
 
-        const productInCart = cartItem.product;
-        const currentQuantityInCart = cartItem.quantity;
+    const productInCart = cartItem.product;
+    const currentQuantityInCart = cartItem.quantity;
 
-        const quantityDifference = currentQuantityInCart - numQuantity;
+    const quantityDifference = currentQuantityInCart - numQuantity;
 
-        if (numQuantity > productInCart.stockQuantity) {
-            return errorHanlder(createError("Requested quantity exceeds available quantity in cart"), req, res);
-        }
+    if (numQuantity > productInCart.stockQuantity) {
+        return errorHanlder(createError("Requested quantity exceeds available quantity in cart"), req, res);
+    }
 
-        cartItem.quantity = numQuantity;
-        await cartItem.save();
+    cartItem.quantity = numQuantity;
+    await cartItem.save();
 
-        const newStockQuantity = productInCart.stockQuantity + quantityDifference;
+    const newStockQuantity = productInCart.stockQuantity + quantityDifference;
 
-        await Product.findByIdAndUpdate(productInCart._id, { stockQuantity: newStockQuantity });
+    await Product.findByIdAndUpdate(productInCart._id, { stockQuantity: newStockQuantity });
 
-        res.send({
-            success: true,
-            message: "Quantity updated successfully",
-            updatedCartItem: cartItem
-        });
+    res.send({
+        success: true,
+        message: "Quantity updated successfully",
+        updatedCartItem: cartItem
     });
+});
 
 export const updateStock = asyncErrorHandling(async (req, res) => {
     const { email } = req.user

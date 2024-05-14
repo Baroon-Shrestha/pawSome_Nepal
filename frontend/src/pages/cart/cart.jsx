@@ -4,12 +4,15 @@ import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import "./cart.scss";
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [cookies, __] = useCookies("token");
 
-  console.log(cartItems);
+  //   console.log(cartItems);
+
   useEffect(() => {
     fetchCartItems();
   }, []);
@@ -17,15 +20,18 @@ export default function Cart() {
   const fetchCartItems = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/petfinder/product/viewCart",
+        "http://localhost:3000/petfinder/product/viewcart",
         {
           headers: {
             authorization: cookies.token,
           },
         }
       );
+
       if (response.data.success) {
-        setCartItems(response.data.seeCart);
+        const carts = response.data.seeCart;
+        setCartItems(carts);
+        console.log(carts);
       } else {
         console.error("Failed to fetch cart items:", response.data.message);
       }
@@ -44,7 +50,6 @@ export default function Cart() {
           },
         }
       );
-      // Remove the item from cartItems state after successful removal
       setCartItems(cartItems.filter((item) => item._id !== itemId));
     } catch (error) {
       console.error("Error removing item from cart:", error);
@@ -62,10 +67,64 @@ export default function Cart() {
           },
         }
       );
-      // Update the cart items after successful quantity update
       fetchCartItems();
     } catch (error) {
       console.error("Error updating quantity:", error);
+    }
+  };
+
+  const payment = async () => {
+    try {
+      // Load Stripe instance with your publishable key
+      const stripe = await loadStripe(
+        "pk_test_51PGROLDWsS23bDgUsGhtsB9rNh349tMnjPmFyi0iWCOwRii2jHUdaZns1pU9q1qX4VAklW8z3HIctt76aYOhpeN800iqS7xkTh"
+      );
+
+      const response = await axios.get(
+        "http://localhost:3000/petfinder/product/viewcart",
+        {
+          headers: {
+            authorization: cookies.token,
+          },
+        }
+      );
+
+      const cartData = response.data;
+      const { seeCart } = cartData;
+
+      const lineItems = seeCart.map((item) => ({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: item.product.name,
+          },
+          unit_amount: item.product.price * 100,
+        },
+        quantity: item.quantity,
+      }));
+
+      const sessionResponse = await axios.post(
+        "http://localhost:3000/petfinder/product/buy",
+        { lineItems },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: cookies.token,
+          },
+        }
+      );
+
+      const sessionData = sessionResponse.data;
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: sessionData.sessionId,
+      });
+
+      if (result.error) {
+        console.error(result.error.message);
+      }
+    } catch (error) {
+      console.error("Error processing payment:", error);
     }
   };
 
@@ -121,7 +180,12 @@ export default function Cart() {
               <h1>Sub Total : Rs: {calculateSubTotal(cartItems)}</h1>
               <h1>Shipping Charge: Rs:10</h1>
               <h1>Total: Rs: {calculateSubTotal(cartItems) + 10}</h1>
-              <button className="btn">Proceed To Payment</button>
+              <button className="btn" onClick={payment}>
+                Proceed To Payment
+              </button>
+              <Link to="/products">
+                <button className="btn">Continue to browse items</button>
+              </Link>
             </div>
           </div>
         </div>

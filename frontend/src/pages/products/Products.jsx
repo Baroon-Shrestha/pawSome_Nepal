@@ -10,6 +10,33 @@ import { useCookies } from "react-cookie";
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [cookies, __] = useCookies("token");
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  useEffect(() => {
+    fetchCartItems();
+    const interval = setInterval(fetchCartItems, 800);
+    return () => clearInterval(interval);
+  }, []);
+
+  const fetchCartItems = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/petfinder/product/viewCart",
+        {
+          headers: {
+            authorization: cookies.token,
+          },
+        }
+      );
+      if (response.data.success) {
+        setCartItemCount(response.data.seeCart.length);
+      } else {
+        console.error("Failed to fetch cart items:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -39,27 +66,30 @@ export default function Products() {
             authorization: cookies.token,
           },
         }
-      )
+      );
       if (response.data.success) {
-        console.log('Item added to cart successfully');
-       
+        console.log("Item added to cart successfully");
+
         const updatedProducts = [...products];
         updatedProducts[index].addedToCart = true;
         setProducts(updatedProducts);
       } else {
-        console.error('Failed to add item to cart:', response.data.message);
-  
+        console.error("Failed to add item to cart:", response.data.message);
       }
     } catch (error) {
-      console.error('Error adding item to cart:', error);
-      
+      console.error("Error adding item to cart:", error);
     }
   };
 
   return (
     <>
       <Nav />
-      <div className="pd-title">Products</div>
+      <div className="pd-container-2">
+        <div className="pd-title">Products</div>
+        <Link to="/cart">
+          <div className="pd-cart">View cart ({cartItemCount})</div>
+        </Link>
+      </div>
       <div className="main-container">
         <div className="products-container">
           {products.map((product, index) => (
@@ -78,7 +108,12 @@ export default function Products() {
                     <div className="btn">Checkout</div>
                   </Link>
                 ) : (
-                  <div className="btn" onClick={() => handleAddToCart(product._id, product.quantity, index)}>
+                  <div
+                    className="btn"
+                    onClick={() =>
+                      handleAddToCart(product._id, product.quantity, index)
+                    }
+                  >
                     Add to cart
                   </div>
                 )}
