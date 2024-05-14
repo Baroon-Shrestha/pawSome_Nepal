@@ -92,8 +92,6 @@ export default function DashboardHome() {
               </div>
               <img src="../adopted.png" alt="Pets" />
             </div>
-
-           
           </div>
           <div className="chart_container">
             <div className="bar_chart">

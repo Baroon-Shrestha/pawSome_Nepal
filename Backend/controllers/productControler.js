@@ -83,6 +83,17 @@ export const viewAllProduct = asyncErrorHandling(async (req, res) => {
     })
 })
 
+export const viewOneProduct = asyncErrorHandling(async (req, res) => {
+    const { id } = req.params
+
+    const view = await Product.findById(id)
+
+    res.send({
+        success: true,
+        view
+    })
+})
+
 export const deleteProduct = asyncErrorHandling(async (req, res) => {
     const { id } = req.params
 
@@ -97,7 +108,20 @@ export const deleteProduct = asyncErrorHandling(async (req, res) => {
 })
 
 export const buyProduct = asyncErrorHandling(async (req, res) => {
+    const { id } = req.user
 
+    const amount = await cart.find({ user: id }).populate('product')
+
+    let totalPrice = 0;
+
+    for (const item of amount) {
+        totalPrice += item.product.price * item.quantity;
+    }
+
+    res.status(200).json({
+        success: true,
+        totalPrice
+    });
 })
 
 
