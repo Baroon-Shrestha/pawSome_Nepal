@@ -25,6 +25,7 @@
     align-items: center; 
     margin: 20px 10px;
     border: 1px solid rgb(240, 115, 111); 
+    border-radius: 5px;
     padding: 20px; 
   }
   .remove-icon {
@@ -93,6 +94,7 @@
   .subtotal{
     padding: 20px;
     border: 1px solid rgb(240, 115, 111); 
+    border-radius: 5px;
   }
   
   .proceed-button {
