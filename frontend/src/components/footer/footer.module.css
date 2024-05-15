@@ -152,7 +152,7 @@ h2 {
   background: transparent;
   border: none;
   padding: 1em 1.5em;
-  color: #151414;
+  color: white;
   text-transform: uppercase;
   position: relative;
   transition: color 0.5s ease;
@@ -338,7 +338,7 @@ h2 {
   background: transparent;
   border: none;
   padding: 1em 1.5em;
-  color: #000000;
+  color: white;
   text-transform: uppercase;
   position: relative;
   transition: color 0.5s ease;

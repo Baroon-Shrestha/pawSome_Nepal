@@ -80,7 +80,8 @@
 }
 
 .btn {
-    background-color: #000000;
+    background-color: rgb(240, 115, 111);
+    ;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -89,5 +90,6 @@
 }
 
 .btn:hover {
-    background-color: #000000d6;
+    background-color: rgb(240, 115, 111);
+    ;
 }
