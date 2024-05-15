@@ -129,13 +129,14 @@ export const buyProduct = asyncErrorHandling(async (req, res) => {
                     product_data: {
                         name: item.product.name
                     },
-                    unit_amount: item.product.price * 100, // Stripe expects amount in cents
+                    unit_amount: item.product.price * 100,
                 },
                 quantity: item.quantity,
             })),
             mode: "payment",
-            success_url: "http://localhost:5173/", // Update the success URL to match your frontend route
-            cancel_url: "http://localhost:5173/products", // Update the cancel URL to match your frontend route
+            success_url: "http://localhost:5173/",
+            cancel_url: "http://localhost:5173/products",
+            metadata: { userId: id }
         });
 
         res.status(200).json({ sessionId: session.id });
@@ -145,6 +146,30 @@ export const buyProduct = asyncErrorHandling(async (req, res) => {
     }
 });
 
+export const webhook = asyncErrorHandling(async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    const endpointSecret = 'whsec_e0fjVbhgZq2q9AppHebdmKRBd7Jg21wu';
+
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    } catch (err) {
+        console.log(`⚠️  Webhook signature verification failed.`, err.message);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        const userId = session.metadata.userId;
+
+        await cart.deleteMany({ user: userId });
+
+        console.log(`✅  Successfully cleared cart for user: ${userId}`);
+    }
+
+    res.json({ received: true });
+});
 
 
 
@@ -198,6 +223,7 @@ export const viewCart = asyncErrorHandling(async (req, res) => {
 
     const seeCart = await cart.find({ user: id }).populate({ path: 'product', select: 'name price prodImage' })
 
+    // await cart.deleteMany({ user: id });
     res.send({
         success: true,
         seeCart

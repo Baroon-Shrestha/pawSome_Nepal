@@ -1,5 +1,5 @@
 import Express from "express";
-import { addProduct, viewAllProduct, buyProduct, deleteProduct, addToCart, viewCart, removeFromCart, updateFromCart, updateStock, viewOneProduct } from "../controllers/productControler.js";
+import { addProduct, viewAllProduct, buyProduct, webhook, deleteProduct, addToCart, viewCart, removeFromCart, updateFromCart, updateStock, viewOneProduct } from "../controllers/productControler.js";
 import { isAuthorized } from "../middlewares/auth.js"
 
 
@@ -8,6 +8,7 @@ const router = Express.Router()
 
 router.post("/product/addproduct", isAuthorized, addProduct)
 router.post("/product/buy", isAuthorized, buyProduct)
+router.post('/product/webhook', Express.raw({ type: 'application/json' }), webhook);
 router.get("/product/viewproduct", viewAllProduct)
 router.get("/product/view/:id", viewOneProduct)
 router.delete("/product/deleteproduct/:id", deleteProduct)

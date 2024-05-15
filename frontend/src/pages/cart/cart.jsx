@@ -11,7 +11,7 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [cookies, __] = useCookies("token");
 
-  //   console.log(cartItems);
+  console.log(cookies.token);
 
   useEffect(() => {
     fetchCartItems();
@@ -80,6 +80,8 @@ export default function Cart() {
         "pk_test_51PGROLDWsS23bDgUsGhtsB9rNh349tMnjPmFyi0iWCOwRii2jHUdaZns1pU9q1qX4VAklW8z3HIctt76aYOhpeN800iqS7xkTh"
       );
 
+      const userId = localStorage.getItem("userId");
+
       const response = await axios.get(
         "http://localhost:3000/petfinder/product/viewcart",
         {
@@ -101,6 +103,9 @@ export default function Cart() {
           unit_amount: item.product.price * 100,
         },
         quantity: item.quantity,
+        metadata: {
+          userId: userId,
+        },
       }));
 
       const sessionResponse = await axios.post(
