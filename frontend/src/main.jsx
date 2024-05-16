@@ -19,6 +19,8 @@ import UserProfile from "./pages/userProfile/userProfile";
 import Products from "./pages/products/Products";
 import ProductDesc from "./pages/productDescription/productDesc";
 import Cart from "./pages/cart/cart";
+import PetHostel from "./pages/petHostel/PetHostel";
+import Homestay from "./pages/petHomestay/Homestay";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +100,14 @@ const router = createBrowserRouter([
   {
     path: "cart",
     element: <Cart />,
+  },
+  {
+    path: "homestay",
+    element: <Homestay />,
+  },
+  {
+    path: "hostel",
+    element: <PetHostel />,
   },
 ]);
 

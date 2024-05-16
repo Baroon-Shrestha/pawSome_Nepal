@@ -40,101 +40,104 @@ export default function Nav() {
     <>
       <nav ref={navRef} className={styles.nav}>
         <div className={styles.navContainer}>
-          <div className={styles.logo_container} ref={logo}>
-            <h1 className={styles.logo}>Pets </h1>
-            <h1 className={styles.logoOrange}>Nepal</h1>
-          </div>
+          <Link to="/">
+            <div className={styles.logo_container} ref={logo}>
+              <div className={styles.logo}>Pets </div>
+              <div className={styles.logoOrange}>Nepal</div>
+            </div>
+          </Link>
 
           <div className={styles.linksWrapper}>
-          <div className={styles.navigationLinks}>  
-            <ul className={styles.ul}>
-              <li className={styles.list}>
-                <Link to="/" className={styles.text}>
-                  Home
-                </Link>
-              </li>
-
-              <li className={styles.list}>
-                <Link to="/allPets" className={styles.text}>
-                  Available Pets
-                </Link>
-              </li>
-              <li className={styles.list}>
-                <Link to="/products" className={styles.text}>
-                  Products
-                </Link>
-              </li>
-
-              {isAdmin && (
+            <div className={styles.navigationLinks}>
+              <ul className={styles.ul}>
                 <li className={styles.list}>
-                  <Link to="/dashboard" className={styles.text}>
-                    Admin Dashboard
+                  <Link to="/" className={styles.text}>
+                    Home
                   </Link>
                 </li>
-              )}
-            </ul>
-          </div>
 
-          <div className={styles.userSection}>
-            {!cookies.token ? (
-              <>
-                <ul className={styles.ul}>
+                <li className={styles.list}>
+                  <Link to="/allPets" className={styles.text}>
+                    Available Pets
+                  </Link>
+                </li>
+                <li className={styles.list}>
+                  <Link to="/products" className={styles.text}>
+                    Products
+                  </Link>
+                </li>
+                <li className={styles.list}>
+                  <Link to="/homestay" className={styles.text}>
+                    Pet Homestay
+                  </Link>
+                </li>
+
+                {isAdmin && (
                   <li className={styles.list}>
-                    <Link to="/register" className={styles.text}>
-                      Register
+                    <Link to="/dashboard" className={styles.text}>
+                      Admin Dashboard
                     </Link>
                   </li>
-                  <li className={styles.list}>
-                    <Link to="/login" className={styles.text}>
-                      Login
-                    </Link>
-                  </li>
-                </ul>
-              </>
-            ) : (
-              <div className={styles.dropDown_container}>
-                <p
-                  className={styles.text}
-                  onClick={() => setShowDropDown(!showDropDown)}
-                >
-                  <div className={styles.prof}>
-                    Welcome, {loggedInUser?.firstname}
-                    <img
-                      src={loggedInUser?.profile[0]?.url}
-                      alt="Profile"
-                      className={styles.profileIcon}
-                    />
-                  </div>
-                </p>
+                )}
+              </ul>
+            </div>
 
-                {showDropDown && (
-                  <div className={styles.dropDown}>
-                    <Link to="/userProfile">
+            <div className={styles.userSection}>
+              {!cookies.token ? (
+                <>
+                  <ul className={styles.ul}>
+                    <li className={styles.list}>
+                      <Link to="/register" className={styles.text}>
+                        Register
+                      </Link>
+                    </li>
+                    <li className={styles.list}>
+                      <Link to="/login" className={styles.text}>
+                        Login
+                      </Link>
+                    </li>
+                  </ul>
+                </>
+              ) : (
+                <div className={styles.dropDown_container}>
+                  <p
+                    className={styles.text}
+                    onClick={() => setShowDropDown(!showDropDown)}
+                  >
+                    <div className={styles.prof}>
+                      Welcome, {loggedInUser?.firstname}
+                      <img
+                        src={loggedInUser?.profile[0]?.url}
+                        alt="Profile"
+                        className={styles.profileIcon}
+                      />
+                    </div>
+                  </p>
+
+                  {showDropDown && (
+                    <div className={styles.dropDown}>
+                      <Link to="/userProfile">
+                        <p
+                          className={`${styles.text} ${styles.drop}`}
+                          onClick={handleSettingClick}
+                        >
+                          Profile
+                        </p>
+                      </Link>
                       <p
                         className={`${styles.text} ${styles.drop}`}
-                        onClick={handleSettingClick}
+                        onClick={handleLogOutClick}
                       >
-                        Profile
+                        Logout
                       </p>
-                    </Link>
-                    <p
-                      className={`${styles.text} ${styles.drop}`}
-                      onClick={handleLogOutClick}
-                    >
-                      Logout
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-       
-          </div>
-         
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
           <FaBarsStaggered className={styles.bars} />
-
-        
         </div>
       </nav>
     </>

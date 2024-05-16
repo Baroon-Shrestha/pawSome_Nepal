@@ -11,15 +11,18 @@
   width: 20%;
 }
 
+.logo {
+  color: black;
+}
 
-.linksWrapper{
+.linksWrapper {
   display: flex;
- 
+
   width: 100%;
 
 }
 
-.bars{
+.bars {
   font-size: 2rem;
   cursor: pointer;
   display: none;
@@ -28,6 +31,7 @@
 .logo,
 .logoOrange {
   font-size: 3.5rem;
+  font-weight: 600;
 }
 
 .logoOrange {
@@ -125,28 +129,29 @@
   object-fit: cover;
 }
 
-@media(max-width:900px){
+@media(max-width:900px) {
 
-  .bars{
+  .bars {
     display: block;
   }
-  .linksWrapper{
+
+  .linksWrapper {
     position: absolute;
-    left:0;
-    top:100%;
+    left: 0;
+    top: 100%;
     z-index: 999;
     background-color: rgb(221, 218, 218);
     flex-direction: column;
     align-items: center;
   }
 
-  .ul{
+  .ul {
     display: flex;
     flex-direction: column;
     gap: 0rem;
   }
 
-  li{
+  li {
     padding: 1rem;
   }
 }

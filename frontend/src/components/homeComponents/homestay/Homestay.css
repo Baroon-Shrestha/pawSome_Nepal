@@ -1,0 +1,41 @@
+.hs-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    background-color: rgb(247, 247, 247);
+    padding: 5rem 0;
+}
+
+.hs-title {
+    font-size: 48px;
+    color: rgb(240, 115, 111);
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.hs-desc {
+    color: black;
+    font-size: 18px;
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+.hs-btn {
+    background-color: rgb(240, 115, 111);
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+
+.hs-btn:hover {
+    cursor: pointer;
+    background-color: rgb(240, 115, 111);
+}
