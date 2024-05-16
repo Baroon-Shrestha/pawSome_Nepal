@@ -66,7 +66,7 @@ export default function Footer() {
                 Save favorite pets <br />&<br /> track their adoption status
               </p>
               <Link to="/register">
-                <button className={styles.btn}>Sign Up Now👋</button>
+                <button className="btn2">Sign Up Now👋</button>
               </Link>
             </div>
           </div>
