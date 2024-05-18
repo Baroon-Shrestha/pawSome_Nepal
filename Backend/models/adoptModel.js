@@ -13,7 +13,6 @@ const adoptSchema = new mongoose.Schema({
         enum: ["Pending", "Accepted", "Rejected"],
         default: "Pending"
     }
-
 })
 
 export const adopt = mongoose.model("adopt", adoptSchema)

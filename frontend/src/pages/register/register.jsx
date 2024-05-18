@@ -26,11 +26,13 @@ function Register() {
   const lastname = useInput("", (value) =>
     value ? "" : "Please enter your last name."
   );
+
   const number = useInput("", (value) => {
     if (!value) return "Please enter your phone number.";
     if (!/^\d{10}$/.test(value)) return "Please enter a valid phone number.";
     return "";
   });
+
   const email = useInput("", (value) =>
     value ? "" : "Please enter your email."
   );
@@ -124,6 +126,8 @@ function Register() {
               <input
                 type="number"
                 placeholder="Your Phone Number"
+                min="10000000"
+                max="9999999999"
                 {...number}
                 autoComplete="off"
                 required

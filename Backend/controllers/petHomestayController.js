@@ -11,7 +11,6 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
 
     const { name, category, age, gender, breed, specialCare, disease, dateFrom, dateTo, status } = req.body;
 
-    // Check if dates are in the future and DateTo is after DateFrom
     const currentDate = new Date();
 
     if (new Date(dateFrom) <= currentDate) {
@@ -24,16 +23,13 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
 
     const { image } = req.files;
 
-    // Check if image is provided
     if (!image) {
         return errorHanlder(createError("Please provide at least one image"), req, res);
     }
 
     const allowedExtensions = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
-    // Process single or multiple images
     if (!Array.isArray(image)) {
-        // Handle single image upload
         if (!allowedExtensions.includes(image.mimetype)) {
             return errorHanlder(createError("Please upload images in PNG, JPEG, JPG, or WEBP format"), req, res);
         }
@@ -57,7 +53,6 @@ export const addRequest = asyncErrorHandling(async (req, res) => {
             post
         });
     } else {
-        // Handle multiple image uploads
         for (const img of image) {
             if (!allowedExtensions.includes(img.mimetype)) {
                 return errorHanlder(createError("Please upload images in PNG, JPEG, JPG, or WEBP format"), req, res);

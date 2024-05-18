@@ -9,7 +9,6 @@ export default function Homestay() {
 
   const toggleModal = () => {
     if (showModal && showConfirmation) {
-      // If modal is open and confirmation is shown, close modal and reset confirmation
       setShowModal(false);
       setShowConfirmation(false);
     } else {
@@ -18,12 +17,10 @@ export default function Homestay() {
   };
 
   const handleConfirmClose = () => {
-    // Show confirmation message and close modal
     setShowConfirmation(true);
   };
 
   const handleCloseModal = () => {
-    // Close modal without confirmation
     setShowModal(false);
     setShowConfirmation(false);
   };
@@ -31,14 +28,21 @@ export default function Homestay() {
   return (
     <>
       <Nav />
-      <div>Leave your pet in a home-like environment</div>
-      <button onClick={toggleModal}>
-        Fill the form to leave your pet in your absence
-      </button>
+      <div className="ps-title">Leave your pet in a home-like environment</div>
+      <div className="ps-req">
+        <div className="ps-req-title">Your Requests</div>
+        <div className="ps-req-btn">
+          <button className="ps-btn-text" onClick={toggleModal}>
+            Send Request
+          </button>
+        </div>
+      </div>
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <PetHostel />
+            <div className="modal-content">
+              <PetHostel />
+            </div>
             {showConfirmation ? (
               <div className="confirmation-message">
                 Are you sure you want to close the form? Your data will be lost.{" "}

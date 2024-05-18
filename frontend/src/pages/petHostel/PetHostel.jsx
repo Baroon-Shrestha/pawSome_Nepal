@@ -1,40 +1,81 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 import styles from "./PetHostel.module.css";
 import Nav from "../../components/nav/nav";
 
 function PetHostel() {
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkOutDate, setCheckOutDate] = useState("");
-  const [petType, setPetType] = useState("");
-  const [deliveryOption, setDeliveryOption] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [category, setCategory] = useState("");
   const [availability, setAvailability] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
   const [age, setAge] = useState("");
   const [breed, setBreed] = useState("");
   const [specialCare, setSpecialCare] = useState("");
   const [disease, setDisease] = useState("");
+  const [gender, setGender] = useState("");
+  const [cookies] = useCookies(["token"]);
+  const [images, setImages] = useState([]);
+  const [submittedData, setSubmittedData] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleImageUpload = (event) => {
+    const files = Array.from(event.target.files);
+    setImages(files);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const currentDate = new Date();
-    const checkInDateTime = new Date(checkInDate);
-    const checkOutDateTime = new Date(checkOutDate);
+    const fromDate = new Date(dateFrom);
+    const toDate = new Date(dateTo);
 
     if (
-      checkInDateTime <= currentDate ||
-      checkOutDateTime <= currentDate ||
-      checkOutDateTime <= checkInDateTime
+      fromDate <= currentDate ||
+      toDate <= currentDate ||
+      toDate <= fromDate
     ) {
       setAvailability(null);
       setErrorMessage("Invalid date!");
       return;
     }
 
-    setAvailability("Submitted");
-    setErrorMessage("");
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("category", category);
+    formData.append("age", age);
+    formData.append("gender", gender);
+    formData.append("breed", breed);
+    formData.append("specialCare", specialCare);
+    formData.append("disease", disease);
+    formData.append("dateFrom", fromDate.toISOString());
+    formData.append("dateTo", toDate.toISOString());
+
+    images.forEach((image, index) => {
+      formData.append(`image`, image);
+    });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/petfinder/homestay/addrequest",
+        formData,
+        {
+          headers: {
+            authorization: cookies.token,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      setAvailability("Submitted");
+      console.log("Data submitted successfully:", response.data);
+      setErrorMessage("");
+    } catch (error) {
+      setErrorMessage("Failed to submit request. Please try again.");
+      console.error("Error submitting data:", error);
+    }
   };
 
   return (
@@ -62,17 +103,8 @@ function PetHostel() {
                   onChange={(e) => setName(e.target.value)}
                 />
               </label>
-              <label>
-                Category:
-                <input
-                  type="text"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                />
-              </label>
             </div>
             <div className={styles.first}>
-              {" "}
               <label>
                 Age:
                 <input
@@ -91,7 +123,6 @@ function PetHostel() {
               </label>
             </div>
             <div className={styles.first}>
-              {" "}
               <label>
                 Special Care:
                 <input
@@ -110,32 +141,47 @@ function PetHostel() {
               </label>
             </div>
             <label>
+              Gender:
+              <select
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </label>
+            <label>
               Check-In Date:
               <input
                 type="date"
-                value={checkInDate}
-                onChange={(e) => setCheckInDate(e.target.value)}
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
               />
             </label>
             <label>
               Check-Out Date:
               <input
                 type="date"
-                value={checkOutDate}
-                onChange={(e) => setCheckOutDate(e.target.value)}
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
               />
             </label>
             <label>
-              Select Pet Type:
+              Select Pet Category:
               <select
-                value={petType}
-                onChange={(e) => setPetType(e.target.value)}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               >
-                <option value="">Select Your Pet Type</option>
+                <option value="">Select Your Pet Category</option>
                 <option value="Dog">Dog</option>
                 <option value="Cat">Cat</option>
                 <option value="Other">Other</option>
               </select>
+            </label>
+            <label>
+              Upload Images:
+              <input type="file" multiple onChange={handleImageUpload} />
             </label>
             <div className={styles.petHostelButtonContainer}>
               <button type="submit">Submit</button>

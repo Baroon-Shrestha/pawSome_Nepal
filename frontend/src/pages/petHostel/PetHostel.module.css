@@ -74,8 +74,8 @@
 .petHostelButtonContainer button {
   width: 100%;
   padding: 10px;
-  color: #0f0d0d;
-  background-color: #e0e0e0;
+  color: white;
+  background-color: #f0736f;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -90,7 +90,7 @@
 }
 
 .petHostelButtonContainer button:hover {
-  background-color: #f0736f;
+  background-color: #f7635d;
   color: white;
 }
 

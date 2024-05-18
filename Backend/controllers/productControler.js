@@ -223,7 +223,6 @@ export const viewCart = asyncErrorHandling(async (req, res) => {
 
     const seeCart = await cart.find({ user: id }).populate({ path: 'product', select: 'name price prodImage' })
 
-    // await cart.deleteMany({ user: id });
     res.send({
         success: true,
         seeCart

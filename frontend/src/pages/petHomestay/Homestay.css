@@ -1,3 +1,36 @@
+.ps-req {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.ps-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #f0736f;
+    text-align: center;
+    padding: 2rem;
+}
+
+.ps-req-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #f0736f;
+}
+
+.ps-btn-text {
+    background-color: #f0736f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ps-btn-text:hover {
+    background-color: #f7635d;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -10,22 +43,28 @@
     align-items: center;
 }
 
-
 .modal {
+    max-height: 80%;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    overflow: hidden;
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px;
 }
 
 .close-btn {
     margin-top: 10px;
     padding: 8px 16px;
-    background-color: #333;
+    background-color: #f0736f;
     color: white;
     border: none;
     border-radius: 4px;
@@ -33,9 +72,8 @@
     align-self: center;
 }
 
-
 .close-btn:hover {
-    background-color: #555;
+    background-color: #f7635d;
 }
 
 .confirmation-message {
