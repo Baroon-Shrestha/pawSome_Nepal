@@ -126,8 +126,7 @@ function Register() {
               <input
                 type="number"
                 placeholder="Your Phone Number"
-                min="10000000"
-                max="9999999999"
+                maxLength="10"
                 {...number}
                 autoComplete="off"
                 required

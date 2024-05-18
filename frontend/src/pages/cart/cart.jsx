@@ -75,7 +75,6 @@ export default function Cart() {
 
   const payment = async () => {
     try {
-      // Load Stripe instance with your publishable key
       const stripe = await loadStripe(
         "pk_test_51PGROLDWsS23bDgUsGhtsB9rNh349tMnjPmFyi0iWCOwRii2jHUdaZns1pU9q1qX4VAklW8z3HIctt76aYOhpeN800iqS7xkTh"
       );
