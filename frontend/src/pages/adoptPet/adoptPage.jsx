@@ -9,6 +9,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import { useNavigate } from "react-router-dom";
+
 
 export default function AdoptPage() {
   const { id } = useParams();
@@ -16,6 +18,8 @@ export default function AdoptPage() {
   const [cookies, __] = useCookies("token");
   const [loading, setIsLoading] = useState(false);
   const [reason, setReason] = useState("");
+
+  const navigate = useNavigate()
 
   async function adoptPet(e) {
     e.preventDefault();
@@ -31,10 +35,16 @@ export default function AdoptPage() {
         }
       );
 
-      console.log(response);
+    
       if (response.data.success === true) {
-        toast.success("Pet details updated successfully");
+        toast.success("Your adoption request has been sent successfully", {
+          onClose: () => {
+           
+            navigate("/");
+          }
+        });
         setIsLoading(false);
+      
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

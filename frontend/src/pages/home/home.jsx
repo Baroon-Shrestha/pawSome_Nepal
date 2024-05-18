@@ -6,14 +6,13 @@ import AdoptionProcess from "../../components/homeComponents/adoptionProcess/ado
 import Petshop from "../../components/homeComponents/petshop/petshop";
 import Slider from "../../components/homeComponents/slider/slider";
 import Video from "../../components/homeComponents/video/video";
-import Shopcard from "../../components/shopcard/shopcard";
-import "../../index.css";
-import PetHostel from "../petHostel/PetHostel";
 import Homestay from "../../components/homeComponents/homestay/Homestay";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Home() {
   return (
     <>
+     <ToastContainer />
       <HeroSection />
       <FindYourFriend />
       <AdoptionProcess />
