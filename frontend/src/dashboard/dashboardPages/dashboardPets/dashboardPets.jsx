@@ -8,8 +8,10 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
+import useAuth from "../../../hooks/useAuth";
 
 export default function DashboardPets() {
+  useAuth()
   const [pets, setPets] = useState([]);
   const [cookies, __] = useCookies(["token"]);
 

@@ -8,9 +8,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import { useCookies } from "react-cookie";
+import useAuth from "../../../hooks/useAuth";
 
 export default function ManageAdoptionRequest() {
-
+useAuth()
     const [petRequests, setPetRequests] = useState([]);
     const [cookies] = useCookies(["token"]);
     const [status, setStatus] = useState("Pending");

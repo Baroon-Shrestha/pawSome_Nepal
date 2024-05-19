@@ -6,8 +6,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './editPets.module.css';
 import { Sidebar } from '../../dashboardComponents/dashboardNav/newDash';
+import useAuth from "../../../hooks/useAuth";
 
 function EditPets() {
+  useAuth()
   const [cookies] = useCookies(['token']);
   const { id } = useParams();
   const [formData, setFormData] = useState({
