@@ -18,7 +18,6 @@ function PetHostel() {
   const [gender, setGender] = useState("");
   const [cookies] = useCookies(["token"]);
   const [images, setImages] = useState([]);
-  const [submittedData, setSubmittedData] = useState(null);
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);

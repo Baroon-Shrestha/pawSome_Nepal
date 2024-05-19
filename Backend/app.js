@@ -26,6 +26,7 @@ app.use(fileUpload({
     tempFileDir: "./tmp/"
 }))
 
+app.use("/petfinder/product/webhook", Express.raw({ type: 'application/json' }));
 
 app.use("/petfinder", petRoute);
 app.use('/petfinder', userRoute)
