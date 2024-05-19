@@ -5,10 +5,13 @@ import { Chart } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
+import useAuth from "../../../hooks/useAuth";
 
 export default function DashboardHome() {
   const [totalPets, setTotalPets] = useState(0);
   const [totalusers, setTotalUsers] = useState(0);
+
+  useAuth()
 
   useEffect(() => {
     axios
