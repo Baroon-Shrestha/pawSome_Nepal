@@ -5,6 +5,7 @@
     gap: 20px;
     align-items: center;
     padding: 50px;
+    text-align: left;
 }
 
 .off-img {
@@ -16,6 +17,7 @@
     font-size: 48px;
     color: rgb(240, 115, 111);
     font-weight: 700;
+    text-align: left;
 }
 
 .off-sec-title {
@@ -26,8 +28,8 @@
     color: black;
     font-size: 18px;
     max-width: 75%;
-    margin: 0 auto;
     z-index: 99;
+    text-align: left;
 }
 
 .off-btn {
