@@ -31,6 +31,11 @@
     background-color: #f7635d;
 }
 
+.hss-container {
+    padding: 060px;
+    margin: 0 auto;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -41,6 +46,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
 .modal {
@@ -96,4 +102,51 @@
 
 .confirmation-message button:hover {
     background-color: #c82333;
+}
+
+.post {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.user_profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user_info {
+    display: flex;
+    align-items: center;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.hs-status_accepted {
+    background-color: green;
+    color: white;
+    font-weight: 400;
+}
+
+.hs-status_pending {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    font-weight: 400;
+}
+
+.post_img {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.caption {
+    margin-top: 10px;
+}
+
+.bold {
+    font-weight: bold;
 }

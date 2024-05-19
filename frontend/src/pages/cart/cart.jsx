@@ -9,7 +9,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
-  const [cookies, __] = useCookies("token");
+  const [cookies, __] = useCookies(["token"]);
 
   console.log(cookies.token);
 
@@ -126,6 +126,22 @@ export default function Cart() {
 
       if (result.error) {
         console.error(result.error.message);
+      } else {
+        const clearResponse = await axios.delete(
+          "http://localhost:3000/petfinder/product/clear",
+          {
+            headers: {
+              authorization: cookies.token,
+            },
+          }
+        );
+
+        if (clearResponse.data.success) {
+          setCartItems([]);
+          console.log("Cart cleared");
+        } else {
+          console.error("Failed to clear cart:", clearResponse.data.message);
+        }
       }
     } catch (error) {
       console.error("Error processing payment:", error);
@@ -158,7 +174,7 @@ export default function Cart() {
                           type="number"
                           value={item.quantity}
                           onChange={(e) =>
-                            updateQuantity(item._id, e.target.value)
+                            updateQuantity(item._id, parseInt(e.target.value))
                           }
                         />
                         <button
@@ -182,8 +198,7 @@ export default function Cart() {
           <div className="container_right">
             <div className="total">
               <h1>Sub Total : Rs: {calculateSubTotal(cartItems)}</h1>
-              <h1>Shipping Charge: Rs:10</h1>
-              <h1>Total: Rs: {calculateSubTotal(cartItems) + 10}</h1>
+              <h1>Total: Rs: {calculateSubTotal(cartItems)}</h1>
               <button className="btn" onClick={payment}>
                 Proceed To Payment
               </button>

@@ -1,11 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PetHostel from "../petHostel/PetHostel";
 import Nav from "../../components/nav/nav";
 import "./Homestay.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import Footer from "../../components/footer/footer";
 
 export default function Homestay() {
   const [showModal, setShowModal] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [homestayRequests, setHomestayRequests] = useState([]);
+  const [cookies, __] = useCookies(["token"]);
+
+  useEffect(() => {
+    const fetchHomestayRequests = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:3000/petfinder/homestay/myrequest",
+          {
+            headers: {
+              authorization: cookies.token,
+            },
+          }
+        );
+        if (res.data.success) {
+          setHomestayRequests(res.data.homestayRequest);
+        }
+      } catch (error) {
+        console.error("Error fetching homestay requests:", error);
+      }
+    };
+
+    fetchHomestayRequests();
+  }, [cookies.token]);
 
   const toggleModal = () => {
     if (showModal && showConfirmation) {
@@ -57,6 +86,66 @@ export default function Homestay() {
           </div>
         </div>
       )}
+      <div className="hss-container">
+        <div className="adoptionRequest_section">
+          <div className="posts">
+            {homestayRequests.map((request, index) => (
+              <div className={`post post-${index}`} key={request._id}>
+                <div className="top">
+                  <div className="left">
+                    <img
+                      src={request.user.profile[0].url}
+                      className="user_profile"
+                      alt={`${request.user.firstname} ${request.user.lastname} Profile`}
+                    />
+                    <div className="user_info">
+                      <h1>{request.name}</h1>
+                    </div>
+                  </div>
+                  <p
+                    className={`status ${
+                      request.status === "Accepted"
+                        ? "hs-status_accepted"
+                        : "hs-status_pending"
+                    }`}
+                  >
+                    {request.status}
+                  </p>
+                </div>
+                <Carousel showThumbs={false}>
+                  {request.image.map((img, i) => (
+                    <img
+                      key={img.public_id}
+                      src={img.url}
+                      className={`post_img post_img-${i}`}
+                      alt={`${request.name} Image`}
+                    />
+                  ))}
+                </Carousel>
+                <div className="caption">
+                  <p>
+                    <span className="bold">Special care: </span>
+                    {request.specialCare}
+                  </p>
+                  <p>
+                    <span className="bold">Disease: </span>
+                    {request.disease}
+                  </p>
+                  <p>
+                    <span className="bold">Date from: </span>
+                    {new Date(request.dateFrom).toLocaleDateString()}
+                  </p>
+                  <p>
+                    <span className="bold">Date to: </span>
+                    {new Date(request.dateTo).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <Footer />
     </>
   );
 }

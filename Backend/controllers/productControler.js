@@ -134,7 +134,7 @@ export const buyProduct = asyncErrorHandling(async (req, res) => {
                 quantity: item.quantity,
             })),
             mode: "payment",
-            success_url: "http://localhost:5173/",
+            success_url: `http://localhost:5173/products?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: "http://localhost:5173/products",
             metadata: { userId: id }
         });
@@ -145,33 +145,21 @@ export const buyProduct = asyncErrorHandling(async (req, res) => {
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 });
-
-export const webhook = asyncErrorHandling(async (req, res) => {
-    const sig = req.headers['stripe-signature'];
-    const endpointSecret = 'whsec_e0fjVbhgZq2q9AppHebdmKRBd7Jg21wu';
-
-    let event;
+export const clearCart = asyncErrorHandling(async (req, res) => {
+    const { id: userId } = req.user;
 
     try {
-        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-    } catch (err) {
-        console.log(`⚠️  Webhook signature verification failed.`, err.message);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
-
-    if (event.type === 'checkout.session.completed') {
-        const session = event.data.object;
-        const userId = session.metadata.userId;
-
         await cart.deleteMany({ user: userId });
 
-        console.log(`✅  Successfully cleared cart for user: ${userId}`);
+        return res.status(200).json({
+            success: true,
+            message: "Cart cleared successfully"
+        });
+    } catch (error) {
+        console.error("Error clearing cart:", error);
+        return res.status(500).json({ success: false, message: "Internal server error" });
     }
-
-    res.json({ received: true });
 });
-
-
 
 export const addToCart = asyncErrorHandling(async (req, res) => {
     const { id: userId, email } = req.user
