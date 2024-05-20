@@ -66,7 +66,7 @@ export default function Nav() {
                     Products
                   </Link>
                 </li>
-                {cookies.token && (
+                {cookies.token && !isAdmin && (
                   <li className={styles.list}>
                     <Link to="/homestay" className={styles.text}>
                       Pet Homestay
