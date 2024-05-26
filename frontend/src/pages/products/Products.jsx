@@ -94,11 +94,9 @@ export default function Products() {
         <div className="products-container">
           {products.map((product, index) => (
             <div key={product._id} className="product">
-              <Link to="/productdescription">
-                <div className="prod-img">
-                  <img src={product.prodImage[0].url} alt="" />
-                </div>
-              </Link>
+              <div className="prod-img">
+                <img src={product.prodImage[0].url} alt="" />
+              </div>
               <div className="prod-body">
                 <div className="prod-title">{product.name}</div>
                 <div className="prod-desc">{product.description}</div>
