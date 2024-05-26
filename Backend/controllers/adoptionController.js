@@ -36,9 +36,9 @@ export const adoptPet = asyncErrorHandling(async (req, res) => {
 });
 
 export const viewAdoptReq = asyncErrorHandling(async (req, res) => {
-    const { email } = req.user;
+    // const { email } = req.user;
 
-    if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
+    // if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("You're not authorized"), req, res);
 
     const viewReq = await adopt.find().populate('user').populate('pet');
 
