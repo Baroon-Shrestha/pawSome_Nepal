@@ -9,7 +9,11 @@ import useAuth from "../../../hooks/useAuth";
 
 export default function DashboardHome() {
   const [totalPets, setTotalPets] = useState(0);
-  const [totalusers, setTotalUsers] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalAdopted, setTotalAdopted] = useState(0);
+  const [totalDog, setTotalDog] = useState(0);
+  const [totalCat, setTotalCat] = useState(0);
+  const [totalOthers, setTotalOthers] = useState(0);
 
   useAuth()
 
@@ -26,12 +30,74 @@ export default function DashboardHome() {
         console.error("Error fetching data:", error);
       });
   }, []);
+
   useEffect(() => {
-    axios.get("http://localhost:3000/petfinder/user/allUsers").then((res) => {
-      const users = res.data.users;
-      const numOfUsers = users.length;
-      setTotalUsers(numOfUsers);
-    });
+    axios
+      .get("http://localhost:3000/petfinder/user/allUsers")
+      .then((res) => {
+        const users = res.data.users;
+        const numOfUsers = users.length;
+        setTotalUsers(numOfUsers);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/petfinder/adopt/viewadoptionrequest")
+      .then((res) => {
+        const req = res.data.viewReq;
+        const numOfAdopted = req.length;
+        setTotalAdopted(numOfAdopted);
+        console.log(numOfAdopted);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/petfinder/dogs?category=Dog")
+      .then((res) => {
+        const dog = res.data.dog;
+        const numOfDog = dog.length;
+        setTotalDog(numOfDog);
+        console.log(numOfDog);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/petfinder/cats?category=Cat")
+      .then((res) => {
+        const cat = res.data.cat;
+        const numOfCat = cat.length;
+        setTotalCat(numOfCat);
+        console.log(numOfCat);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/petfinder/others?category=Other")
+      .then((res) => {
+        const oth = res.data.others;
+        const numOfOth = oth.length;
+        setTotalOthers(numOfOth);
+        console.log(numOfOth);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   const barChartData = {
@@ -39,7 +105,7 @@ export default function DashboardHome() {
     datasets: [
       {
         label: "Pets",
-        data: [totalPets, 10],
+        data: [totalPets, totalAdopted],
         borderWidth: 1,
       },
     ],
@@ -50,7 +116,7 @@ export default function DashboardHome() {
     datasets: [
       {
         label: "Pet Categories",
-        data: [50, 10, 20],
+        data: [totalDog, totalCat, totalOthers],
         borderWidth: 1,
         backgroundColor: [
           "rgba(255,99,132,1)",
@@ -63,7 +129,6 @@ export default function DashboardHome() {
 
   return (
     <>
-      {/* <DashboardNav /> */}
       <Sidebar />
       <div className="dashboard_home">
         <div className="container">
@@ -81,7 +146,7 @@ export default function DashboardHome() {
             <Link to="/manageusers">
               <div className="card">
                 <div className="description">
-                  <h1>{totalusers}</h1>
+                  <h1>{totalUsers}</h1>
                   <p>Total Users</p>
                 </div>
                 <img src="/user.png" alt="Pets" />
@@ -90,8 +155,8 @@ export default function DashboardHome() {
 
             <div className="card">
               <div className="description">
-                <h1>20</h1>
-                <p>Total Adopted</p>
+                <h1>{totalAdopted}</h1>
+                <p>Total Adopted Requests</p>
               </div>
               <img src="../adopted.png" alt="Pets" />
             </div>
