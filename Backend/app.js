@@ -15,7 +15,9 @@ const app = Express();
 
 dotenv.config({ path: "./config/config.env" });
 
-app.use(cors());
+app.use(cors({
+    origin: "https://pawsome-nepal.vercel.app",
+}));
 
 app.use(cookieParser())
 app.use(Express.json());
