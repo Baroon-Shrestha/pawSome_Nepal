@@ -3,7 +3,7 @@ export const getToken = (user, statusCode, res, message) => {
         const jwtToken = user.getJWTToken();
         const option = {
             expires: new Date(
-                Date.now() + (5 * 24 * 60 * 60 * 1000)
+                Date.now() + (process.env.COOKIE_EXP * 24 * 60 * 60 * 1000)
             ),
             httpOnly: true
         }

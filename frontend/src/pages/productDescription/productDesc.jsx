@@ -12,7 +12,9 @@ const ProductDesc = () => {
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/product/view/663bad0f87720eb18bcc564e`)
+      .get(
+        `http://localhost:3000/petfinder/product/view/663bad0f87720eb18bcc564e`
+      )
       .then(function (res) {
         setproduct(res.data.view);
         console.log(res.data.view);

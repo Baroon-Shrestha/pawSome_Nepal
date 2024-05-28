@@ -60,7 +60,7 @@ function PetHostel() {
 
     try {
       const response = await axios.post(
-        `${API}/petfinder/homestay/addrequest`,
+        "http://localhost:3000/petfinder/homestay/addrequest",
         formData,
         {
           headers: {

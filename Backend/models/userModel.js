@@ -69,11 +69,8 @@ userSchema.methods.comparePassword = async function (pass) {
 };
 
 userSchema.methods.getJWTToken = function () {
-
-    const expiresIn = 3 * 24 * 60 * 60
-
     return jwt.sign({ id: this._id }, process.env.JWT_KEY, {
-        expiresIn: expiresIn,
+        expiresIn: process.env.JWT_EXP
     });
 };
 

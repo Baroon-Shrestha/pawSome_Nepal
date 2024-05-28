@@ -10,7 +10,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { useNavigate } from "react-router-dom";
-const API = "https://paw-some-nepal.vercel.app";
 
 export default function AdoptPage() {
   const { id } = useParams();
@@ -26,7 +25,7 @@ export default function AdoptPage() {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        `${API}/petfinder/adopt/adoptpet/${id}`,
+        `http://localhost:3000/petfinder/adopt/adoptpet/${id}`,
         { reason: reason }, // Send reason as part of an object
         {
           headers: {

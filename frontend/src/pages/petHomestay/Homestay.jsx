@@ -19,11 +19,14 @@ export default function Homestay() {
   useEffect(() => {
     const fetchHomestayRequests = async () => {
       try {
-        const res = await axios.get(`${API}/petfinder/homestay/myrequest`, {
-          headers: {
-            authorization: cookies.token,
-          },
-        });
+        const res = await axios.get(
+          "http://localhost:3000/petfinder/homestay/myrequest",
+          {
+            headers: {
+              authorization: cookies.token,
+            },
+          }
+        );
         if (res.data.success) {
           setHomestayRequests(res.data.homestayRequest);
         }

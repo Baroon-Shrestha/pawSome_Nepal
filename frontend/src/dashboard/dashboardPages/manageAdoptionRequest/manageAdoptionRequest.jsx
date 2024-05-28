@@ -1,3 +1,6 @@
+//
+// http://localhost:3000/petFinder/adopt/viewadoptionrequest
+
 import { useEffect, useState } from "react";
 import "./manageAdoptionRequest.scss";
 import axios from "axios";
@@ -6,7 +9,6 @@ import { Carousel } from "react-responsive-carousel";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import { useCookies } from "react-cookie";
 import useAuth from "../../../hooks/useAuth";
-const API = "https://paw-some-nepal.vercel.app";
 
 export default function ManageAdoptionRequest() {
   useAuth();
@@ -17,7 +19,7 @@ export default function ManageAdoptionRequest() {
   const handleStatusChange = (id, newStatus) => {
     axios
       .put(
-        `${API}/petFinder/adopt/update/${id}`,
+        `http://localhost:3000/petFinder/adopt/update/${id}`,
         { status: newStatus },
         {
           headers: {
@@ -37,7 +39,7 @@ export default function ManageAdoptionRequest() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petFinder/adopt/viewadoptionrequest`, {
+      .get("http://localhost:3000/petFinder/adopt/viewadoptionrequest", {
         headers: {
           authorization: cookies.token,
         },

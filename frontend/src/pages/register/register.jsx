@@ -72,7 +72,7 @@ function Register() {
     };
 
     axios
-      .post(`${API}/petfinder/user/register`, formData)
+      .post(`http://localhost:3000/petfinder/user/register`, formData)
       .then((response) => {
         const token = response?.data?.jwtToken;
         const user = response?.data?.user;

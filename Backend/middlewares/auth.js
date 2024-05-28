@@ -20,7 +20,7 @@ export const isAuthorized = asyncErrorHandling(async (req, res, next) => {
     }
 
     try {
-        const decodedId = jwt.verify(token, " f0f3f30f1a7eb98c87223fcc8b9be1832874babf057b777582286fd734642e9f502672242b86bbe2d19440ff5ac88a509bfd14518be5008e0774378e5f0c74be");
+        const decodedId = jwt.verify(token, process.env.JWT_KEY);
         req.user = await user.findById(decodedId.id);
         next();
     } catch (error) {

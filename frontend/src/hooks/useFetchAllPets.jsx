@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = "https://paw-some-nepal.vercel.app";
-
 export default function useFetchAllPets() {
   const [pets, setPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
@@ -12,7 +10,7 @@ export default function useFetchAllPets() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petFinder/get`)
+      .get("http://localhost:3000/petFinder/get")
       .then(function (response) {
         setPets(response.data.getallpets); //storing all the pets
         setFilteredPets(response.data.getallpets); // storing all the pets here for filtering

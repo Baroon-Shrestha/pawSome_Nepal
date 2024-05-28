@@ -7,8 +7,6 @@ import "./products.css";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-const API = "https://paw-some-nepal.vercel.app";
-
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [cookies, __] = useCookies("token");
@@ -22,11 +20,14 @@ export default function Products() {
 
   const fetchCartItems = async () => {
     try {
-      const response = await axios.get(`${API}/petfinder/product/viewCart`, {
-        headers: {
-          authorization: cookies.token,
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/petfinder/product/viewCart",
+        {
+          headers: {
+            authorization: cookies.token,
+          },
+        }
+      );
       if (response.data.success) {
         setCartItemCount(response.data.seeCart.length);
       } else {
@@ -39,7 +40,7 @@ export default function Products() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/product/viewproduct`)
+      .get("http://localhost:3000/petfinder/product/viewproduct")
       .then(function (response) {
         const productsWithQuantity = response.data.viewProduct.map(
           (product) => ({
@@ -58,7 +59,7 @@ export default function Products() {
   const handleAddToCart = async (productId, quantity, index) => {
     try {
       const response = await axios.post(
-        `${API}/petfinder/product/addtocart/${productId}`,
+        `http://localhost:3000/petfinder/product/addtocart/${productId}`,
         { quantity },
         {
           headers: {

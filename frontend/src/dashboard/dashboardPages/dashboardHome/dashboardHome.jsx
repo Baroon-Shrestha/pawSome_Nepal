@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import useAuth from "../../../hooks/useAuth";
 
-const API = "https://paw-some-nepal.vercel.app";
-
 export default function DashboardHome() {
   const [totalPets, setTotalPets] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
@@ -21,7 +19,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/get`)
+      .get("http://localhost:3000/petfinder/get")
       .then((res) => {
         const pets = res.data.getallpets;
         const numOfPets = pets.length;
@@ -35,7 +33,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get(`${API}petfinder/user/allUsers`)
+      .get("http://localhost:3000/petfinder/user/allUsers")
       .then((res) => {
         const users = res.data.users;
         const numOfUsers = users.length;
@@ -48,7 +46,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/adopt/viewadoptionrequest`)
+      .get("http://localhost:3000/petfinder/adopt/viewadoptionrequest")
       .then((res) => {
         const req = res.data.viewReq;
         const numOfAdopted = req.length;
@@ -62,7 +60,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/dogs?category=Dog`)
+      .get("http://localhost:3000/petfinder/dogs?category=Dog")
       .then((res) => {
         const dog = res.data.dog;
         const numOfDog = dog.length;
@@ -76,7 +74,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/cats?category=Cat`)
+      .get("http://localhost:3000/petfinder/cats?category=Cat")
       .then((res) => {
         const cat = res.data.cat;
         const numOfCat = cat.length;
@@ -90,7 +88,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/others?category=Other`)
+      .get("http://localhost:3000/petfinder/others?category=Other")
       .then((res) => {
         const oth = res.data.others;
         const numOfOth = oth.length;

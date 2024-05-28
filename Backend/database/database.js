@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
 export const connectDB = () => {
+    const db_url = process.env.MONGO_DB_URI;
 
-    mongoose.connect("mongodb+srv://bar00nshrestha098:Bl67u1WZyixtphKI@cluster0.0ri681o.mongodb.net/PetsNepal?retryWrites=true&w=majority&appName=Cluster0")
+    mongoose.connect(db_url)
         .then(() => {
             console.log("Connection successful");
         })

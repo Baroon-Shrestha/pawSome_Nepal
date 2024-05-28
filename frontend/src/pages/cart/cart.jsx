@@ -7,8 +7,6 @@ import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 
-const API = "https://paw-some-nepal.vercel.app";
-
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [cookies, __] = useCookies(["token"]);
@@ -21,11 +19,14 @@ export default function Cart() {
 
   const fetchCartItems = async () => {
     try {
-      const response = await axios.get(`${API}/petfinder/product/viewcart`, {
-        headers: {
-          authorization: cookies.token,
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/petfinder/product/viewcart",
+        {
+          headers: {
+            authorization: cookies.token,
+          },
+        }
+      );
 
       if (response.data.success) {
         const carts = response.data.seeCart;
@@ -41,11 +42,14 @@ export default function Cart() {
 
   const removeFromCart = async (itemId) => {
     try {
-      await axios.delete(`${API}/petfinder/product/remove/${itemId}`, {
-        headers: {
-          authorization: cookies.token,
-        },
-      });
+      await axios.delete(
+        `http://localhost:3000/petfinder/product/remove/${itemId}`,
+        {
+          headers: {
+            authorization: cookies.token,
+          },
+        }
+      );
       setCartItems(cartItems.filter((item) => item._id !== itemId));
     } catch (error) {
       console.error("Error removing item from cart:", error);
@@ -55,7 +59,7 @@ export default function Cart() {
   const updateQuantity = async (itemId, newQuantity) => {
     try {
       await axios.put(
-        `${API}/petfinder/product/updatequantity/${itemId}`,
+        `http://localhost:3000/petfinder/product/updatequantity/${itemId}`,
         { quantity: newQuantity },
         {
           headers: {
@@ -77,11 +81,14 @@ export default function Cart() {
 
       const userId = localStorage.getItem("userId");
 
-      const response = await axios.get(`${API}/petfinder/product/viewcart`, {
-        headers: {
-          authorization: cookies.token,
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/petfinder/product/viewcart",
+        {
+          headers: {
+            authorization: cookies.token,
+          },
+        }
+      );
 
       const cartData = response.data;
       const { seeCart } = cartData;
@@ -101,7 +108,7 @@ export default function Cart() {
       }));
 
       const sessionResponse = await axios.post(
-        `${API}/petfinder/product/buy`,
+        "http://localhost:3000/petfinder/product/buy",
         { lineItems },
         {
           headers: {
@@ -121,7 +128,7 @@ export default function Cart() {
         console.error(result.error.message);
       } else {
         const clearResponse = await axios.delete(
-          `${API}/petfinder/product/clear`,
+          "http://localhost:3000/petfinder/product/clear",
           {
             headers: {
               authorization: cookies.token,

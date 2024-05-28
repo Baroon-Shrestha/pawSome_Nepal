@@ -53,7 +53,7 @@ export default function Register() {
     };
 
     axios
-      .post(`${API}/petFinder/user/login`, postData)
+      .post("http://localhost:3000/petFinder/user/login", postData)
       .then((response) => {
         const token = response?.data?.jwtToken;
         const user = response?.data?.user;

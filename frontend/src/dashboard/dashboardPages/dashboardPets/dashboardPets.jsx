@@ -10,8 +10,6 @@ import { IoMdAdd } from "react-icons/io";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import useAuth from "../../../hooks/useAuth";
 
-const API = "https://paw-some-nepal.vercel.app";
-
 export default function DashboardPets() {
   useAuth();
   const [pets, setPets] = useState([]);
@@ -19,7 +17,7 @@ export default function DashboardPets() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petFinder/get`)
+      .get("http://localhost:3000/petFinder/get")
       .then(function (response) {
         setPets(response.data.getallpets);
       })
@@ -30,7 +28,7 @@ export default function DashboardPets() {
 
   function handlePetDelete(petId) {
     axios
-      .delete(`${API}/petFinder/delete/${petId}`, {
+      .delete(`http://localhost:3000/petFinder/delete/${petId}`, {
         headers: {
           authorization: cookies.token,
         },

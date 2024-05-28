@@ -6,15 +6,13 @@ import { Carousel } from "react-responsive-carousel";
 import Nav from "../../components/nav/nav";
 import { useCookies } from "react-cookie";
 
-const API = "https://paw-some-nepal.vercel.app";
-
 export default function AdoptionRequest() {
   const [petRequests, setPetRequests] = useState([]);
   const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/adopt/viewyourrequest`, {
+      .get("http://localhost:3000/petfinder/adopt/viewyourrequest", {
         headers: {
           authorization: cookies.token,
         },

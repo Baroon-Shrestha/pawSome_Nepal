@@ -27,7 +27,7 @@ function EditPets() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petFinder/selected/${id}`)
+      .get(`http://localhost:3000/petFinder/selected/${id}`)
       .then((response) => {
         setFormData(response?.data?.getPetData);
       })
@@ -68,7 +68,7 @@ function EditPets() {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        `${API}/petFinder/update/${id}`,
+        `http://localhost:3000/petFinder/update/${id}`,
         formDataToUpdate,
         {
           headers: {
