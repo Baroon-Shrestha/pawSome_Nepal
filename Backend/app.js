@@ -16,7 +16,7 @@ const app = Express();
 dotenv.config({ path: "./config/config.env" });
 
 app.use(cors({
-    origin: "https://pawsome-nepal-cmnzx1770-baroon-shresthas-projects.vercel.app/"
+    origin: "*"
 }));
 
 app.use(cookieParser())
