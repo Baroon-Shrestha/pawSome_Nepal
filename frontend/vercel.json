@@ -10,10 +10,10 @@
       }
     ],
     "routes": [
-        {
-            "source": "/feedback/((?!general).*)",
-            "destination": "/api/feedback/general"
-          }
+      {
+  "src": "/feedback/((?!general).*)",
+  "dest": "/api/feedback/general"
+}
     ]
   }
   
