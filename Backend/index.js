@@ -7,6 +7,10 @@ cloudinary.v2.config({
     api_secret: process.env.CLOUDIARY_PASS
 })
 
+app.get("/", (req, res) => {
+    res.json("conncetion successfull")
+})
+
 app.listen(process.env.PORT, () => {
     console.log(`listening on port ${process.env.PORT}`);
 });
