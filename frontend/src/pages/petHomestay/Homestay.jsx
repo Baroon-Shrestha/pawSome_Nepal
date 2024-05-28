@@ -8,6 +8,8 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import Footer from "../../components/footer/footer";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 export default function Homestay() {
   const [showModal, setShowModal] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -17,14 +19,11 @@ export default function Homestay() {
   useEffect(() => {
     const fetchHomestayRequests = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:3000/petfinder/homestay/myrequest",
-          {
-            headers: {
-              authorization: cookies.token,
-            },
-          }
-        );
+        const res = await axios.get(`${API}/petfinder/homestay/myrequest`, {
+          headers: {
+            authorization: cookies.token,
+          },
+        });
         if (res.data.success) {
           setHomestayRequests(res.data.homestayRequest);
         }

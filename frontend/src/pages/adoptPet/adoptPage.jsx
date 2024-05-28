@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { useNavigate } from "react-router-dom";
-
+const API = "https://paw-some-nepal.vercel.app";
 
 export default function AdoptPage() {
   const { id } = useParams();
@@ -19,14 +19,14 @@ export default function AdoptPage() {
   const [loading, setIsLoading] = useState(false);
   const [reason, setReason] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function adoptPet(e) {
     e.preventDefault();
     try {
       setIsLoading(true);
       const response = await axios.post(
-        `http://localhost:3000/petfinder/adopt/adoptpet/${id}`,
+        `${API}/petfinder/adopt/adoptpet/${id}`,
         { reason: reason }, // Send reason as part of an object
         {
           headers: {
@@ -35,16 +35,13 @@ export default function AdoptPage() {
         }
       );
 
-    
       if (response.data.success === true) {
         toast.success("Your adoption request has been sent successfully", {
           onClose: () => {
-           
             navigate("/");
-          }
+          },
         });
         setIsLoading(false);
-      
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

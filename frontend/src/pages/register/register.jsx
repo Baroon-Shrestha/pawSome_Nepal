@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Nav from "../../components/nav/nav";
 import styles from "./register.module.css";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 function useInput(initialValue, validator) {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState("");
@@ -70,7 +72,7 @@ function Register() {
     };
 
     axios
-      .post("http://localhost:3000/petfinder/user/register", formData)
+      .post(`${API}/petfinder/user/register`, formData)
       .then((response) => {
         const token = response?.data?.jwtToken;
         const user = response?.data?.user;

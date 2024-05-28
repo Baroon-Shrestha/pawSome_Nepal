@@ -3,6 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 function useFavoritePet(petId) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [cookies] = useCookies(["token"]);
@@ -11,14 +13,11 @@ function useFavoritePet(petId) {
   useEffect(() => {
     async function fetchFavourites() {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/petFinder/getfav`,
-          {
-            headers: {
-              authorization: cookies.token,
-            },
-          }
-        );
+        const response = await axios.get(`${API}/petFinder/getfav`, {
+          headers: {
+            authorization: cookies.token,
+          },
+        });
 
         setFavourites(response?.data?.favorites);
 
@@ -38,15 +37,11 @@ function useFavoritePet(petId) {
 
   const handleAddToFavorites = async (id) => {
     try {
-      const response = await axios.post(
-        `http://localhost:3000/petFinder/addfav/${id}`,
-        null,
-        {
-          headers: {
-            authorization: cookies.token,
-          },
-        }
-      );
+      const response = await axios.post(`${API}/petFinder/addfav/${id}`, null, {
+        headers: {
+          authorization: cookies.token,
+        },
+      });
 
       toast(response?.data?.message, {
         type: "success",

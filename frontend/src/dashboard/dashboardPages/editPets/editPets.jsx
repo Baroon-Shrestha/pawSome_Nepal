@@ -1,31 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import styles from './editPets.module.css';
-import { Sidebar } from '../../dashboardComponents/dashboardNav/newDash';
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./editPets.module.css";
+import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import useAuth from "../../../hooks/useAuth";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 function EditPets() {
-  useAuth()
-  const [cookies] = useCookies(['token']);
+  useAuth();
+  const [cookies] = useCookies(["token"]);
   const { id } = useParams();
   const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    category: '',
-    description: '',
-    breed: '',
-    gender: '',
+    name: "",
+    age: "",
+    category: "",
+    description: "",
+    breed: "",
+    gender: "",
   });
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/petFinder/selected/${id}`)
+      .get(`${API}/petFinder/selected/${id}`)
       .then((response) => {
         setFormData(response?.data?.getPetData);
       })
@@ -66,23 +68,23 @@ function EditPets() {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        `http://localhost:3000/petFinder/update/${id}`,
+        `${API}/petFinder/update/${id}`,
         formDataToUpdate,
         {
           headers: {
             authorization: cookies.token,
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
 
       if (response.data.success === true) {
-        toast.success('Pet details updated successfully');
+        toast.success("Pet details updated successfully");
         setIsLoading(false);
       }
     } catch (error) {
-      console.error('Error:', error);
-      toast.error('Failed to update pet details. Please try again.');
+      console.error("Error:", error);
+      toast.error("Failed to update pet details. Please try again.");
       setIsLoading(false);
     }
   };
@@ -182,7 +184,7 @@ function EditPets() {
               type="submit"
               id="submit_btn"
             >
-              {isLoading ? 'Updating...' : 'Update'}
+              {isLoading ? "Updating..." : "Update"}
             </button>
           </div>
         </form>

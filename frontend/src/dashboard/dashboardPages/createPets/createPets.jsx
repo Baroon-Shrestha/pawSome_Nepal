@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 export default function CreatePets() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -42,15 +44,11 @@ export default function CreatePets() {
 
     try {
       setIsLoading(true);
-      const response = await axios.post(
-        "http://localhost:3000/petFinder/post",
-        formData,
-        {
-          headers: {
-            authorization: cookies.token,
-          },
-        }
-      );
+      const response = await axios.post(`${API}/petFinder/post`, formData, {
+        headers: {
+          authorization: cookies.token,
+        },
+      });
 
       if (response.data.success === true) {
         toast("New Pet created successfully", {

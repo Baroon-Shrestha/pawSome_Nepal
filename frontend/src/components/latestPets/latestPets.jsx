@@ -5,12 +5,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import NewCard from "../../components/card/NewCard";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 export default function LatestPets() {
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petFinder/get")
+      .get(`${API}/petFinder/get`) // Using the API variable here
       .then(function (response) {
         setPets(response.data.getallpets);
       })

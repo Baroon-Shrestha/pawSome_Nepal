@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "./editUserProfile.module.css";
 import { MdCancel } from "react-icons/md";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 function EditUserProfile({ setShowEditModal }) {
   const [cookies] = useCookies(["token"]);
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -59,7 +61,7 @@ function EditUserProfile({ setShowEditModal }) {
       setIsLoading(true);
       if (userId) {
         const response = await axios.put(
-          `http://localhost:3000/petfinder/user/update/${userId}`,
+          `${API}/petfinder/user/update/${userId}`,
           formDataToUpdate,
           {
             headers: {

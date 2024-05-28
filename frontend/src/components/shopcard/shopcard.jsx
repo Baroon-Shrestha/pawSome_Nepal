@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./shopcard.css";
 import axios from "axios";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 export default function ShopCard() {
   const [quantity, setQuantity] = useState(1);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/product/viewproduct")
+      .get(`${API}/petfinder/product/viewproduct`)
       .then(function (response) {
         setProducts(response.data.viewProduct);
         console.log(response.data.viewProduct);

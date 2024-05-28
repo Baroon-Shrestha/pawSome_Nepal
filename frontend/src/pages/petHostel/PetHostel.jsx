@@ -4,6 +4,8 @@ import axios from "axios";
 import styles from "./PetHostel.module.css";
 import Nav from "../../components/nav/nav";
 
+const API = "https://paw-some-nepal.vercel.app";
+
 function PetHostel() {
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
@@ -58,7 +60,7 @@ function PetHostel() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/petfinder/homestay/addrequest",
+        `${API}/petfinder/homestay/addrequest`,
         formData,
         {
           headers: {
