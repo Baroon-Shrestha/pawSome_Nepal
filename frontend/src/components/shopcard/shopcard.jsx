@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./shopcard.css";
 import axios from "axios";
-
-const API = "https://paw-some-nepal.vercel.app";
+import { Backend_Url } from "../../../url";
 
 export default function ShopCard() {
   const [quantity, setQuantity] = useState(1);
@@ -10,7 +9,7 @@ export default function ShopCard() {
 
   useEffect(() => {
     axios
-      .get(`${API}/petfinder/product/viewproduct`)
+      .get(`${Backend_Url}/petfinder/product/viewproduct`)
       .then(function (response) {
         setProducts(response.data.viewProduct);
         console.log(response.data.viewProduct);

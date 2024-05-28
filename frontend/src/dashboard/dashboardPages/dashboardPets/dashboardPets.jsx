@@ -9,6 +9,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import useAuth from "../../../hooks/useAuth";
+import { Backend_Url } from "../../../../url";
 
 export default function DashboardPets() {
   useAuth();
@@ -17,7 +18,7 @@ export default function DashboardPets() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petFinder/get")
+      .get(`${Backend_Url}/petFinder/get`)
       .then(function (response) {
         setPets(response.data.getallpets);
       })
@@ -28,7 +29,7 @@ export default function DashboardPets() {
 
   function handlePetDelete(petId) {
     axios
-      .delete(`http://localhost:3000/petFinder/delete/${petId}`, {
+      .delete(`${Backend_Url}/petFinder/delete/${petId}`, {
         headers: {
           authorization: cookies.token,
         },

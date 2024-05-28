@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
+import { Backend_Url } from "../../../../url";
 
 export default function CreatePets() {
   const [name, setName] = useState("");
@@ -43,7 +44,7 @@ export default function CreatePets() {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        "http://localhost:3000/petFinder/post",
+        `${Backend_Url}/petFinder/post`,
         formData,
         {
           headers: {

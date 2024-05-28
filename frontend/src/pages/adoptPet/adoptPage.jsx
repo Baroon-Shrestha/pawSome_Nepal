@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { useNavigate } from "react-router-dom";
+import { Backend_Url } from "../../../url";
 
 export default function AdoptPage() {
   const { id } = useParams();
@@ -25,7 +26,7 @@ export default function AdoptPage() {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        `http://localhost:3000/petfinder/adopt/adoptpet/${id}`,
+        `${Backend_Url}/petfinder/adopt/adoptpet/${id}`,
         { reason: reason }, // Send reason as part of an object
         {
           headers: {

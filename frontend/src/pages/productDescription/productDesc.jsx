@@ -4,17 +4,14 @@ import food1 from "./food1.png";
 import axios from "axios";
 import Nav from "../../components/nav/nav";
 import { useParams } from "react-router-dom";
-
-const API = "https://paw-some-nepal.vercel.app";
+import { Backend_Url } from "../../../url";
 
 const ProductDesc = () => {
   const [product, setproduct] = useState([]);
 
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:3000/petfinder/product/view/663bad0f87720eb18bcc564e`
-      )
+      .get(`${Backend_Url}/petfinder/product/view/663bad0f87720eb18bcc564e`)
       .then(function (res) {
         setproduct(res.data.view);
         console.log(res.data.view);

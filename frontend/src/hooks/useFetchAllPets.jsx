@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Backend_Url } from "../../url";
 
 export default function useFetchAllPets() {
   const [pets, setPets] = useState([]);
@@ -10,7 +11,7 @@ export default function useFetchAllPets() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petFinder/get")
+      .get(`${Backend_Url}/petFinder/get`)
       .then(function (response) {
         setPets(response.data.getallpets); //storing all the pets
         setFilteredPets(response.data.getallpets); // storing all the pets here for filtering

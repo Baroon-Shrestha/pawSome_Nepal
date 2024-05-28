@@ -5,6 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import Nav from "../../components/nav/nav";
 import { useCookies } from "react-cookie";
+import { Backend_Url } from "../../../url";
 
 export default function AdoptionRequest() {
   const [petRequests, setPetRequests] = useState([]);
@@ -12,7 +13,7 @@ export default function AdoptionRequest() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/adopt/viewyourrequest", {
+      .get(`${Backend_Url}/petfinder/adopt/viewyourrequest`, {
         headers: {
           authorization: cookies.token,
         },

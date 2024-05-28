@@ -3,8 +3,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import styles from "./PetHostel.module.css";
 import Nav from "../../components/nav/nav";
-
-const API = "https://paw-some-nepal.vercel.app";
+import { Backend_Url } from "../../../url";
 
 function PetHostel() {
   const [dateFrom, setDateFrom] = useState("");
@@ -60,7 +59,7 @@ function PetHostel() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/petfinder/homestay/addrequest",
+        `${Backend_Url}/petfinder/homestay/addrequest`,
         formData,
         {
           headers: {

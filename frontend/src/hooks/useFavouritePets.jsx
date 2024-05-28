@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
+import { Backend_Url } from "../../url";
 
 function useFavoritePet(petId) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -11,14 +12,11 @@ function useFavoritePet(petId) {
   useEffect(() => {
     async function fetchFavourites() {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/petFinder/getfav`,
-          {
-            headers: {
-              authorization: cookies.token,
-            },
-          }
-        );
+        const response = await axios.get(`${Backend_Url}/petFinder/getfav`, {
+          headers: {
+            authorization: cookies.token,
+          },
+        });
 
         setFavourites(response?.data?.favorites);
 
@@ -39,7 +37,7 @@ function useFavoritePet(petId) {
   const handleAddToFavorites = async (id) => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/petFinder/addfav/${id}`,
+        `${Backend_Url}/petFinder/addfav/${id}`,
         null,
         {
           headers: {

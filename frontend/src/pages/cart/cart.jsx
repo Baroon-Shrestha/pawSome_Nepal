@@ -6,6 +6,7 @@ import "./cart.scss";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
+import { Backend_Url } from "../../../url";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -20,7 +21,7 @@ export default function Cart() {
   const fetchCartItems = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/petfinder/product/viewcart",
+        `${Backend_Url}/petfinder/product/viewcart`,
         {
           headers: {
             authorization: cookies.token,
@@ -42,14 +43,11 @@ export default function Cart() {
 
   const removeFromCart = async (itemId) => {
     try {
-      await axios.delete(
-        `http://localhost:3000/petfinder/product/remove/${itemId}`,
-        {
-          headers: {
-            authorization: cookies.token,
-          },
-        }
-      );
+      await axios.delete(`${Backend_Url}/petfinder/product/remove/${itemId}`, {
+        headers: {
+          authorization: cookies.token,
+        },
+      });
       setCartItems(cartItems.filter((item) => item._id !== itemId));
     } catch (error) {
       console.error("Error removing item from cart:", error);
@@ -59,7 +57,7 @@ export default function Cart() {
   const updateQuantity = async (itemId, newQuantity) => {
     try {
       await axios.put(
-        `http://localhost:3000/petfinder/product/updatequantity/${itemId}`,
+        `${Backend_Url}/petfinder/product/updatequantity/${itemId}`,
         { quantity: newQuantity },
         {
           headers: {
@@ -82,7 +80,7 @@ export default function Cart() {
       const userId = localStorage.getItem("userId");
 
       const response = await axios.get(
-        "http://localhost:3000/petfinder/product/viewcart",
+        `${Backend_Url}/petfinder/product/viewcart`,
         {
           headers: {
             authorization: cookies.token,
@@ -108,7 +106,7 @@ export default function Cart() {
       }));
 
       const sessionResponse = await axios.post(
-        "http://localhost:3000/petfinder/product/buy",
+        `${Backend_Url}/petfinder/product/buy`,
         { lineItems },
         {
           headers: {
@@ -128,7 +126,7 @@ export default function Cart() {
         console.error(result.error.message);
       } else {
         const clearResponse = await axios.delete(
-          "http://localhost:3000/petfinder/product/clear",
+          `${Backend_Url}/petfinder/product/clear`,
           {
             headers: {
               authorization: cookies.token,

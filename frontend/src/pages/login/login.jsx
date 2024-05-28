@@ -7,8 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
 import Nav from "../../components/nav/nav";
-
-const API = "https://paw-some-nepal.vercel.app";
+import { Backend_Url } from "../../../url";
 
 const useFormInput = (initialValue, validator) => {
   const [value, setValue] = useState(initialValue);
@@ -53,7 +52,7 @@ export default function Register() {
     };
 
     axios
-      .post("http://localhost:3000/petFinder/user/login", postData)
+      .post(`${Backend_Url}/petFinder/user/login`, postData)
       .then((response) => {
         const token = response?.data?.jwtToken;
         const user = response?.data?.user;

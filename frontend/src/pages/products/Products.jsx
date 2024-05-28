@@ -6,6 +6,7 @@ import ProductDesc from "../productDescription/productDesc";
 import "./products.css";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { Backend_Url } from "../../../url";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ export default function Products() {
   const fetchCartItems = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/petfinder/product/viewCart",
+        `${Backend_Url}/petfinder/product/viewCart`,
         {
           headers: {
             authorization: cookies.token,
@@ -40,7 +41,7 @@ export default function Products() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/product/viewproduct")
+      .get(`${Backend_Url}/petfinder/product/viewproduct`)
       .then(function (response) {
         const productsWithQuantity = response.data.viewProduct.map(
           (product) => ({
@@ -59,7 +60,7 @@ export default function Products() {
   const handleAddToCart = async (productId, quantity, index) => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/petfinder/product/addtocart/${productId}`,
+        `${Backend_Url}/petfinder/product/addtocart/${productId}`,
         { quantity },
         {
           headers: {

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import useAuth from "../../../hooks/useAuth";
+import { Backend_Url } from "../../../../url";
 
 export default function DashboardHome() {
   const [totalPets, setTotalPets] = useState(0);
@@ -19,7 +20,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/get")
+      .get(`${Backend_Url}/petfinder/get`)
       .then((res) => {
         const pets = res.data.getallpets;
         const numOfPets = pets.length;
@@ -33,7 +34,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/user/allUsers")
+      .get(`${Backend_Url}/petfinder/user/allUsers`)
       .then((res) => {
         const users = res.data.users;
         const numOfUsers = users.length;
@@ -46,7 +47,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/adopt/viewadoptionrequest")
+      .get(`${Backend_Url}/petfinder/adopt/viewadoptionrequest`)
       .then((res) => {
         const req = res.data.viewReq;
         const numOfAdopted = req.length;
@@ -60,7 +61,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/dogs?category=Dog")
+      .get(`${Backend_Url}/petfinder/dogs?category=Dog`)
       .then((res) => {
         const dog = res.data.dog;
         const numOfDog = dog.length;
@@ -74,7 +75,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/cats?category=Cat")
+      .get(`${Backend_Url}/petfinder/cats?category=Cat`)
       .then((res) => {
         const cat = res.data.cat;
         const numOfCat = cat.length;
@@ -88,7 +89,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petfinder/others?category=Other")
+      .get(`${Backend_Url}/petfinder/others?category=Other`)
       .then((res) => {
         const oth = res.data.others;
         const numOfOth = oth.length;

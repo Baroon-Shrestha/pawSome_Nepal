@@ -9,6 +9,7 @@ import { Carousel } from "react-responsive-carousel";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import { useCookies } from "react-cookie";
 import useAuth from "../../../hooks/useAuth";
+import { Backend_Url } from "../../../../url";
 
 export default function ManageAdoptionRequest() {
   useAuth();
@@ -19,7 +20,7 @@ export default function ManageAdoptionRequest() {
   const handleStatusChange = (id, newStatus) => {
     axios
       .put(
-        `http://localhost:3000/petFinder/adopt/update/${id}`,
+        `${Backend_Url}/petFinder/adopt/update/${id}`,
         { status: newStatus },
         {
           headers: {
@@ -39,7 +40,7 @@ export default function ManageAdoptionRequest() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/petFinder/adopt/viewadoptionrequest", {
+      .get(`${Backend_Url}/petFinder/adopt/viewadoptionrequest`, {
         headers: {
           authorization: cookies.token,
         },

@@ -7,8 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "./editPets.module.css";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import useAuth from "../../../hooks/useAuth";
-
-const API = "https://paw-some-nepal.vercel.app";
+import { Backend_Url } from "../../../../url";
 
 function EditPets() {
   useAuth();
@@ -27,7 +26,7 @@ function EditPets() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/petFinder/selected/${id}`)
+      .get(`${Backend_Url}/petFinder/selected/${id}`)
       .then((response) => {
         setFormData(response?.data?.getPetData);
       })
@@ -68,7 +67,7 @@ function EditPets() {
     try {
       setIsLoading(true);
       const response = await axios.put(
-        `http://localhost:3000/petFinder/update/${id}`,
+        `${Backend_Url}/petFinder/update/${id}`,
         formDataToUpdate,
         {
           headers: {
