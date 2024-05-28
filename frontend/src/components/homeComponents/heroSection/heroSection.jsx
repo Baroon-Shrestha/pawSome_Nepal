@@ -8,7 +8,12 @@ export default function HeroSection() {
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.description}>
-            <h1>FIND YOUR FUR-EVER FAMILY: <span className={styles.orange}>ADOPT</span>, <span className={styles.orange}>LOVE</span>, AND <span className={styles.orange}>BE LOVED</span>.</h1>
+            <h1>
+              FIND YOUR FUR-EVER FAMILY:{" "}
+              <span className={styles.orange}>ADOPT</span>,{" "}
+              <span className={styles.orange}>LOVE</span>, AND{" "}
+              <span className={styles.orange}>BE LOVED</span>.
+            </h1>
             <p className={styles.grey}>
               Welcome to our pet adoption platform, where happiness meets a
               wagging tail. Find your new best friend among our selection of
