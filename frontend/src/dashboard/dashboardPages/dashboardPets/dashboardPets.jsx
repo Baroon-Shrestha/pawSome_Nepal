@@ -10,6 +10,7 @@ import { IoMdAdd } from "react-icons/io";
 import { Sidebar } from "../../dashboardComponents/dashboardNav/newDash";
 import useAuth from "../../../hooks/useAuth";
 import { Backend_Url } from "../../../../url";
+import NewPetDescription from "../../../pages/newPetDescriptionPage/newPetDescription";
 
 export default function DashboardPets() {
   useAuth();
@@ -64,7 +65,7 @@ export default function DashboardPets() {
                 <>
                   <div className="card">
                     <Link
-                      to={`/petDescription/${pet?._id}`}
+                      to={`/NewPetDescription/${pet?._id}`}
                       onClick={() => window.scrollTo(0, 0)}
                     >
                       <img src={pet?.image[0].url}></img>

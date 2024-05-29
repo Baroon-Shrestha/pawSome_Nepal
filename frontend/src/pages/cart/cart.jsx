@@ -185,7 +185,7 @@ export default function Cart() {
                       </div>
                     </div>
                   </div>
-                  <p className="price">Rs: {item.product.price}</p>
+                  <p className="price">$: {item.product.price}</p>
                   <button onClick={() => removeFromCart(item._id)}>
                     Remove
                   </button>
@@ -195,8 +195,8 @@ export default function Cart() {
           </div>
           <div className="container_right">
             <div className="total">
-              <h1>Sub Total : Rs: {calculateSubTotal(cartItems)}</h1>
-              <h1>Total: Rs: {calculateSubTotal(cartItems)}</h1>
+              <h1>Sub Total : $: {calculateSubTotal(cartItems)}</h1>
+              <h1>Total: $: {calculateSubTotal(cartItems)}</h1>
               <button className="btn" onClick={payment}>
                 Proceed To Payment
               </button>
