@@ -117,7 +117,7 @@ export const viewAllRequest = asyncErrorHandling(async (req, res) => {
 export const deleteRequest = asyncErrorHandling(async (req, res) => {
     const { email } = req.user
 
-    if (!email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
+    if (email.endsWith(".admin@gmail.com")) return errorHanlder(createError("you're not authorized"), req, res)
 
     const { id } = req.params
 

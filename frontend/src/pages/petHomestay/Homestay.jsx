@@ -8,6 +8,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import Footer from "../../components/footer/footer";
 import { Backend_Url } from "../../../url";
+import { FaTrash } from "react-icons/fa";
 
 export default function Homestay() {
   const [showModal, setShowModal] = useState(false);
@@ -53,6 +54,26 @@ export default function Homestay() {
   const handleCloseModal = () => {
     setShowModal(false);
     setShowConfirmation(false);
+  };
+
+  const handleDeleteRequest = async (id) => {
+    try {
+      const res = await axios.delete(
+        `${Backend_Url}/petfinder/homestay/delete/${id}`,
+        {
+          headers: {
+            authorization: cookies.token,
+          },
+        }
+      );
+      if (res.data.success) {
+        setHomestayRequests((prevRequests) =>
+          prevRequests.filter((request) => request._id !== id)
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting homestay request:", error);
+    }
   };
 
   return (
@@ -115,12 +136,18 @@ export default function Homestay() {
                 </div>
                 <Carousel showThumbs={false}>
                   {request.image.map((img, i) => (
-                    <img
-                      key={img.public_id}
-                      src={img.url}
-                      className={`post_img post_img-${i}`}
-                      alt={`${request.name} Image`}
-                    />
+                    <div className="img-container" key={img.public_id}>
+                      <img
+                        src={img.url}
+                        className={`post_img post_img-${i}`}
+                        alt={`${request.name} Image`}
+                      />
+                      <FaTrash
+                        className="delete-btn"
+                        onClick={() => handleDeleteRequest(request._id)}
+                        title="Delete Request"
+                      />
+                    </div>
                   ))}
                 </Carousel>
                 <div className="caption">

@@ -132,6 +132,10 @@
     font-weight: 400;
 }
 
+.img-container {
+    position: relative;
+}
+
 .hs-status_pending {
     background-color: rgb(255, 0, 0);
     color: white;
@@ -149,4 +153,26 @@
 
 .bold {
     font-weight: bold;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    /* Semi-transparent red background */
+    color: red;
+    cursor: pointer;
+    font-size: 1.5em;
+    border-radius: 50%;
+    /* Rounded background */
+    padding: 5px;
+    /* Padding to make the background larger */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    /* Fixed width */
+    height: 35px;
+    /* Fixed height */
 }
