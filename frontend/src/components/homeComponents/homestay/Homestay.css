@@ -37,5 +37,47 @@
 
 .hs-btn:hover {
     cursor: pointer;
-    background-color: rgb(240, 115, 111);
+    background-color: rgb(220, 100, 100);
+}
+
+/* Tablet viewport */
+@media (max-width: 768px) {
+    .hs-container {
+        padding: 4rem 0;
+    }
+
+    .hs-title {
+        font-size: 36px;
+    }
+
+    .hs-desc {
+        font-size: 16px;
+        max-width: 85%;
+    }
+
+    .hs-btn {
+        padding: 12px 25px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Mobile viewport */
+@media (max-width: 480px) {
+    .hs-container {
+        padding: 3rem 0;
+    }
+
+    .hs-title {
+        font-size: 28px;
+    }
+
+    .hs-desc {
+        font-size: 14px;
+        max-width: 95%;
+    }
+
+    .hs-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
 }

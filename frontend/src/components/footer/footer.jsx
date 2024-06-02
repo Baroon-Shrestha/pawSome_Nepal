@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./footer.module.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,74 +10,64 @@ import {
 
 export default function Footer() {
   return (
-    <>
-      <footer className={styles.module}>
-        <h1 className={styles.logo}>
-          <div className={styles.logo_name}>pet finder</div>
-          <div className={styles.logo_slogan}>Save a Life, Adopt a Pet</div>
-        </h1>
-        <div className={styles.footer_container}>
-          <div className={styles.footer_col_1}>
-            <h2>About Us</h2>
+    <footer className={styles.footer}>
+      <div className={styles.logo}>
+        <div className={styles.logo_name}>
+          pets<span className={styles.orange}>Nepal</span>
+        </div>
+        <div className={styles.logo_slogan}>Adopt a Pet, Save a Life</div>
+      </div>
+
+      <div className={styles.footer_container}>
+        <div className={styles.footer_col_1}>
+          <h2>About Us</h2>
+          <p>
+            Thank you for choosing PetsNepal to find your furry family member.
+            Together, we are creating a brighter future for pets in need. Join
+            us in our mission to find loving homes for every pet.
+          </p>
+        </div>
+
+        <div className={styles.footer_wrapper}>
+          <div className={styles.footer_col_2}>
+            <h2>Address</h2>
             <p>
-              Thank you for choosing PetsNepal to find your furry family member.
-              Together, we are creating a brighter future for pets in need. Join
-              us in our mission to find loving homes for every pet.
+              <FontAwesomeIcon icon={faMapMarkerAlt} /> Kathmandu, Nepal
             </p>
-
-            <div className={styles.additional_info}></div>
+            <p>
+              <FontAwesomeIcon icon={faPhone} /> +1234567890
+            </p>
+            <p>
+              <FontAwesomeIcon icon={faEnvelope} /> info@petsnepal.com
+            </p>
           </div>
 
-          <div className={styles.footer_wrapper}>
-            <div className={styles.footer_col_2}>
-              <h2>Address</h2>
-              <p>
-                <FontAwesomeIcon icon={faMapMarkerAlt} /> Address: Kathmandu,
-                Nepal
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faPhone} /> Phone: +1234567890
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faEnvelope} /> Email: info@petsnepal.com
-              </p>
-            </div>
+          <div className={styles.footer_col_3}>
+            <h2>Our Services</h2>
+            <Link to="/allpets">
+              <p>Pets for adoption</p>
+            </Link>
+            <Link to="/products">
+              <p>Products for pets</p>
+            </Link>
+            <Link to="/homestay">
+              <p>Pet's homestay</p>
+            </Link>
+          </div>
 
-            <div className={styles.footer_col_3}>
-              <h2>Contact Us</h2>
-              <div className="content">
-                <form action="#">
-                  <div className="email">
-                    <div className="text">Email *</div>
-                    <input type="email" required />
-                  </div>
-                  <div className="msg">
-                    <div className="text">Message *</div>
-                    <textarea rows="2" cols="25" required></textarea>
-                  </div>
-                  <div className="btn">
-                    <button type="submit">Send</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div className={styles.footer_col_4}>
-              <p>
-                Save favorite pets <br />&<br /> track their adoption status
-              </p>
-              <Link to="/register">
-                <button className="btn2">Sign Up Now👋</button>
-              </Link>
-            </div>
+          <div className={styles.footer_col_4}>
+            <p>Sign up and track your favourite pet</p>
+            <Link to="/register">
+              <div className={styles.sign}>Signup Now</div>
+            </Link>
           </div>
         </div>
-        <div className={styles.footer_bottom}>
-          <span className="credit">Created By PetsNepal | </span>
-          <span className="far fa-copyright"></span>
-          <span> 2024 All rights reserved.</span>
-        </div>
-      </footer>
-    </>
+      </div>
+
+      <div className={styles.footer_bottom}>
+        <span>Created By PetsNepal | </span>
+        <span>&copy; 2024 All rights reserved.</span>
+      </div>
+    </footer>
   );
 }

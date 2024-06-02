@@ -74,47 +74,50 @@ export default function Register() {
   return (
     <>
       <Nav />
-      <ToastContainer bodyclassName="toastBody" />
+      <ToastContainer bodyClassName="toastBody" />
       <div className={styles.formSection}>
-        <form id="myForm" className={styles.myForm} onSubmit={formSubmit}>
-          <img src="/new.GIF" className={styles.gif} />
-          <p className={styles.message}>Hey there! Want to Login?</p>
-          <div className={styles.formPadding}>
-            <div className={styles.inputDiv}>
-              <input
-                type="email"
-                placeholder="Your Email"
-                {...email}
-                autoComplete="off"
-                required
-              />
+        <div className={styles.myFormContainer}>
+          <img src="/new.GIF" className={styles.gif} alt="Login GIF" />
+          <form id="myForm" className={styles.myForm} onSubmit={formSubmit}>
+            <p className={styles.message}>Hey there! Welcome Back</p>
+            <div className={styles.formPadding}>
+              <div className={styles.inputDiv}>
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  {...email}
+                  autoComplete="off"
+                  required
+                />
+              </div>
+              {email.error && <p className={styles.error}>{email.error}</p>}
+              <div className={styles.inputDiv}>
+                <input
+                  type="password"
+                  placeholder="Your Password"
+                  {...password}
+                  autoComplete="off"
+                  required
+                />
+              </div>
+              {password.error && (
+                <p className={styles.error}>{password.error}</p>
+              )}
             </div>
-            {email.error && <p className={styles.error}>{email.error}</p>}
-            <div className={styles.inputDiv}>
-              <input
-                type="password"
-                placeholder="Your Password"
-                {...password}
-                autoComplete="off"
-                required
-              />
+            <div className={styles.btnDiv}>
+              <button
+                className={`${styles.btn} ${styles.btnSend}`}
+                type="submit"
+                id="submit_btn"
+              >
+                Login
+              </button>
             </div>
-            {password.error && <p className={styles.error}>{password.error}</p>}
-          </div>
-
-          <div className={styles.btnDiv}>
-            <button
-              className={`${styles.btn} ${styles.btnSend}`}
-              type="submit"
-              id="submit_btn"
-            >
-              Login
-            </button>
-          </div>
-          <p className={styles.signInMessage}>
-            Don't Have An Account ? <Link to="/register">Sign up now!</Link>
-          </p>
-        </form>
+            <p className={styles.signInMessage}>
+              Don't Have An Account? <Link to="/register">Sign up now!</Link>
+            </p>
+          </form>
+        </div>
       </div>
     </>
   );

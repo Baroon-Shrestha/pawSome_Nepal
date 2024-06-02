@@ -3,6 +3,8 @@ import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { FaBarsStaggered } from "react-icons/fa6";
+import { ImCross } from "react-icons/im";
+
 export default function Nav() {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -10,6 +12,7 @@ export default function Nav() {
   const [isAdmin, setIsAdmin] = useState(false);
   const navRef = useRef(null);
   const logo = useRef();
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
@@ -22,7 +25,7 @@ export default function Nav() {
         setIsAdmin(true);
       }
     }
-  }, [cookies.token, localStorage.getItem("user")]);
+  }, [cookies.token]);
 
   function handleLogOutClick() {
     localStorage.clear();
@@ -36,6 +39,10 @@ export default function Nav() {
     setShowDropDown(false);
   }
 
+  function toggleMenu() {
+    setShowMenu(!showMenu);
+  }
+
   return (
     <>
       <nav ref={navRef} className={styles.nav}>
@@ -47,7 +54,11 @@ export default function Nav() {
             </div>
           </Link>
 
-          <div className={styles.linksWrapper}>
+          <div
+            className={`${styles.linksWrapper} ${
+              showMenu ? styles.showMenu : ""
+            }`}
+          >
             <div className={styles.navigationLinks}>
               <ul className={styles.ul}>
                 <li className={styles.list}>
@@ -83,63 +94,63 @@ export default function Nav() {
                 )}
               </ul>
             </div>
-
-            <div className={styles.userSection}>
-              {!cookies.token ? (
-                <>
-                  <ul className={styles.ul}>
-                    <li className={styles.list}>
-                      <Link to="/register" className={styles.text}>
-                        Register
-                      </Link>
-                    </li>
-                    <li className={styles.list}>
-                      <Link to="/login" className={styles.text}>
-                        Login
-                      </Link>
-                    </li>
-                  </ul>
-                </>
-              ) : (
-                <div className={styles.dropDown_container}>
-                  <p
-                    className={styles.text}
-                    onClick={() => setShowDropDown(!showDropDown)}
-                  >
-                    <div className={styles.prof}>
-                      Welcome, {loggedInUser?.firstname}
-                      <img
-                        src={loggedInUser?.profile[0]?.url}
-                        alt="Profile"
-                        className={styles.profileIcon}
-                      />
-                    </div>
-                  </p>
-
-                  {showDropDown && (
-                    <div className={styles.dropDown}>
-                      <Link to="/userProfile">
-                        <p
-                          className={`${styles.text} ${styles.drop}`}
-                          onClick={handleSettingClick}
-                        >
-                          Profile
-                        </p>
-                      </Link>
-                      <p
-                        className={`${styles.text} ${styles.drop}`}
-                        onClick={handleLogOutClick}
-                      >
-                        Logout
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
           </div>
 
-          <FaBarsStaggered className={styles.bars} />
+          <div className={styles.barsAndUser}>
+            {cookies.token ? (
+              <div className={styles.dropDown_container}>
+                <p
+                  className={styles.text}
+                  onClick={() => setShowDropDown(!showDropDown)}
+                >
+                  <div className={styles.prof}>
+                    Welcome,
+                    <span className={styles.userName}>
+                      {loggedInUser?.firstname}
+                    </span>
+                    <img
+                      src={loggedInUser?.profile[0]?.url}
+                      alt="Profile"
+                      className={styles.profileIcon}
+                    />
+                  </div>
+                </p>
+
+                {showDropDown && (
+                  <div className={styles.dropDown}>
+                    <Link to="/userProfile">
+                      <p
+                        className={`${styles.text} ${styles.drop}`}
+                        onClick={handleSettingClick}
+                      >
+                        Profile
+                      </p>
+                    </Link>
+                    <p
+                      className={`${styles.text} ${styles.drop}`}
+                      onClick={handleLogOutClick}
+                    >
+                      Logout
+                    </p>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className={styles.authLinks}>
+                <Link to="/login" className={styles.text}>
+                  Login
+                </Link>
+                <Link to="/register" className={styles.text}>
+                  Register
+                </Link>
+              </div>
+            )}
+            {showMenu ? (
+              <ImCross className={styles.cross} onClick={toggleMenu} />
+            ) : (
+              <FaBarsStaggered className={styles.bars} onClick={toggleMenu} />
+            )}
+          </div>
         </div>
       </nav>
     </>

@@ -1,5 +1,3 @@
-// section-two
-
 *{
     padding: 0;
     margin: 0;
@@ -10,7 +8,6 @@
     display: flex;
     justify-content: center;
     padding: 0rem 5rem;
-    // background-color: #f1f1f1;
     
     .section_container {     
       width: 100%;
@@ -49,12 +46,6 @@
           flex-direction: column !important ;
          
         }
-      
-
-     
-      
-      
-  
         .img_container {
           width: 350px;
           height: 350px;
@@ -111,7 +102,6 @@
             height: 250px;
             border: 2px dashed #eeb75c;
             border-radius: 100%;
-            // z-index: -1;
             left: -30%;
             top: 50%;
             z-index: -1;
@@ -136,7 +126,6 @@
             z-index: -1;
             right: -30%;
             top: 50%;
-            // z-index: 0;
   
             position: absolute;
           }

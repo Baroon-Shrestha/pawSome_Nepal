@@ -15,29 +15,9 @@ export default function Video() {
               autoPlay
               loop
               muted
-              style={{ width: "90vw", height: "auto" }}
+              className="centered-video"
             ></video>
           </div>
-
-          {/* <div className="cards_container">
-            <div className="cards">
-              <div className="card">
-                <img src="../cat1.jpg"></img>
-              </div>
-
-              <div className="card">
-                <img src="../cat1.jpg"></img>
-              </div>
-
-              <div className="card">
-                <img src="../cober.jpg"></img>
-              </div>
-
-              <div className="card">
-                <img src="../cat1.jpg"></img>
-              </div>
-            </div>
-          </div> */}
         </div>
       </section>
     </>

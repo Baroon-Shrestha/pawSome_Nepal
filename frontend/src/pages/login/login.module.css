@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
 
 * {
   padding: 0;
@@ -12,32 +12,51 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   padding: 2rem;
+}
+
+.myFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+@media (min-width: 768px) {
+  .myFormContainer {
+    flex-direction: row;
+  }
 }
 
 .gif {
   width: 100%;
   object-fit: cover;
-  height: 200px;
+  height: 500px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }
 
-
+@media (min-width: 768px) {
+  .gif {
+    width: 300px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 12px;
+  }
+}
 
 .myForm {
-  border-radius: 12px;
-  font-family: "Raleway", sans-serif;
-  width: 450px;
-  background-color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  width: 100%;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 form p {
@@ -47,7 +66,7 @@ form p {
 
 .inputDiv {
   width: 100%;
-  margin: 2rem 0rem;
+  margin: 2rem 0;
   border-bottom: 1px solid rgb(209, 204, 204);
 }
 
@@ -96,7 +115,7 @@ textarea {
 }
 
 .signInMessage:hover {
-  color: rgb(54, 54, 54)
+  color: rgb(54, 54, 54);
 }
 
 .selectDiv {
@@ -121,10 +140,66 @@ select option {
   color: white;
 }
 
-
 .error {
   position: relative;
   color: red;
   font-size: 14px;
   margin-top: 5px;
+}
+
+/* Media Queries */
+
+/* Mobile Styles (max-width: 767px) */
+@media (max-width: 767px) {
+  .myFormContainer {
+    padding: 1rem;
+    box-shadow: none;
+    width: 75%;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+
+  .gif {
+    height: 300px;
+  }
+
+  .btnSend {
+    padding: 1rem 3rem;
+  }
+
+  .signInMessage,
+  .signInMessage a {
+    font-size: 1.2rem;
+  }
+
+  .message {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablet Styles (min-width: 768px and max-width: 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .myFormContainer {
+    padding: 2rem;
+  }
+
+  .gif {
+    height: 400px;
+  }
+
+  .btnSend {
+    padding: 1.2rem 4rem;
+  }
+
+  .signInMessage,
+  .signInMessage a {
+    font-size: 1.3rem;
+  }
+
+  .message {
+    font-size: 1.4rem;
+  }
 }
