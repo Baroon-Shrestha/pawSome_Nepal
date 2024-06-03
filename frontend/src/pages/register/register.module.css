@@ -12,77 +12,89 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   padding: 2rem;
-
 }
 
 .gif {
   width: 100%;
   object-fit: cover;
-  height: 200px;
+  height: 500px;
   border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  mix-blend-mode: multiply;
+  border-bottom-left-radius: 12px;
 }
 
+@media (min-width: 768px) {
+  .gif {
+    width: 400px;
+    height: 665px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 12px;
+  }
+}
 
-.myForm {
-  position: relative;
-  border-radius: 12px;
-  font-family: "Raleway", sans-serif;
-  max-width: 450px;
-  width: 100%;
-  background-color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+.myFormContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0rem !important;
+  width: 100%;
+  max-width: 900px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-.myForm p {
+@media (min-width: 768px) {
+  .myFormContainer {
+    flex-direction: row;
+  }
+}
+
+/* Form Styles */
+.myForm {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form p {
   text-align: center;
   margin: 1rem;
 }
 
 .inputDiv {
   width: 100%;
-  margin: 2rem 0rem;
+  margin: 2rem 0;
   border-bottom: 1px solid rgb(209, 204, 204);
-
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
+/* Input and Textarea Styles */
 input,
 textarea {
-  border: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   outline: none;
-  width: 100%;
-  padding: 0.5rem 1rem;
   border-bottom: 1px solid rgb(209, 204, 204);
+  width: 100%;
+  padding: 0.7rem 2rem;
 }
 
 textarea {
-  min-height: 10vh;
+  min-height: 15vh;
 }
 
+/* Form Padding Styles */
 .formPadding {
   padding: 1rem;
   width: 100%;
 }
 
+/* Button Styles */
 .btnSend {
   text-align: center;
   margin: 2rem auto;
@@ -93,13 +105,14 @@ textarea {
   cursor: pointer;
   color: white;
   border-radius: 10px;
-  width: 100%;
 }
 
+/* Message Styles */
 .message {
   font-size: 1.5rem;
 }
 
+/* Sign In Message Styles */
 .signInMessage,
 .signInMessage a {
   font-size: 1.4rem;
@@ -108,19 +121,77 @@ textarea {
   margin-bottom: 3rem;
 }
 
-
 .signInMessage:hover {
-  color: rgb(54, 54, 54)
+  color: rgb(54, 54, 54);
 }
 
-
-input:focus,
-textarea:focus,
-select:focus {
-  border-bottom: 1px solid #007bff;
-}
-
+/* Error Styles */
 .error {
+  position: relative;
   color: red;
-  font-size: 10px;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Media Queries */
+
+/* Mobile Styles (max-width: 767px) */
+@media (max-width: 767px) {
+  .myFormContainer {
+    padding: 1rem;
+    box-shadow: none;
+    width: 100%;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+
+  .gif {
+    width: 100%;
+    height: 300px;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 12px;
+  }
+
+  .btnSend {
+    padding: 1rem 3rem;
+  }
+
+  .signInMessage,
+  .signInMessage a {
+    font-size: 1.2rem;
+  }
+
+  .message {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablet Styles (min-width: 768px and max-width: 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .myFormContainer {
+    padding: 1rem;
+  }
+
+  .gif {
+    width: 400px;
+    height: 665px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 12px;
+  }
+
+  .btnSend {
+    padding: 1.2rem 4rem;
+  }
+
+  .signInMessage,
+  .signInMessage a {
+    font-size: 1.3rem;
+  }
+
+  .message {
+    font-size: 1.4rem;
+  }
 }

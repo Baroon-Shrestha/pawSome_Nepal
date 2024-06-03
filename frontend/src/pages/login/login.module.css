@@ -154,7 +154,7 @@ select option {
   .myFormContainer {
     padding: 1rem;
     box-shadow: none;
-    width: 75%;
+    width: 100%;
     background-color: white;
     border-radius: 12px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,

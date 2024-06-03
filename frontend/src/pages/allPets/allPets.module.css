@@ -1,7 +1,6 @@
 .mainContainer {
   padding: 20rem 10rem;
   position: relative;
-  /* background-color: rgb(241, 241, 241); */
 }
 
 .img_container {
@@ -101,6 +100,14 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
+
+  .mainContainer {
+    padding: 20rem 0;
+  }
+
+  /* .img_container {
+    background-image: linear-gradient(rgba(24, 24, 24, 0.8), rgba(255, 255, 255, 0.3)), url("../cover-smaller.jpg");
+  } */
 }
 
 .inputContainer {
@@ -155,6 +162,10 @@
     object-fit: cover;
     border-radius: 15px;
     object-position: 50% 20%;
+  }
+
+  .mainContainer {
+    padding: 20rem 0;
   }
 }
 
@@ -227,7 +238,6 @@
     box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
   }
 }
-
 
 .loaderContainer {
   width: 100%;

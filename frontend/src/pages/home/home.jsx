@@ -12,14 +12,14 @@ import { ToastContainer, toast } from "react-toastify";
 export default function Home() {
   return (
     <>
-     <ToastContainer />
+      <ToastContainer />
       <HeroSection />
       <FindYourFriend />
       <AdoptionProcess />
       <Homestay />
       {/* <PetHostel /> */}
       <Petshop />
-      <Slider />
+      {/* <Slider /> */}
       <Video />
       <Footer />
     </>
