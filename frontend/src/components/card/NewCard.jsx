@@ -46,7 +46,6 @@ export default function NewCard({ pet }) {
             {pet?.name}&nbsp;:&nbsp;
             <span className={styles.breed}>{pet?.breed}</span>
           </div>
-
           <div className={styles.category}>{pet?.category}</div>
         </div>
 

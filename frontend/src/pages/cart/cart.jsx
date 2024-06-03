@@ -150,16 +150,18 @@ export default function Cart() {
     <>
       <Nav />
       <div className="cart">
+        <div className="cartName">Your Cart</div>
         <div className="cart_container">
           <div className="container_left">
-            <h1>Your Cart</h1>
             <div className="items">
               {cartItems.map((item) => (
                 <div key={item._id} className="item">
                   <div className="item_close">
                     <img src={item.product.prodImage[0].url} alt="" />
                     <div className="item_desc">
-                      <p>{item.product.name}</p>
+                      <div className="prodname">
+                        <p>{item.product.name}</p>
+                      </div>
                       <div className="quantity">
                         <button
                           onClick={() =>
@@ -185,23 +187,35 @@ export default function Cart() {
                       </div>
                     </div>
                   </div>
-                  <p className="price">$: {item.product.price}</p>
-                  <button onClick={() => removeFromCart(item._id)}>
+                  <div className="price">
+                    ${item.product.price} <br />{" "}
+                    <span className="per">per piece</span>
+                  </div>
+                  {/* <div className="cartdel"> */}
+                  <button
+                    onClick={() => removeFromCart(item._id)}
+                    className="rev"
+                  >
                     Remove
                   </button>
+                  {/* </div> */}
                 </div>
               ))}
             </div>
           </div>
           <div className="container_right">
             <div className="total">
-              <h1>Sub Total : $: {calculateSubTotal(cartItems)}</h1>
-              <h1>Total: $: {calculateSubTotal(cartItems)}</h1>
-              <button className="btn" onClick={payment}>
+              <div className="ttl">
+                Sub Total : $: {calculateSubTotal(cartItems)}
+              </div>
+              <div className="ttl">
+                Total: $: {calculateSubTotal(cartItems)}
+              </div>
+              <button className="paybtn" onClick={payment}>
                 Proceed To Payment
               </button>
               <Link to="/products">
-                <button className="btn">Continue to browse items</button>
+                <button className="paybtn">Continue to browse items</button>
               </Link>
             </div>
           </div>
