@@ -148,7 +148,7 @@ span {
 
   .card_img {
     width: 160px;
-    height: 18rem;
+    /* height: 18rem; */
     padding: 10px;
     border-radius: 15px;
   }
@@ -156,6 +156,10 @@ span {
   .description_two,
   .description_one {
     gap: 2rem;
+  }
+
+  .description_one {
+    display: block;
   }
 
   .fav {
